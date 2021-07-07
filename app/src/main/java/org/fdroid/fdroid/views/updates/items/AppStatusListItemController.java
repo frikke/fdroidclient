@@ -1,10 +1,8 @@
 package org.fdroid.fdroid.views.updates.items;
 
-import android.app.Activity;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import com.google.android.material.snackbar.Snackbar;
 import android.view.View;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.fdroid.fdroid.AppUpdateStatusManager;
 import org.fdroid.fdroid.AppUpdateStatusManager.AppUpdateStatus;
@@ -14,6 +12,10 @@ import org.fdroid.fdroid.views.apps.AppListItemController;
 import org.fdroid.fdroid.views.apps.AppListItemState;
 import org.fdroid.fdroid.views.updates.UpdatesAdapter;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 /**
  * Shows apps which are:
  *  * In the process of being downloaded.
@@ -21,7 +23,7 @@ import org.fdroid.fdroid.views.updates.UpdatesAdapter;
  *  * Recently installed and ready to run.
  */
 public class AppStatusListItemController extends AppListItemController {
-    public AppStatusListItemController(Activity activity, View itemView) {
+    public AppStatusListItemController(AppCompatActivity activity, View itemView) {
         super(activity, itemView);
     }
 

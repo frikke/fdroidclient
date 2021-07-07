@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.OperationApplicationException;
 import android.net.Uri;
 import android.os.RemoteException;
-import androidx.annotation.NonNull;
 
 import org.fdroid.fdroid.CompatibilityChecker;
 import org.fdroid.fdroid.IndexUpdater;
@@ -16,6 +15,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
 
 public class RepoPersister {
 
@@ -106,7 +107,7 @@ public class RepoPersister {
         try {
             context.getContentResolver().applyBatch(TempApkProvider.getAuthority(), apkOperations);
         } catch (RemoteException | OperationApplicationException e) {
-            throw new IndexUpdater.UpdateException("An internal error occurred while updating the database", e);
+            throw new IndexUpdater.UpdateException(repo, "An internal error occurred while updating the database", e);
         }
     }
 
@@ -122,7 +123,7 @@ public class RepoPersister {
             context.getContentResolver().applyBatch(TempAppProvider.getAuthority(), appOperations);
             return getIdsForPackages(appsToSave);
         } catch (RemoteException | OperationApplicationException e) {
-            throw new IndexUpdater.UpdateException("An internal error occurred while updating the database", e);
+            throw new IndexUpdater.UpdateException(repo, "An internal error occurred while updating the database", e);
         }
     }
 

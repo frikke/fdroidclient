@@ -24,8 +24,10 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import androidx.annotation.NonNull;
+
 import org.fdroid.fdroid.data.Apk;
+
+import androidx.annotation.NonNull;
 
 /**
  * The default installer of F-Droid. It uses the normal Intents APIs of Android
@@ -47,7 +49,7 @@ public class DefaultInstaller extends Installer {
 
         Intent installIntent = new Intent(context, DefaultInstallerActivity.class);
         installIntent.setAction(DefaultInstallerActivity.ACTION_INSTALL_PACKAGE);
-        installIntent.putExtra(org.fdroid.fdroid.net.Downloader.EXTRA_CANONICAL_URL, canonicalUri);
+        installIntent.putExtra(org.fdroid.fdroid.net.Downloader.EXTRA_CANONICAL_URL, canonicalUri.toString());
         installIntent.putExtra(Installer.EXTRA_APK, apk);
         installIntent.setData(localApkUri);
 

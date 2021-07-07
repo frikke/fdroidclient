@@ -29,10 +29,10 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.PatternMatcher;
 import android.os.Process;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.LogPrinter;
+
 import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.ProgressListener;
@@ -42,10 +42,6 @@ import org.fdroid.fdroid.data.RepoProvider;
 import org.fdroid.fdroid.data.SanitizedFile;
 import org.fdroid.fdroid.installer.ApkCache;
 
-import javax.net.ssl.SSLHandshakeException;
-import javax.net.ssl.SSLKeyException;
-import javax.net.ssl.SSLPeerUnverifiedException;
-import javax.net.ssl.SSLProtocolException;
 import java.io.File;
 import java.io.IOException;
 import java.net.ConnectException;
@@ -54,6 +50,13 @@ import java.net.NoRouteToHostException;
 import java.net.ProtocolException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
+
+import javax.net.ssl.SSLHandshakeException;
+import javax.net.ssl.SSLKeyException;
+import javax.net.ssl.SSLPeerUnverifiedException;
+import javax.net.ssl.SSLProtocolException;
+
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 /**
  * DownloaderService is a service that handles asynchronous download requests
@@ -366,7 +369,7 @@ public class DownloaderService extends Service {
     /**
      * Check if a URL is waiting in the queue for downloading or if actively being downloaded.
      * This is useful for checking whether to re-register {@link android.content.BroadcastReceiver}s
-     * in {@link android.app.Activity#onResume()}.
+     * in {@link android.app.AppCompatActivity#onResume()}.
      */
     public static boolean isQueuedOrActive(String canonicalUrl) {
         if (TextUtils.isEmpty(canonicalUrl)) { //NOPMD - suggests unreadable format

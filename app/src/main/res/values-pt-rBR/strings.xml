@@ -152,7 +152,7 @@
     <string name="bad_fingerprint">Falha na fingerprint</string>
     <string name="invalid_url">Esta não é uma URL válida.</string>
     <string name="menu_changelog">Changelog</string>
-    <string name="update_notification_title">Atualizando repositórios</string>
+    <string name="banner_updating_repositories">Atualizando os repositórios</string>
     <string name="status_processing_xml_percent">Processando %2$s / %3$s (%4$d%%) de %1$s</string>
     <string name="pref_language">Idioma</string>
     <string name="pref_language_default">Padrão do sistema</string>
@@ -243,7 +243,6 @@
     <string name="permissions">Permissões</string>
     <string name="repo_details">Repositório</string>
     <string name="repo_url">Endereço</string>
-    <string name="theme_night">Noturno</string>
     <string name="menu_settings">Configurações</string>
     <string name="login_title">Autenticação necessária</string>
     <string name="login_name">Nome de usuário</string>
@@ -356,8 +355,8 @@
     <string name="nearby_splash__both_parties_need_fdroid">Ambas as partes precisam do %1$s para uso próximo.</string>
     <string name="details_last_updated_today">Atualizado hoje</string>
     <plurals name="details_last_update_days">
-        <item quantity="one">Atualizado %1$s dia atrás</item>
-        <item quantity="other">Atualizado %1$s dias atrás</item>
+        <item quantity="one">Atualizado %1$d dia atrás</item>
+        <item quantity="other">Atualizados %1$d dias atrás</item>
     </plurals>
     <string name="menu_video">Vídeo</string>
     <string name="app__tts__cancel_download">Cancelar download</string>
@@ -513,4 +512,24 @@
     <string name="swap_toast_closing_nearby_after_timeout">Por Perto fechado já que estava ocioso.</string>
     <string name="nearby_splash__document_tree">Pesquisa por USB OTG por repositórios e espelhos.</string>
     <string name="menu_opencollective">OpenCollective</string>
+    <string name="notification_channel_updates_description">Exibe as notificações de atualização dos aplicativos e dos repositórios.</string>
+    <string name="notification_channel_updates_title">Atualizações</string>
+    <string name="notification_channel_swaps_description">Exibe notificações da troca dos aplicativos P2P.</string>
+    <string name="notification_channel_swaps_title">Trocas</string>
+    <string name="notification_channel_installs_description">Exibe notificações de instalação dos aplicativos.</string>
+    <string name="notification_channel_installs_title">Instalações</string>
+    <string name="menu_show_install_history">Mostrar histórico de instalação</string>
+    <string name="menu_show_fdroid_metrics_report">Mostrar relatório das métricas</string>
+    <string name="toast_metrics_in_install_history">O Relatório das Métricas %s pode ser visualizado no visor do Histórico de Instalação</string>
+    <string name="fdroid_metrics_report">%s Relatório das Métricas</string>
+    <string name="send_fdroid_metrics_json">%s relatório das métricas como arquivo JSON</string>
+    <string name="send_fdroid_metrics_report">Enviar %s Relatório das Métricas</string>
+    <string name="send_to_fdroid_metrics_summary">Enviar dados anônimos semanalmente para F-Droid Métricas (exige Manter histórico de instalação)</string>
+    <string name="send_to_fdroid_metrics">Enviar dados de uso</string>
+    <string name="install_history_and_metrics">Instalar histórico e métricas</string>
+    <string name="theme_follow_system">O mesmo do sistema</string>
+    <string name="use_pure_black_dark_theme_summary">Recomendado apenas para telas OLED.</string>
+    <string name="use_pure_black_dark_theme">Use um fundo preto no tema escuro</string>
+    <string name="banner_no_data_or_wifi">Dados móveis ou WiFi indisponíveis</string>
+    <string name="banner_no_internet">Sem Internet</string>
 </resources>

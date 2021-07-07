@@ -83,7 +83,6 @@
     <string name="interval_2w">Kontrollo për përditësime çdo 2 javë</string>
     <string name="theme_light">E çelët</string>
     <string name="theme_dark">E errët</string>
-    <string name="theme_night">Natë</string>
     <string name="login_password">Fjalëkalim</string>
     <string name="repo_edit_credentials">Ndryshoni Fjalëkalimin</string>
     <string name="crash_dialog_comment_prompt">Këtu mund të shtoni të dhëna ekstra dhe komente:</string>
@@ -238,7 +237,7 @@
     <string name="hide_on_long_search_press_title">Fshihe me butonin e kërkimit</string>
     <string name="hide_on_long_search_press_summary">Prekja e zgjatur e butonit të kërkimit do të fshehë aplikacionin</string>
     <string name="download_404">Kartela e domosdoshme s’u gjet.</string>
-    <string name="update_notification_title">Përditësim deposh</string>
+    <string name="banner_updating_repositories">Përditësim deposh</string>
     <string name="repo_num_apps">Numër aplikacionesh</string>
     <string name="repo_official_mirrors">Pasqyra zyrtare</string>
     <string name="repo_user_mirrors">Pasqyra përdoruesi</string>
@@ -490,4 +489,26 @@
     <string name="app_suggested">I sugjeruar</string>
     <string name="app_list__name__successfully_installed">%1$s u instalua</string>
     <string name="notification_title_summary_installed">U instalua me sukses</string>
+    <string name="notification_channel_updates_description">Shfaq njoftime përditësimesh aplikacionesh dhe deposh.</string>
+    <string name="notification_channel_updates_title">Përditësime</string>
+    <string name="notification_channel_installs_description">Shfaq njoftime instalimi aplikacionesh.</string>
+    <string name="notification_channel_installs_title">Instalime</string>
+    <string name="menu_opencollective">OpenCollective</string>
+    <string name="notification_channel_swaps_title">Shkëmbime</string>
+    <string name="notification_channel_swaps_description">Shfaq njoftime shkëmbimi aplikacionesh përmes P2P-së.</string>
+    <string name="menu_show_install_history">Shfaq historik instalimesh</string>
+    <string name="menu_show_fdroid_metrics_report">Shfaq raport statistikash</string>
+    <string name="menu_downgrade">Kaloje në version të mëparshëm</string>
+    <string name="toast_metrics_in_install_history">Raporti i Statistikave %s mund të shihet që nga parësi i Historikut të Instalimeve</string>
+    <string name="send_to_fdroid_metrics_summary">Dërgon një herë në javë të dhëna anonime te F-Droid Metrics (lyp Ruajtje historiku instalimesh)</string>
+    <string name="send_to_fdroid_metrics">Dërgo të dhëna përdorimi</string>
+    <string name="fdroid_metrics_report">Raport Statistikash %s</string>
+    <string name="install_history_and_metrics">Historik instalimesh dhe statistika</string>
+    <string name="send_fdroid_metrics_json">Raport statistikash %s si kartelë JSON</string>
+    <string name="send_fdroid_metrics_report">Dërgo Raport Statistikash %s</string>
+    <string name="theme_follow_system">Ndiq sistemin</string>
+    <string name="use_pure_black_dark_theme_summary">E rekomanduar vetëm për ekranë OLED.</string>
+    <string name="use_pure_black_dark_theme">Përdor sfond të zi në temë të errët</string>
+    <string name="banner_no_internet">Pa Internet</string>
+    <string name="banner_no_data_or_wifi">Pa të Dhëna ose WiFi aktive</string>
 </resources>

@@ -1,8 +1,5 @@
 package org.fdroid.fdroid.views.installed;
 
-import android.app.Activity;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.view.View;
 
 import org.fdroid.fdroid.AppUpdateStatusManager;
@@ -12,13 +9,17 @@ import org.fdroid.fdroid.data.AppPrefs;
 import org.fdroid.fdroid.views.apps.AppListItemController;
 import org.fdroid.fdroid.views.apps.AppListItemState;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 /**
  * Shows the currently installed version name, and whether or not it is the recommended version.
  * Also shows whether the user has previously asked to ignore updates for this app entirely, or for
  * a specific version of this app.
  */
 public class InstalledAppListItemController extends AppListItemController {
-    public InstalledAppListItemController(Activity activity, View itemView) {
+    public InstalledAppListItemController(AppCompatActivity activity, View itemView) {
         super(activity, itemView);
     }
 

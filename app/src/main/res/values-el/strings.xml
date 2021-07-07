@@ -14,17 +14,17 @@
     <string name="app_details">Λεπτομέρειες Εφαρμογής</string>
     <string name="no_such_app">Δεν βρέθηκε τέτοια εφαρμογή.</string>
     <string name="about_title">Σχετικά με το F-Droid</string>
-    <string name="about_site">Ιστοσελίδα</string>
+    <string name="about_site">Ιστότοπος</string>
     <string name="about_version">Έκδοση</string>
     <string name="app_installed">Εγκατεστημένο</string>
     <string name="app_not_installed">Δεν είναι εγκατεστημένο</string>
     <string name="added_on">Προστέθηκε στις %s</string>
-    <string name="ok">OK</string>
+    <string name="ok">Εντάξει</string>
     <string name="yes">Ναι</string>
     <string name="no">Όχι</string>
     <string name="repo_add_title">Προσθήκη νέου αποθετηρίου</string>
     <string name="repo_add_add">Προσθήκη</string>
-    <string name="cancel">Ακύρωση</string>
+    <string name="cancel">Άκυρο</string>
     <string name="enable">Ενεργοποίηση</string>
     <string name="add_key">Προσθήκη κλειδιού</string>
     <string name="overwrite">Αντικατάσταση</string>
@@ -37,12 +37,12 @@
     <string name="menu_search">Αναζήτηση</string>
     <string name="menu_add_repo">Νέο Αποθετήριο</string>
     <string name="menu_launch">Άνοιγμα</string>
-    <string name="menu_share">Διαμοιρασμός</string>
+    <string name="menu_share">Κοινοποίηση</string>
     <string name="menu_install">Εγκατάσταση</string>
     <string name="menu_uninstall">Απεγκατάσταση</string>
     <string name="menu_ignore_all">Αγνόησε όλες τις ενημερώσεις</string>
     <string name="menu_ignore_this">Αγνόησε αυτή την ενημέρωση</string>
-    <string name="menu_website">Ιστοσελίδα</string>
+    <string name="menu_website">Ιστότοπος</string>
     <string name="menu_issues">Προβλήματα</string>
     <string name="menu_source">Πηγαίος κώδικας</string>
     <string name="menu_upgrade">Ενημέρωση</string>
@@ -105,7 +105,7 @@
     <string name="links">Σύνδεσμοι</string>
     <string name="more">Περισσότερα</string>
     <string name="less">Λιγότερα</string>
-    <string name="back">Πίσω</string>
+    <string name="back">Επιστροφή</string>
     <string name="bad_fingerprint">Λανθασμένο δακτυλικό αποτύπωμα</string>
     <string name="invalid_url">Αυτή δεν είναι έγκυρη διεύθυνση.</string>
     <string name="menu_settings">Ρυθμίσεις</string>
@@ -124,7 +124,7 @@
     <string name="icon">Εικονίδιο</string>
     <string name="next">Επόμενο</string>
     <string name="skip">Παράβλεψη</string>
-    <string name="proxy">Διακομιστής μεσολάβησης (Proxy)</string>
+    <string name="proxy">Διακομιστής μεσολάβησης</string>
     <string name="enable_proxy_title">Ενεργοποίηση διακομιστή μεσολάβησης HTTP</string>
     <string name="enable_proxy_summary">Ρύθμιση διακομιστή μεσολάβησης HTTP για όλες τις αιτήσεις δικτύου</string>
     <string name="proxy_host">Διακομιστής μεσολάβησης</string>
@@ -134,7 +134,7 @@
     <string name="status_download_unknown_size">Λήψη
 \n%2$s από
 \n%1$s</string>
-    <string name="update_notification_title">Ενημέρωση αποθετηρίων</string>
+    <string name="banner_updating_repositories">Ενημέρωση αποθετηρίων</string>
     <string name="status_processing_xml_percent">Επεξεργασία %2$s / %3$s (%4$d%%) από %1$s</string>
     <string name="repos_unchanged">Όλα τα αποθετήρια είναι ενημερωμένα</string>
     <string name="all_other_repos_fine">Τα υπόλοιπα αποθετήρια δεν δημιούργησαν σφάλματα.</string>
@@ -236,7 +236,6 @@
     <string name="interval_2w">Να γίνεται έλεγχος για ενημερώσεις κάθε 2 εβδομάδες</string>
     <string name="theme_light">Φωτεινό</string>
     <string name="theme_dark">Σκοτεινό</string>
-    <string name="theme_night">Νυχτερινό</string>
     <string name="swap_nfc_title">Αγγίξτε για ανταλλαγή</string>
     <string name="swap_nfc_description">Αν ο φίλος σας έχει το F-Droid και ενεργοποιημένο το NFC αγγίξτε μεταξύ τους τις
         συσκευές σας.
@@ -251,8 +250,8 @@
     <string name="status_inserting_apps">Αποθήκευση λεπτομερειών εφαρμογής</string>
     <string name="about_license">Άδεια</string>
     <string name="login_name">Όνομα χρήστη</string>
-    <string name="login_password">Συνθηματικό</string>
-    <string name="repo_edit_credentials">Τροποποίηση Συνθηματικού</string>
+    <string name="login_password">Κωδικός πρόσβασης</string>
+    <string name="repo_edit_credentials">Αλλαγή κωδικού πρόσβασης</string>
     <string name="login_title">Απαιτείται πιστοποίηση</string>
     <string name="useTor">Χρήση Tor</string>
     <string name="keep_install_history">Αποθήκευση ιστορικού εγκαταστάσεων</string>
@@ -286,7 +285,7 @@
     <string name="main_menu__categories">Κατηγορίες</string>
     <string name="preference_manage_installed_apps">Διαχείριση  εγκατεστημένων εφαρμογών</string>
     <string name="notification_action_update">Ενημέρωση</string>
-    <string name="notification_action_cancel">Ακύρωση</string>
+    <string name="notification_action_cancel">Άκυρο</string>
     <string name="notification_action_install">Εγκατάσταση</string>
     <string name="app_list__name__downloading_in_progress">Γίνεται λήψη %1$s</string>
     <string name="app_list__name__successfully_installed">Εγκαταστάθηκε %1$s</string>
@@ -310,7 +309,7 @@
     <string name="latest__empty_state__no_recent_apps">Δεν βρέθηκαν πρόσφατες εφαρμογές</string>
     <string name="categories__empty_state__no_categories">Δεν υπάρχουν κατηγορίες να εμφανιστούν</string>
     <string name="preference_category__my_apps">Οι εφαρμογές μου</string>
-    <string name="antifeatures">ανεπιθύμητα χαρακτηριστικά</string>
+    <string name="antifeatures">Aνεπιθύμητα χαρακτηριστικά</string>
     <string name="notification_title_single_ready_to_install">Έτοιμο για εγκατάσταση</string>
     <string name="notification_title_single_ready_to_install_update">Ενημέρωση έτοιμη για εγκατάσταση</string>
     <string name="notification_title_single_install_error">Η εγκατάσταση Απέτυχε</string>
@@ -326,7 +325,7 @@
     <string name="notification_title_summary_installed">Εγκαταστάθηκε με επιτυχία</string>
     <string name="details_last_updated_today">Ενημερώθηκαν σήμερα</string>
     <string name="main_menu__swap_nearby">Κοντά</string>
-    <string name="updates__tts__download_app">Κατέβασμα</string>
+    <string name="updates__tts__download_app">Λήψη</string>
     <string name="by_author_format">Από %s</string>
     <string name="force_old_index">Υποχρεωτική χρήση παλαιάς μορφής ευρετηρίου</string>
     <string name="force_old_index_summary">Σε περίπτωση που υπάρχουν σφάλματα ή ασυμβατότητες, χρήση του ευρετηρίου εφαρμογών XML</string>
@@ -511,4 +510,20 @@
     <string name="notification_channel_installs_description">Εμφανίζει ειδοποιήσεις εγκατάστασης εφαρμογής.</string>
     <string name="notification_channel_installs_title">Εγκαταστάσεις</string>
     <string name="menu_opencollective">OpenCollective</string>
+    <string name="notification_channel_swaps_description">Επίδειξη ειδοποιήσεων ανταλλαγής εφαρμογών με τη χρήση P2P.</string>
+    <string name="notification_channel_swaps_title">Ανταλλαγές</string>
+    <string name="menu_show_install_history">Εμφάνιση ιστορικού εγκατάστασης</string>
+    <string name="menu_show_fdroid_metrics_report">Εμφάνιση αναφοράς διαγνωστικών</string>
+    <string name="toast_metrics_in_install_history">Η αναφορά διαγνωστικών %s είναι ορατή στην προβολή ιστορικού εγκατάστασης</string>
+    <string name="send_to_fdroid_metrics_summary">Αποστέλλει ανώνυμα δεδομένα εβδομαδιαίως στο κέντρο διαγνωστικών του F-Droid (απαιτεί διατήρηση ιστορικού εγκατάστασης)</string>
+    <string name="fdroid_metrics_report">Αναφορά διαγνωστικών %s</string>
+    <string name="install_history_and_metrics">Ιστορικό εγκαταστάσεων και διαγνωστικών</string>
+    <string name="send_fdroid_metrics_json">Αναφορά διαγνωστικών %s ως αρχείο JSON</string>
+    <string name="send_fdroid_metrics_report">Αποστολή αναφοράς διαγνωστικών %s</string>
+    <string name="send_to_fdroid_metrics">Αποστολή δεδομένων χρήσης</string>
+    <string name="theme_follow_system">Ίδιο με του συστήματος</string>
+    <string name="use_pure_black_dark_theme_summary">Συνιστάται μόνο για οθόνες OLED.</string>
+    <string name="use_pure_black_dark_theme">Χρήση τελείως μαύρου φόντου στο σκούρο θέμα</string>
+    <string name="banner_no_data_or_wifi">Δεν έχουν ενεργοποιηθεί δεδομένα ή WiFi</string>
+    <string name="banner_no_internet">Χωρίς σύνδεση στο διαδίκτυο</string>
 </resources>

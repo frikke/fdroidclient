@@ -19,21 +19,22 @@
 
 package org.fdroid.fdroid.privileged.views;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
-import androidx.appcompat.app.AlertDialog;
 import android.view.ContextThemeWrapper;
 
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.installer.Installer;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 /**
  * This class provides the confirmation prompt for when the user chooses to
@@ -89,7 +90,7 @@ public class UninstallDialogActivity extends FragmentActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent data = new Intent();
                         data.putExtra(Installer.EXTRA_APK, apk);
-                        setResult(Activity.RESULT_OK, intent);
+                        setResult(AppCompatActivity.RESULT_OK, intent);
                         finish();
                     }
                 });
@@ -97,7 +98,7 @@ public class UninstallDialogActivity extends FragmentActivity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        setResult(Activity.RESULT_CANCELED);
+                        setResult(AppCompatActivity.RESULT_CANCELED);
                         finish();
                     }
                 });
@@ -105,7 +106,7 @@ public class UninstallDialogActivity extends FragmentActivity {
                 new DialogInterface.OnCancelListener() {
                     @Override
                     public void onCancel(DialogInterface dialog) {
-                        setResult(Activity.RESULT_CANCELED);
+                        setResult(AppCompatActivity.RESULT_CANCELED);
                         finish();
                     }
                 });

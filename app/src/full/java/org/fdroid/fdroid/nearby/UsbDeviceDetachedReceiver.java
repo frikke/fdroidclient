@@ -19,28 +19,22 @@
 
 package org.fdroid.fdroid.nearby;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.UriPermission;
 import android.database.ContentObserver;
 import android.hardware.usb.UsbManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.Log;
-import org.fdroid.fdroid.views.main.MainActivity;
+
 import org.fdroid.fdroid.views.main.NearbyViewBinder;
 
 import java.util.HashMap;
+
+import androidx.annotation.RequiresApi;
 
 /**
  * This is just a shim to receive {@link UsbManager#ACTION_USB_DEVICE_DETACHED}
@@ -49,7 +43,7 @@ import java.util.HashMap;
 public class UsbDeviceDetachedReceiver extends BroadcastReceiver {
     public static final String TAG = "UsbDeviceDetachedReceiv";
 
-    private static final HashMap<Uri, ContentObserver> contentObservers = new HashMap<>();
+    static final HashMap<Uri, ContentObserver> contentObservers = new HashMap<>();
 
     @RequiresApi(api = 19)
     @Override

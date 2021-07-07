@@ -9,10 +9,9 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
+
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Schema.AppMetadataTable;
@@ -24,6 +23,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class InstalledAppProvider extends FDroidProvider {
 
@@ -339,7 +341,7 @@ public class InstalledAppProvider extends FDroidProvider {
         }
 
         String packageName = values.getAsString(Cols.Package.NAME);
-        long packageId = PackageProvider.Helper.ensureExists(getContext(), packageName);
+        long packageId = PackageIdProvider.Helper.ensureExists(getContext(), packageName);
         values.remove(Cols.Package.NAME);
         values.put(Cols.PACKAGE_ID, packageId);
 

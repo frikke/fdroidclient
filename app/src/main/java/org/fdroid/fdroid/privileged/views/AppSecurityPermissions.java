@@ -31,9 +31,6 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Parcel;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.appcompat.app.AlertDialog;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -44,6 +41,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.R;
 
@@ -56,6 +54,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 /**
  * This class contains the SecurityPermissions view implementation.
@@ -236,7 +238,7 @@ public class AppSecurityPermissions {
 
     private AppSecurityPermissions(Context context) {
         this.context = context;
-        inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater = ContextCompat.getSystemService(this.context, LayoutInflater.class);
         pm = this.context.getPackageManager();
         // Pick up from framework resources instead.
         newPermPrefix = this.context.getText(R.string.perms_new_perm_prefix);

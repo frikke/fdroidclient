@@ -27,9 +27,9 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageInfo;
-import androidx.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
+
 import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.ApkProvider;
 import org.fdroid.fdroid.data.App;
@@ -44,14 +44,10 @@ import org.fdroid.fdroid.installer.InstallManagerService;
 import org.fdroid.fdroid.installer.InstallerService;
 import org.fdroid.fdroid.net.Downloader;
 import org.fdroid.fdroid.net.DownloaderFactory;
-import org.fdroid.fdroid.net.TreeUriDownloader;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -64,6 +60,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
+import androidx.annotation.NonNull;
 
 // TODO move to org.fdroid.fdroid.updater
 // TODO reduce visibility of methods once in .updater package (.e.g tests need it public now)
@@ -116,11 +118,7 @@ public class IndexUpdater {
     }
 
     protected String getIndexUrl(@NonNull Repo repo) {
-        if (repo.address.startsWith("content://")) {
-            return repo.address + TreeUriDownloader.ESCAPED_SLASH + SIGNED_FILE_NAME;
-        } else {
-            return repo.address + "/" + SIGNED_FILE_NAME;
-        }
+        return repo.getFileUrl(SIGNED_FILE_NAME);
     }
 
     public boolean hasChanged() {
@@ -142,7 +140,7 @@ public class IndexUpdater {
                 }
             }
 
-            throw new UpdateException("Error getting F-Droid index file", e);
+            throw new UpdateException(repo, "Error getting F-Droid index file", e);
         } catch (InterruptedException e) {
             // ignored if canceled, the local database just won't be updated
             e.printStackTrace();
@@ -205,7 +203,7 @@ public class IndexUpdater {
         InputStream indexInputStream = null;
         try {
             if (downloadedFile == null || !downloadedFile.exists()) {
-                throw new UpdateException(downloadedFile + " does not exist!");
+                throw new UpdateException(repo, downloadedFile + " does not exist!");
             }
 
             // Due to a bug in Android 5.0 Lollipop, the inclusion of bouncycastle causes
@@ -229,7 +227,7 @@ public class IndexUpdater {
 
             long timestamp = repoDetailsToSave.getAsLong(RepoTable.Cols.TIMESTAMP);
             if (timestamp < repo.timestamp) {
-                throw new UpdateException("index.jar is older that current index! "
+                throw new UpdateException(repo, "index.jar is older that current index! "
                         + timestamp + " < " + repo.timestamp);
             }
 
@@ -240,7 +238,7 @@ public class IndexUpdater {
             assertSigningCertFromXmlCorrect();
             commitToDb();
         } catch (SAXException | ParserConfigurationException | IOException e) {
-            throw new UpdateException("Error parsing index", e);
+            throw new UpdateException(repo, "Error parsing index", e);
         } finally {
             FDroidApp.enableBouncyCastleOnLollipop();
             Utils.closeQuietly(indexInputStream);
@@ -347,22 +345,22 @@ public class IndexUpdater {
 
         private static final long serialVersionUID = -4492452418826132803L;
 
-        public UpdateException(String message) {
-            super(message);
+        public UpdateException(Repo repo, String message) {
+            super((repo != null ? repo.name + ": " : "") + message);
         }
 
-        public UpdateException(String message, Exception cause) {
-            super(message, cause);
+        public UpdateException(Repo repo, String message, Exception cause) {
+            super((repo != null ? repo.name + ": " : "") + message, cause);
         }
     }
 
     public static class SigningException extends UpdateException {
         public SigningException(String message) {
-            super("Repository was not signed correctly: " + message);
+            super(null, "Repository was not signed correctly: " + message);
         }
 
         public SigningException(Repo repo, String message) {
-            super((repo == null ? "Repository" : repo.name) + " was not signed correctly: " + message);
+            super(repo, "Repository was not signed correctly: " + message);
         }
     }
 

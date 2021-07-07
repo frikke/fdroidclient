@@ -121,7 +121,7 @@
     <string name="copying_icons">Aplikazioen ikonoak biltegira kopiatzen…</string>
     <string name="proxy_host">Proxy ostalaria</string>
     <string name="enable_proxy_summary">Konfiguratu HTTP Proxya sare eskari guztientzat</string>
-    <string name="update_notification_title">Biltegiak eguneratzen</string>
+    <string name="banner_updating_repositories">Biltegiak eguneratzen</string>
     <string name="repos_unchanged">Biltegi guztiak egunean daude</string>
     <string name="all_other_repos_fine">Beste biltegiek ez dute errorerik sortu.</string>
     <string name="global_error_updating_repos">Errorea eguneratzean: %s</string>
@@ -246,7 +246,6 @@
         \ndeskargatzen\n%1$s(e)tik
     </string>
     <string name="permissions">Baimenak</string>
-    <string name="theme_night">Gaua</string>
     <string name="menu_settings">Ezarpenak</string>
     <string name="update_auto_download">Deskargatu eguneraketak automatikoki</string>
     <string name="update_auto_download_summary">Eguneraketak automatikoki deskargatzen dira eta berauek instalatzeko jakinarazten zaizu</string>
@@ -513,4 +512,23 @@
     <string name="swap_toast_closing_nearby_after_timeout">Inguruneko funtzioa itxi da geldirik zegoelako.</string>
     <string name="nearby_splash__document_tree">Bilatu USB OTG bidez biltegiak eta ispiluak.</string>
     <string name="menu_opencollective">OpenCollective</string>
+    <string name="notification_channel_swaps_description">P2P aplikazioaren truke-jakinarazpenak erakusten ditu.</string>
+    <string name="notification_channel_swaps_title">Trukeak</string>
+    <string name="notification_channel_updates_description">Aplikazioaren eta biltegiaren eguneratze-jakinarazpenak erakusten ditu.</string>
+    <string name="notification_channel_updates_title">Eguneraketak</string>
+    <string name="notification_channel_installs_description">Aplikazioaren instalazio-jakinarazpenak erakusten ditu.</string>
+    <string name="notification_channel_installs_title">Instalazioak</string>
+    <string name="send_to_fdroid_metrics">Erabilera datuak bidali</string>
+    <string name="fdroid_metrics_report">%s Metrika Erreportea</string>
+    <string name="install_history_and_metrics">Historia eta metrikak instalatu</string>
+    <string name="send_fdroid_metrics_json">%s metrika erreportea JSON fitxategia batean</string>
+    <string name="send_fdroid_metrics_report">%s metrika erreportea bidali</string>
+    <string name="menu_show_fdroid_metrics_report">Metrika erreportea erakutsi</string>
+    <string name="toast_metrics_in_install_history">%s metrika erreportea instalazio historian ikus daiteke</string>
+    <string name="theme_follow_system">Sistemarena erabili</string>
+    <string name="use_pure_black_dark_theme_summary">OLED paintailetarako bakarrik gomendatua.</string>
+    <string name="use_pure_black_dark_theme">Gai ilunearen atzealderako kolore beltz-beltza erabili</string>
+    <string name="banner_no_data_or_wifi">Datuak eta WiFi-a itzalita</string>
+    <string name="banner_no_internet">Internet gabe</string>
+    <string name="menu_show_install_history">Instalazio historia erakutsi</string>
 </resources>

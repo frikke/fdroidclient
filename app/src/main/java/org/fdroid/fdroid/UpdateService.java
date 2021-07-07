@@ -30,14 +30,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Process;
 import android.os.SystemClock;
-import androidx.annotation.NonNull;
-import androidx.core.app.JobIntentService;
-import androidx.core.app.NotificationCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -55,9 +50,18 @@ import org.fdroid.fdroid.installer.InstallManagerService;
 import org.fdroid.fdroid.net.BluetoothDownloader;
 import org.fdroid.fdroid.net.ConnectivityMonitorService;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.JobIntentService;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class UpdateService extends JobIntentService {
 
@@ -79,6 +83,13 @@ public class UpdateService extends JobIntentService {
     public static final int STATUS_ERROR_LOCAL_SMALL = 4;
     public static final int STATUS_INFO = 5;
 
+    /**
+     * This number should never change, it is used by ROMs to trigger
+     * the first background update of F-Droid during setup.
+     *
+     * @see <a href="https://gitlab.com/fdroid/fdroidclient/-/issues/2147">Add a way to trigger an index update externally</a>
+     * @see <a href="https://review.calyxos.org/c/CalyxOS/platform_packages_apps_SetupWizard/+/3461"/>Schedule F-Droid index update on initialization and network connection</a>
+     */
     private static final int JOB_ID = 0xfedcba;
 
     private static final int NOTIFY_ID_UPDATING = 0;
@@ -163,7 +174,7 @@ public class UpdateService extends JobIntentService {
             }
         } else {
             Utils.debugLog(TAG, "Using android-21 JobScheduler for updates");
-            JobScheduler jobScheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
+            JobScheduler jobScheduler = ContextCompat.getSystemService(context, JobScheduler.class);
             ComponentName componentName = new ComponentName(context, UpdateJobService.class);
             JobInfo.Builder builder = new JobInfo.Builder(JOB_ID, componentName)
                     .setRequiresDeviceIdle(true)
@@ -206,42 +217,30 @@ public class UpdateService extends JobIntentService {
      * unlimited networks over metered networks for index updates and auto
      * downloads of app updates. Starting with {@code android-21}, this uses
      * {@link android.app.job.JobScheduler} instead.
+     *
+     * @return a {@link Completable} that schedules the update. If this process is already running,
+     * a {@code Completable} that completes immediately is returned.
      */
-    public static void scheduleIfStillOnWifi(Context context) {
+    @NonNull
+    public static Completable scheduleIfStillOnWifi(Context context) {
         if (Build.VERSION.SDK_INT >= 21) {
             throw new IllegalStateException("This should never be used on android-21 or newer!");
         }
         if (isScheduleIfStillOnWifiRunning || !Preferences.get().isBackgroundDownloadAllowed()) {
-            return;
+            return Completable.complete();
         }
         isScheduleIfStillOnWifiRunning = true;
-        new StillOnWifiAsyncTask(context).execute();
-    }
 
-    private static final class StillOnWifiAsyncTask extends AsyncTask<Void, Void, Void> {
-
-        private final WeakReference<Context> contextWeakReference;
-
-        private StillOnWifiAsyncTask(Context context) {
-            this.contextWeakReference = new WeakReference<>(context);
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            Context context = contextWeakReference.get();
-            try {
-                Thread.sleep(120000);
-                if (Preferences.get().isBackgroundDownloadAllowed()) {
-                    Utils.debugLog(TAG, "scheduling update because there is good internet");
-                    schedule(context);
-                }
-            } catch (Throwable e) { // NOPMD
-                Utils.debugLog(TAG, e.getMessage());
-            }
-            isScheduleIfStillOnWifiRunning = false;
-            return null;
-        }
-
+        return Completable.timer(2, TimeUnit.MINUTES)
+                .andThen(Completable.fromAction(() -> {
+                    if (Preferences.get().isBackgroundDownloadAllowed()) {
+                        Utils.debugLog(TAG, "scheduling update because there is good internet");
+                        schedule(context);
+                    }
+                    isScheduleIfStillOnWifiRunning = false;
+                }))
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     public static void stopNow(Context context) {
@@ -251,18 +250,49 @@ public class UpdateService extends JobIntentService {
         }
     }
 
+    /**
+     * Return a {@link List} of all {@link Repo}s that have either a local
+     * canonical URL or a local mirror URL.  These are repos that can be
+     * updated and used without using the Internet.
+     */
+    public static List<Repo> getLocalRepos(Context context) {
+        return getLocalRepos(RepoProvider.Helper.all(context));
+    }
+
+    /**
+     * Return the repos in the {@code repos} {@link List} that have either a
+     * local canonical URL or a local mirror URL.  These are repos that can be
+     * updated and used without using the Internet.
+     */
+    public static List<Repo> getLocalRepos(List<Repo> repos) {
+        ArrayList<Repo> localRepos = new ArrayList<>();
+        for (Repo repo : repos) {
+            if (isLocalRepoAddress(repo.address)) {
+                localRepos.add(repo);
+            } else {
+                for (String mirrorAddress : repo.getMirrorList()) {
+                    if (isLocalRepoAddress(mirrorAddress)) {
+                        localRepos.add(repo);
+                        break;
+                    }
+                }
+            }
+        }
+        return localRepos;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
         updateService = this;
 
-        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager = ContextCompat.getSystemService(this, NotificationManager.class);
 
         notificationBuilder = new NotificationCompat.Builder(this, NotificationHelper.CHANNEL_UPDATES)
-                .setSmallIcon(R.drawable.ic_refresh_white)
+                .setSmallIcon(R.drawable.ic_refresh)
                 .setOngoing(true)
                 .setCategory(NotificationCompat.CATEGORY_SERVICE)
-                .setContentTitle(getString(R.string.update_notification_title));
+                .setContentTitle(getString(R.string.banner_updating_repositories));
         appUpdateStatusManager = AppUpdateStatusManager.getInstance(this);
     }
 
@@ -402,22 +432,11 @@ public class UpdateService extends JobIntentService {
             if (isLocalRepoAddress(address)) {
                 Utils.debugLog(TAG, "skipping internet check, this is local: " + address);
             } else if (netState == ConnectivityMonitorService.FLAG_NET_UNAVAILABLE) {
-                boolean foundLocalRepo = false;
-                for (Repo repo : repos) {
-                    if (isLocalRepoAddress(repo.address)) {
-                        foundLocalRepo = true;
-                    } else {
-                        for (String mirrorAddress : repo.getMirrorList()) {
-                            if (isLocalRepoAddress(mirrorAddress)) {
-                                foundLocalRepo = true;
-                                //localRepos.add(repo);
-                                //FDroidApp.setLastWorkingMirror(repo.getId(), mirrorAddress);
-                                break;
-                            }
-                        }
-                    }
-                }
-                if (!foundLocalRepo) {
+                // keep track of repos that have a local copy in case internet is not available
+                List<Repo> localRepos = getLocalRepos(repos);
+                if (localRepos.size() > 0) {
+                    repos = localRepos;
+                } else {
                     Utils.debugLog(TAG, "No internet, cannot update");
                     if (manualUpdate) {
                         Utils.showToastFromService(this, getString(R.string.warning_no_internet), Toast.LENGTH_SHORT);

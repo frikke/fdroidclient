@@ -4,13 +4,11 @@
 -keep class org.fdroid.fdroid.** {*;}
 -dontskipnonpubliclibraryclassmembers
 -dontwarn android.test.**
--dontwarn com.android.support.test.**
 
 -dontwarn javax.naming.**
 -dontwarn org.slf4j.**
 -dontnote org.apache.http.**
 -dontnote android.net.http.**
--dontnote android.support.**
 -dontnote **ILicensingService
 
 # Needed for espresso https://stackoverflow.com/a/21706087
@@ -33,13 +31,6 @@
     public *;
 }
 
-# The rxjava library depends on sun.misc.Unsafe, which is unavailable on Android
-# The rxjava team is aware of this, and mention in the docs that they only use
-# the unsafe functionality if the platform supports it.
-#  - https://github.com/ReactiveX/RxJava/issues/1415#issuecomment-48390883
-#  - https://github.com/ReactiveX/RxJava/blob/1.x/src/main/java/rx/internal/util/unsafe/UnsafeAccess.java#L23
--dontwarn rx.internal.util.**
-
 -keepattributes *Annotation*,EnclosingMethod,Signature
 -keepnames class com.fasterxml.jackson.** { *; }
 -dontwarn com.fasterxml.jackson.databind.ext.**
@@ -48,4 +39,9 @@
 public static final org.codehaus.jackson.annotate.JsonAutoDetect$Visibility *; }
 -keep public class your.class.** {
   *;
+}
+
+# This is necessary so that RemoteWorkManager can be initialized (also marked with @Keep)
+-keep class androidx.work.multiprocess.RemoteWorkManagerClient {
+    public <init>(...);
 }

@@ -30,25 +30,23 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.ViewGroup;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.text.TextUtils;
-import android.util.TypedValue;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-import com.ashokvarma.bottomnavigation.BottomNavigationBar;
-import com.ashokvarma.bottomnavigation.BottomNavigationItem;
-import com.ashokvarma.bottomnavigation.TextBadgeItem;
+
+import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import org.fdroid.fdroid.AppUpdateStatusManager;
 import org.fdroid.fdroid.AppUpdateStatusManager.AppUpdateStatus;
-import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.NfcHelper;
 import org.fdroid.fdroid.Preferences;
@@ -65,8 +63,6 @@ import org.fdroid.fdroid.views.AppDetailsActivity;
 import org.fdroid.fdroid.views.ManageReposActivity;
 import org.fdroid.fdroid.views.apps.AppListActivity;
 
-import java.lang.reflect.Field;
-
 /**
  * Main view shown to users upon starting F-Droid.
  * <p>
@@ -81,7 +77,7 @@ import java.lang.reflect.Field;
  * When switching from one screen to the next, we stay within this activity. The new screen will
  * get inflated (if required)
  */
-public class MainActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
@@ -98,17 +94,16 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     private static final String ACTION_ADD_REPO = "org.fdroid.fdroid.MainActivity.ACTION_ADD_REPO";
     public static final String ACTION_REQUEST_SWAP = "requestSwap";
 
-    private static final String STATE_SELECTED_MENU_ID = "selectedMenuId";
-
     private RecyclerView pager;
     private MainViewAdapter adapter;
-    private BottomNavigationBar bottomNavigation;
-    private int selectedMenuId;
-    private TextBadgeItem updatesBadge;
+    private BottomNavigationView bottomNavigation;
+    private BadgeDrawable updatesBadge;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        ((FDroidApp) getApplication()).applyTheme(this);
+        FDroidApp fdroidApp = (FDroidApp) getApplication();
+        fdroidApp.applyPureBlackBackgroundInDarkTheme(this);
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
@@ -127,73 +122,24 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
             pager.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
         }
 
-        updatesBadge = new TextBadgeItem().hide(false);
+        bottomNavigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        bottomNavigation.setOnNavigationItemSelectedListener(item -> {
+            pager.scrollToPosition(item.getOrder());
 
-        bottomNavigation = (BottomNavigationBar) findViewById(R.id.bottom_navigation);
-        bottomNavigation
-                .addItem(new BottomNavigationItem(R.drawable.ic_latest, R.string.main_menu__latest_apps));
-        if (BuildConfig.FLAVOR.startsWith("full")) {
-            bottomNavigation
-                    .addItem(new BottomNavigationItem(R.drawable.ic_categories, R.string.main_menu__categories))
-                    .addItem(new BottomNavigationItem(R.drawable.ic_nearby, R.string.main_menu__swap_nearby));
-
-            bottomNavigation.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (bottomNavigation.getCurrentSelectedPosition() == 2) {
-                        NearbyViewBinder.updateUsbOtg(MainActivity.this);
-                    }
-                }
-            });
-        }
-        bottomNavigation.setTabSelectedListener(this)
-                .setBarBackgroundColor(getBottomNavigationBackgroundColorResId())
-                .setInActiveColor(R.color.bottom_nav_items)
-                .setActiveColor(R.color.bottom_nav_active)
-                .setMode(BottomNavigationBar.MODE_FIXED)
-                .addItem(new BottomNavigationItem(R.drawable.ic_updates, R.string.main_menu__updates)
-                        .setBadgeItem(updatesBadge))
-                .addItem(new BottomNavigationItem(R.drawable.ic_settings, R.string.menu_settings))
-                .setAnimationDuration(0)
-                .initialise();
-
-        // turn off animation, scaling, and truncate labels in the middle
-        final LinearLayout linearLayout = bottomNavigation.findViewById(R.id.bottom_navigation_bar_item_container);
-        final int childCount = linearLayout.getChildCount();
-        for (int i = 0; i < childCount; i++) {
-            final View fixedBottomNavigationTab = linearLayout.getChildAt(i);
-            try {
-                Field labelScale = fixedBottomNavigationTab.getClass().getDeclaredField("labelScale");
-                labelScale.setAccessible(true);
-                labelScale.set(fixedBottomNavigationTab, 1.0f);
-            } catch (IllegalAccessException | NoSuchFieldException | IllegalArgumentException e) {
-                e.printStackTrace();
+            if (item.getItemId() == 2) {
+                NearbyViewBinder.updateUsbOtg(MainActivity.this);
             }
 
-            final View container = fixedBottomNavigationTab.findViewById(R.id.fixed_bottom_navigation_container);
-            container.setPadding(
-                    2,
-                    container.getPaddingTop(),
-                    2,
-                    container.getPaddingBottom()
-            );
+            return true;
 
-            final TextView title = fixedBottomNavigationTab.findViewById(R.id.fixed_bottom_navigation_title);
-            title.setEllipsize(TextUtils.TruncateAt.MIDDLE);
-            title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
-        }
+        });
+        updatesBadge = bottomNavigation.getOrCreateBadge(R.id.updates);
+        updatesBadge.setVisible(false);
 
         IntentFilter updateableAppsFilter = new IntentFilter(AppUpdateStatusManager.BROADCAST_APPSTATUS_LIST_CHANGED);
         updateableAppsFilter.addAction(AppUpdateStatusManager.BROADCAST_APPSTATUS_CHANGED);
         updateableAppsFilter.addAction(AppUpdateStatusManager.BROADCAST_APPSTATUS_REMOVED);
         LocalBroadcastManager.getInstance(this).registerReceiver(onUpdateableAppsChanged, updateableAppsFilter);
-
-        if (savedInstanceState != null) {
-            selectedMenuId = savedInstanceState.getInt(STATE_SELECTED_MENU_ID, (int) adapter.getItemId(0));
-        } else {
-            selectedMenuId = (int) adapter.getItemId(0);
-        }
-        setSelectedMenuInNav();
 
         initialRepoUpdateIfRequired();
 
@@ -201,14 +147,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         handleSearchOrAppViewIntent(intent);
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        outState.putInt(STATE_SELECTED_MENU_ID, selectedMenuId);
-        super.onSaveInstanceState(outState);
-    }
-
-    private void setSelectedMenuInNav() {
-        bottomNavigation.selectTab(adapter.adapterPositionFromItemId(selectedMenuId));
+    private void setSelectedMenuInNav(int menuId) {
+        int position = adapter.adapterPositionFromItemId(menuId);
+        pager.scrollToPosition(position);
+        bottomNavigation.setSelectedItemId(position);
     }
 
     private void initialRepoUpdateIfRequired() {
@@ -226,19 +168,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
 
         if (getIntent().hasExtra(EXTRA_VIEW_UPDATES)) {
             getIntent().removeExtra(EXTRA_VIEW_UPDATES);
-            pager.scrollToPosition(adapter.adapterPositionFromItemId(R.id.updates));
-            selectedMenuId = R.id.updates;
-            setSelectedMenuInNav();
+            setSelectedMenuInNav(R.id.updates);
         } else if (getIntent().hasExtra(EXTRA_VIEW_NEARBY)) {
             getIntent().removeExtra(EXTRA_VIEW_NEARBY);
-            pager.scrollToPosition(adapter.adapterPositionFromItemId(R.id.nearby));
-            selectedMenuId = R.id.nearby;
-            setSelectedMenuInNav();
+            setSelectedMenuInNav(R.id.nearby);
         } else if (getIntent().hasExtra(EXTRA_VIEW_SETTINGS)) {
             getIntent().removeExtra(EXTRA_VIEW_SETTINGS);
-            pager.scrollToPosition(adapter.adapterPositionFromItemId(R.id.settings));
-            selectedMenuId = R.id.settings;
-            setSelectedMenuInNav();
+            setSelectedMenuInNav(R.id.settings);
         }
 
         // AppDetailsActivity and RepoDetailsActivity set different NFC actions, so reset here
@@ -276,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_LOCATION_PERMISSIONS) {
             WifiStateChangeService.start(this, null);
-            SwapService.start(this);
+            ContextCompat.startForegroundService(this, new Intent(this, SwapService.class));
         } else if (requestCode == REQUEST_STORAGE_PERMISSIONS) {
             Toast.makeText(this,
                     this.getString(R.string.scan_removable_storage_toast, ""),
@@ -285,22 +221,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         }
     }
 
-    @Override
-    public void onTabSelected(int position) {
-        pager.scrollToPosition(position);
-        selectedMenuId = (int) adapter.getItemId(position);
-    }
-
-    @Override
-    public void onTabUnselected(int position) {
-
-    }
-
-    @Override
-    public void onTabReselected(int position) {
-
-    }
-
+    /**
+     * Since any app could send this {@link Intent}, and the search terms are
+     * fed into a SQL query, the data must be strictly sanitized to avoid
+     * SQL injection attacks.
+     */
     private void handleSearchOrAppViewIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
@@ -387,6 +312,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         }
 
         if (!TextUtils.isEmpty(packageName)) {
+            // sanitize packageName to be a valid Java packageName and prevent exploits
+            packageName = packageName.replaceAll("[^A-Za-z\\d_.]", "");
             Utils.debugLog(TAG, "FDroid launched via app link for '" + packageName + "'");
             Intent intentToInvoke = new Intent(this, AppDetailsActivity.class);
             intentToInvoke.putExtra(AppDetailsActivity.EXTRA_APPID, packageName);
@@ -399,11 +326,18 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     }
 
     /**
+     * These strings might end up in a SQL query, so strip all non-alpha-num
+     */
+    static String sanitizeSearchTerms(String query) {
+        return query.replaceAll("[^\\p{L}\\d_ -]", " ");
+    }
+
+    /**
      * Initiates the {@link AppListActivity} with the relevant search terms passed in via the query arg.
      */
     private void performSearch(String query) {
         Intent searchIntent = new Intent(this, AppListActivity.class);
-        searchIntent.putExtra(AppListActivity.EXTRA_SEARCH_TERMS, query);
+        searchIntent.putExtra(AppListActivity.EXTRA_SEARCH_TERMS, sanitizeSearchTerms(query));
         startActivity(searchIntent);
     }
 
@@ -434,19 +368,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
 
     private void refreshUpdatesBadge(int canUpdateCount) {
         if (canUpdateCount == 0) {
-            updatesBadge.hide(true);
+            updatesBadge.setVisible(false);
+            updatesBadge.clearNumber();
         } else {
-            updatesBadge.setText(Integer.toString(canUpdateCount));
-            updatesBadge.show(true);
-        }
-    }
-
-    private int getBottomNavigationBackgroundColorResId() {
-        switch (FDroidApp.getCurThemeResId()) {
-            case R.style.AppThemeNight:
-                return R.color.fdroid_night;
-            default:
-                return R.color.fdroid_blue;
+            updatesBadge.setNumber(canUpdateCount);
+            updatesBadge.setVisible(true);
         }
     }
 

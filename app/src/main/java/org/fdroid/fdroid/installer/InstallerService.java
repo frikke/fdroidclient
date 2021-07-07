@@ -24,8 +24,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import androidx.annotation.NonNull;
-import androidx.core.app.JobIntentService;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.fdroid.fdroid.Utils;
@@ -36,6 +35,9 @@ import org.fdroid.fdroid.views.AppDetailsActivity;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.Objects;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.JobIntentService;
 
 /**
  * This service handles the install process of apk files and
@@ -74,7 +76,7 @@ public class InstallerService extends JobIntentService {
 
         if (ACTION_INSTALL.equals(intent.getAction())) {
             Uri uri = intent.getData();
-            Uri canonicalUri = intent.getParcelableExtra(org.fdroid.fdroid.net.Downloader.EXTRA_CANONICAL_URL);
+            Uri canonicalUri = Uri.parse(intent.getStringExtra(org.fdroid.fdroid.net.Downloader.EXTRA_CANONICAL_URL));
             installer.installPackage(uri, canonicalUri);
         } else if (ACTION_UNINSTALL.equals(intent.getAction())) {
             installer.uninstallPackage();
@@ -124,7 +126,7 @@ public class InstallerService extends JobIntentService {
         Intent intent = new Intent(context, InstallerService.class);
         intent.setAction(ACTION_INSTALL);
         intent.setData(localApkUri);
-        intent.putExtra(org.fdroid.fdroid.net.Downloader.EXTRA_CANONICAL_URL, canonicalUri);
+        intent.putExtra(org.fdroid.fdroid.net.Downloader.EXTRA_CANONICAL_URL, canonicalUri.toString());
         intent.putExtra(Installer.EXTRA_APK, apk);
         enqueueWork(context, intent);
     }

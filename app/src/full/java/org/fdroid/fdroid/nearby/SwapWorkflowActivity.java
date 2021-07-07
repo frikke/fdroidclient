@@ -1,7 +1,6 @@
 package org.fdroid.fdroid.nearby;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -17,17 +16,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.core.view.MenuItemCompat;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,9 +33,22 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import cc.mvdan.accesspoint.WifiApControl;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+
 import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.NfcHelper;
@@ -64,7 +65,6 @@ import org.fdroid.fdroid.net.BluetoothDownloader;
 import org.fdroid.fdroid.net.Downloader;
 import org.fdroid.fdroid.net.HttpDownloader;
 import org.fdroid.fdroid.qr.CameraCharacteristicsChecker;
-import org.fdroid.fdroid.qr.QrGenAsyncTask;
 import org.fdroid.fdroid.views.main.MainActivity;
 
 import java.util.Date;
@@ -74,6 +74,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import cc.mvdan.accesspoint.WifiApControl;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 import static org.fdroid.fdroid.views.main.MainActivity.ACTION_REQUEST_SWAP;
 
@@ -103,7 +106,7 @@ public class SwapWorkflowActivity extends AppCompatActivity {
     private static final int REQUEST_WRITE_SETTINGS_PERMISSION = 5;
     private static final int STEP_INTRO = 1;  // TODO remove this special case, only use layoutResIds
 
-    private Toolbar toolbar;
+    private MaterialToolbar toolbar;
     private SwapView currentView;
     private boolean hasPreparedLocalRepo;
     private boolean newIntent;
@@ -115,6 +118,8 @@ public class SwapWorkflowActivity extends AppCompatActivity {
 
     @LayoutRes
     private int currentSwapViewLayoutRes = STEP_INTRO;
+
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public static void requestSwap(Context context, String repo) {
         requestSwap(context, Uri.parse(repo));
@@ -197,7 +202,11 @@ public class SwapWorkflowActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ((FDroidApp) getApplication()).setSecureWindow(this);
+        FDroidApp fdroidApp = (FDroidApp) getApplication();
+        fdroidApp.setSecureWindow(this);
+
+        fdroidApp.applyPureBlackBackgroundInDarkTheme(this);
+
         super.onCreate(savedInstanceState);
 
         currentView = new SwapView(this); // dummy placeholder to avoid NullPointerExceptions;
@@ -210,8 +219,7 @@ public class SwapWorkflowActivity extends AppCompatActivity {
 
         setContentView(R.layout.swap_activity);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitleTextAppearance(getApplicationContext(), R.style.SwapTheme_Wizard_Text_Toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         container = (ViewGroup) findViewById(R.id.container);
@@ -220,7 +228,7 @@ public class SwapWorkflowActivity extends AppCompatActivity {
         localBroadcastManager.registerReceiver(downloaderInterruptedReceiver,
                 new IntentFilter(Downloader.ACTION_INTERRUPTED));
 
-        wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        wifiManager = ContextCompat.getSystemService(getApplicationContext(), WifiManager.class);
         wifiApControl = WifiApControl.getInstance(this);
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -230,6 +238,7 @@ public class SwapWorkflowActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        compositeDisposable.dispose();
         localBroadcastManager.unregisterReceiver(downloaderInterruptedReceiver);
         unbindService(serviceConnection);
         super.onDestroy();
@@ -268,8 +277,7 @@ public class SwapWorkflowActivity extends AppCompatActivity {
         CharSequence title = getString(titleResId);
         next.setTitle(title);
         next.setTitleCondensed(title);
-        MenuItemCompat.setShowAsAction(next,
-                MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
+        next.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
         next.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -298,8 +306,8 @@ public class SwapWorkflowActivity extends AppCompatActivity {
         SearchView searchView = new SearchView(this);
 
         MenuItem searchMenuItem = menu.findItem(R.id.action_search);
-        MenuItemCompat.setActionView(searchMenuItem, searchView);
-        MenuItemCompat.setShowAsAction(searchMenuItem, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+        searchMenuItem.setActionView(searchView);
+        searchMenuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
@@ -485,14 +493,13 @@ public class SwapWorkflowActivity extends AppCompatActivity {
         getSwapService().initTimer();
 
         container.removeAllViews();
-        View view = ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(viewRes, container, false);
+        View view = ContextCompat.getSystemService(this, LayoutInflater.class)
+                .inflate(viewRes, container, false);
         currentView = (SwapView) view;
         currentView.setLayoutResId(viewRes);
         currentSwapViewLayoutRes = viewRes;
 
-        toolbar.setBackgroundColor(currentView.getToolbarColour());
         toolbar.setTitle(currentView.getToolbarTitle());
-        toolbar.setNavigationIcon(R.drawable.ic_close_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -590,7 +597,7 @@ public class SwapWorkflowActivity extends AppCompatActivity {
     }
 
     private void sendFDroidApk() {
-        ((FDroidApp) getApplication()).sendViaBluetooth(this, Activity.RESULT_OK, BuildConfig.APPLICATION_ID);
+        ((FDroidApp) getApplication()).sendViaBluetooth(this, AppCompatActivity.RESULT_OK, BuildConfig.APPLICATION_ID);
     }
 
     /**
@@ -772,7 +779,7 @@ public class SwapWorkflowActivity extends AppCompatActivity {
     private final BroadcastReceiver bluetoothScanModeChanged = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            SwitchCompat bluetoothSwitch = container.findViewById(R.id.switch_bluetooth);
+            SwitchMaterial bluetoothSwitch = container.findViewById(R.id.switch_bluetooth);
             TextView textBluetoothVisible = container.findViewById(R.id.bluetooth_visible);
             if (bluetoothSwitch == null || textBluetoothVisible == null
                     || !BluetoothManager.ACTION_STATUS.equals(intent.getAction())) {
@@ -926,17 +933,23 @@ public class SwapWorkflowActivity extends AppCompatActivity {
         ImageView qrImage = container.findViewById(R.id.wifi_qr_code);
         if (qrUriString != null && qrImage != null) {
             Utils.debugLog(TAG, "Encoded swap URI in QR Code: " + qrUriString);
-            new QrGenAsyncTask(SwapWorkflowActivity.this, R.id.wifi_qr_code).execute(qrUriString);
 
-            // Replace all blacks with the background blue.
-            qrImage.setColorFilter(new LightingColorFilter(0xffffffff, getResources().getColor(R.color.swap_blue)));
+            compositeDisposable.add(Utils.generateQrBitmap(this, qrUriString)
+                    .subscribe(qrBitmap -> {
+                        qrImage.setImageBitmap(qrBitmap);
 
-            final View qrWarningMessage = container.findViewById(R.id.warning_qr_scanner);
-            if (CameraCharacteristicsChecker.getInstance(this).hasAutofocus()) {
-                qrWarningMessage.setVisibility(View.GONE);
-            } else {
-                qrWarningMessage.setVisibility(View.VISIBLE);
-            }
+                        // Replace all blacks with the background blue.
+                        qrImage.setColorFilter(new LightingColorFilter(0xffffffff,
+                                ContextCompat.getColor(this, R.color.swap_blue)));
+
+                        final View qrWarningMessage = container.findViewById(R.id.warning_qr_scanner);
+                        if (CameraCharacteristicsChecker.getInstance(this).hasAutofocus()) {
+                            qrWarningMessage.setVisibility(View.GONE);
+                        } else {
+                            qrWarningMessage.setVisibility(View.VISIBLE);
+                        }
+                    })
+            );
         }
     }
 
@@ -955,19 +968,19 @@ public class SwapWorkflowActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(FDroidApp.bssid) && !TextUtils.isEmpty(FDroidApp.ipAddressString)) {
             // empty bssid with an ipAddress means hotspot mode
             descriptionView.setText(R.string.swap_join_this_hotspot);
-            wifiIcon.setImageDrawable(getResources().getDrawable(R.drawable.hotspot));
+            wifiIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_wifi_tethering));
             ssidView.setText(R.string.swap_active_hotspot);
             tapView.setText(R.string.swap_switch_to_wifi);
         } else if (TextUtils.isEmpty(FDroidApp.ssid)) {
             // not connected to or setup with any wifi network
             descriptionView.setText(R.string.swap_join_same_wifi);
-            wifiIcon.setImageDrawable(getResources().getDrawable(R.drawable.wifi));
+            wifiIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_wifi));
             ssidView.setText(R.string.swap_no_wifi_network);
             tapView.setText(R.string.swap_view_available_networks);
         } else {
             // connected to a regular wifi network
             descriptionView.setText(R.string.swap_join_same_wifi);
-            wifiIcon.setImageDrawable(getResources().getDrawable(R.drawable.wifi));
+            wifiIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_wifi));
             ssidView.setText(FDroidApp.ssid);
             tapView.setText(R.string.swap_view_available_networks);
         }
@@ -983,7 +996,7 @@ public class SwapWorkflowActivity extends AppCompatActivity {
             }
         });
 
-        SwitchCompat wifiSwitch = findViewById(R.id.switch_wifi);
+        SwitchMaterial wifiSwitch = findViewById(R.id.switch_wifi);
         wifiSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -1107,7 +1120,7 @@ public class SwapWorkflowActivity extends AppCompatActivity {
     private final BroadcastReceiver bluetoothStatus = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            SwitchCompat bluetoothSwitch = container.findViewById(R.id.switch_bluetooth);
+            SwitchMaterial bluetoothSwitch = container.findViewById(R.id.switch_bluetooth);
             TextView textBluetoothVisible = container.findViewById(R.id.bluetooth_visible);
             TextView textDeviceIdBluetooth = container.findViewById(R.id.device_id_bluetooth);
             TextView peopleNearbyText = container.findViewById(R.id.text_people_nearby);

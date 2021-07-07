@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="SignatureMismatch">La nouvelle version est signée avec une clé différente de l\'ancienne version. Pour installer cette nouvelle version, vous devez d\'abord désinstaller l\'ancienne version de l\'application avant de réessayer. (Attention : la désinstallation supprimera toutes les données de l\'application)</string>
-    <string name="installIncompatible">Application incompatible avec votre appareil, l\'installer quand même ?</string>
+    <string name="installIncompatible">Application non compatible avec votre appareil, l\'installer quand même \?</string>
     <string name="version">Version</string>
     <string name="delete">Supprimer</string>
     <string name="enable_nfc_send">Activer l’envoi par CCP/NFC…</string>
@@ -126,7 +126,7 @@
     <string name="category_Internet">Internet</string>
     <string name="category_Multimedia">Multimédia</string>
     <string name="category_Navigation">Navigation</string>
-    <string name="category_Phone_SMS">Téléphone et textos</string>
+    <string name="category_Phone_SMS">Téléphone et SMS</string>
     <string name="category_Reading">Lecture</string>
     <string name="category_Science_Education">Science et éducation</string>
     <string name="category_Security">Sécurité</string>
@@ -148,7 +148,7 @@
     <string name="bad_fingerprint">Mauvaise empreinte</string>
     <string name="invalid_url">Ceci n\'est pas une URL valide.</string>
     <string name="menu_changelog">Journal des changements</string>
-    <string name="update_notification_title">Mise à jour des dépôts</string>
+    <string name="banner_updating_repositories">Mise à jour des dépôts</string>
     <string name="pref_language">Langue</string>
     <string name="pref_language_default">Langue du système</string>
     <string name="wifi">Wi-Fi</string>
@@ -210,10 +210,10 @@
     <string name="swap_intro">Connectez-vous et échangez des applis avec des personnes autour de vous.</string>
     <string name="swap_visible_bluetooth">Visible en Bluetooth</string>
     <string name="swap_setting_up_bluetooth">Activation du Bluetooth…</string>
-    <string name="swap_not_visible_bluetooth">Non visible par le Bluetooth</string>
-    <string name="swap_visible_wifi">Visible par le Wi-Fi</string>
+    <string name="swap_not_visible_bluetooth">Non visible en Bluetooth</string>
+    <string name="swap_visible_wifi">Visible en Wi-Fi</string>
     <string name="swap_setting_up_wifi">Mise en place du Wi-Fi…</string>
-    <string name="swap_not_visible_wifi">Non visible par le Wi-Fi</string>
+    <string name="swap_not_visible_wifi">Non visible en Wi-Fi</string>
     <string name="swap_wifi_device_name">Nom de l’appareil</string>
     <string name="swap_send_fdroid">Envoyer F-Droid</string>
     <string name="swap_no_peers_nearby">Aucune personne n\'a été trouvée à proximité.</string>
@@ -238,7 +238,6 @@
     <string name="more">Plus</string>
     <string name="less">Moins</string>
     <string name="permissions">Autorisations</string>
-    <string name="theme_night">Nuit</string>
     <string name="menu_settings">Paramètres</string>
     <string name="login_title">Identification requise</string>
     <string name="login_name">Nom d\'utilisateur</string>
@@ -247,7 +246,7 @@
     <string name="repo_error_empty_username">Nom d\'utilisateur vide, aucune modification effectuée</string>
     <string name="about_license">Licence</string>
     <string name="empty_search_available_app_list">Aucune application correspondante disponible.</string>
-    <string name="status_inserting_apps">Enregistrement des détails des applis</string>
+    <string name="status_inserting_apps">Enregistrement des détails de l\'appli</string>
     <string name="crash_dialog_title">F-Droid s’est arrêté de manière inattendue</string>
     <string name="crash_dialog_comment_prompt">Vous pouvez ajouter des informations supplémentaires :</string>
     <string name="crash_dialog_text">Une erreur inattendue s’est produite entraînant l’arrêt de l’appli. Souhaitez envoyer les détails par courriel afin d’aider à corriger la situation \?</string>
@@ -289,14 +288,14 @@
     <string name="notification_content_single_downloading_update">Téléchargement de la mise à jour de « %1$s »…</string>
     <string name="notification_content_single_installing">Installation de « %1$s »…</string>
     <string name="notification_content_single_installed">Installation réussie</string>
-    <string name="notification_title_summary_update_available">Une mise à jour est proposée</string>
+    <string name="notification_title_summary_update_available">Une mise à jour est disponible</string>
     <string name="notification_title_summary_downloading">Téléchargement…</string>
     <string name="notification_title_summary_downloading_update">Téléchargement de la mise à jour…</string>
     <string name="notification_title_summary_ready_to_install">Prêt pour installation</string>
     <string name="notification_title_summary_ready_to_install_update">Mise à jour prête pour installation</string>
     <string name="notification_title_summary_installing">Installation</string>
     <string name="notification_title_summary_installed">Installé avec succès</string>
-    <string name="notification_title_summary_install_error">Échec d’installation</string>
+    <string name="notification_title_summary_install_error">L’installation a échoué</string>
     <string name="notification_action_update">Mettre à jour</string>
     <string name="notification_action_cancel">Annuler</string>
     <string name="notification_action_install">Installer</string>
@@ -340,8 +339,8 @@
         <item quantity="other">Afficher toutes les applications %1$d de la catégorie %2$s</item>
     </plurals>
     <plurals name="details_last_update_days">
-        <item quantity="one">Mis à jour il y a %1$s jour</item>
-        <item quantity="other">Mis à jour il y a %1$s jours</item>
+        <item quantity="one">Mis à jour il y a %1$d jour</item>
+        <item quantity="other">Mis à jour il y a %1$d jours</item>
     </plurals>
     <string name="latest__empty_state__no_recent_apps">Aucune application récente trouvée</string>
     <string name="categories__empty_state__no_categories">Aucune catégorie à afficher</string>
@@ -369,16 +368,16 @@
         <item quantity="other">%1$d applis installées</item>
     </plurals>
     <plurals name="details_last_update_weeks">
-        <item quantity="one">Mis à jour il y a %1$s semaine</item>
-        <item quantity="other">Mis à jour il y a %1$s semaines</item>
+        <item quantity="one">Mis à jour il y a %1$d semaine</item>
+        <item quantity="other">Mis à jour il y a %1$d semaines</item>
     </plurals>
     <plurals name="details_last_update_months">
         <item quantity="one">Mis à jour il y a %1$d mois</item>
         <item quantity="other">Mis à jour il y a %1$d mois</item>
     </plurals>
     <plurals name="details_last_update_years">
-        <item quantity="one">Mis à jour il y a %1$s an</item>
-        <item quantity="other">Mis à jour il y a %1$s ans</item>
+        <item quantity="one">Mis à jour il y a %1$d an</item>
+        <item quantity="other">Mis à jour il y a %1$d ans</item>
     </plurals>
     <string name="by_author_format">par %s</string>
     <string name="download_404">Le fichier demandé n\'a pas été trouvé.</string>
@@ -505,8 +504,22 @@
     <string name="menu_opencollective">OpenCollective</string>
     <string name="notification_channel_updates_title">Mises à jour</string>
     <string name="notification_channel_installs_title">Installations</string>
-    <string name="notification_channel_swaps_description">Affiche les notifications de transfert d’applications en P2P.</string>
-    <string name="notification_channel_swaps_title">Transferts</string>
+    <string name="notification_channel_swaps_description">Affiche les notifications d\'échange d\'applications en P2P.</string>
+    <string name="notification_channel_swaps_title">Échanges</string>
     <string name="notification_channel_updates_description">Afficher les notifications de mise à jour des applis et des dépôts.</string>
     <string name="notification_channel_installs_description">Affiche les notifications d’installation d’applis.</string>
+    <string name="menu_show_install_history">Afficher l’historique des installations</string>
+    <string name="send_to_fdroid_metrics_summary">Envoi hebdomadaire de données anonymes aux indicateurs métriques F-Droid (requiert la sauvegarde de l\'historique de téléchargement)</string>
+    <string name="send_to_fdroid_metrics">Envoyer les données d\'utilisation</string>
+    <string name="send_fdroid_metrics_report">Envoyer le rapport d\'analyses de %s</string>
+    <string name="send_fdroid_metrics_json">Rapport d\'analyse de %s en tant que fichier JSON</string>
+    <string name="fdroid_metrics_report">Rapport d\'analyse de %s</string>
+    <string name="install_history_and_metrics">Installer l\'historique et les analyses</string>
+    <string name="toast_metrics_in_install_history">Le rapport de télémétrie de %s est visualisable dans la visionneuse de l\'installation d\'historique</string>
+    <string name="menu_show_fdroid_metrics_report">Afficher le rapport d\'analyse</string>
+    <string name="theme_follow_system">Suivre le système</string>
+    <string name="use_pure_black_dark_theme_summary">Recommandé uniquement pour les écrans OLED.</string>
+    <string name="use_pure_black_dark_theme">Utiliser un fond noir pur pour le thème sombre</string>
+    <string name="banner_no_data_or_wifi">Pas de Données ou Wi-Fi actif</string>
+    <string name="banner_no_internet">Aucune connexion Internet</string>
 </resources>

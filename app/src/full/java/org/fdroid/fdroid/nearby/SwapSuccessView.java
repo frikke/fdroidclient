@@ -1,7 +1,6 @@
 package org.fdroid.fdroid.nearby;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,13 +11,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.CursorLoader;
-import androidx.loader.content.Loader;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.cursoradapter.widget.CursorAdapter;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -31,7 +23,19 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.nostra13.universalimageloader.core.ImageLoader;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.cursoradapter.widget.CursorAdapter;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+import com.bumptech.glide.Glide;
+
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.UpdateService;
 import org.fdroid.fdroid.Utils;
@@ -194,7 +198,7 @@ public class SwapSuccessView extends SwapView implements LoaderManager.LoaderCal
             private final ContentObserver appObserver = new ContentObserver(new Handler()) {
                 @Override
                 public void onChange(boolean selfChange) {
-                    Activity activity = getActivity();
+                    AppCompatActivity activity = getActivity();
                     if (activity != null && app != null) {
                         app = AppProvider.Helper.findSpecificApp(
                                 activity.getContentResolver(),
@@ -309,7 +313,10 @@ public class SwapSuccessView extends SwapView implements LoaderManager.LoaderCal
                     nameView.setText(app.name);
                 }
 
-                ImageLoader.getInstance().displayImage(app.getIconUrl(iconView.getContext()), iconView, Utils.getRepoAppDisplayImageOptions());
+                Glide.with(iconView.getContext())
+                        .load(app.getIconUrl(iconView.getContext()))
+                        .apply(Utils.getRepoAppDisplayImageOptions())
+                        .into(iconView);
 
                 if (app.hasUpdates()) {
                     btnInstall.setText(R.string.menu_upgrade);
@@ -361,7 +368,7 @@ public class SwapSuccessView extends SwapView implements LoaderManager.LoaderCal
         @NonNull
         private LayoutInflater getInflater(Context context) {
             if (inflater == null) {
-                inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                inflater = ContextCompat.getSystemService(context, LayoutInflater.class);
             }
             return inflater;
         }

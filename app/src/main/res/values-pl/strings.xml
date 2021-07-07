@@ -8,8 +8,8 @@
     <string name="updates">Aktualizacje</string>
     <string name="other">Inne</string>
     <string name="notify">Pokaż dostępne aktualizacje</string>
-    <string name="system_installer">Uprzywilejowany dodatek</string>
-    <string name="system_installer_on">Używaj uprzywilejowanego dodatku, aby instalować, aktualizować i usuwać paczki</string>
+    <string name="system_installer">Uprzywilejowane rozszerzenie</string>
+    <string name="system_installer_on">Używaj uprzywilejowanego rozszerzenia, aby instalować, aktualizować i usuwać paczki</string>
     <string name="local_repo_name">Nazwa lokalnego repozytorium</string>
     <string name="local_repo_name_summary">Wyświetlana nazwa repozytorium lokalnego: %s</string>
     <string name="local_repo_https_on">Korzystaj z zabezpieczonego połączenia HTTPS</string>
@@ -132,7 +132,7 @@
     <string name="antitracklist">Ta aplikacja śledzi i raportuje Twoją aktywność</string>
     <string name="show_incompat_versions_on">Pokazuj aplikacje, które są niekompatybilne z tym urządzeniem</string>
     <string name="status_download">Pobieranie\n%2$s / %3$s (%4$d%%) z\n%1$s</string>
-    <string name="update_notification_title">Aktualizowanie repozytoriów</string>
+    <string name="banner_updating_repositories">Aktualizacja repozytoriów</string>
     <string name="status_processing_xml_percent">Przetwarzanie %2$s / %3$s (%4$d%%) z %1$s</string>
     <string name="no_permissions">Brak uprawnień</string>
     <string name="unsigned">Brak podpisu</string>
@@ -239,7 +239,6 @@
     <string name="less">Mniej</string>
     <string name="status_download_unknown_size">Pobieranie\n%2$s z\n%1$s</string>
     <string name="permissions">Uprawnienia</string>
-    <string name="theme_night">Nocny</string>
     <string name="menu_settings">Ustawienia</string>
     <string name="login_title">Wymagane uwierzytelnienie</string>
     <string name="login_name">Użytkownik</string>
@@ -324,9 +323,9 @@
     <string name="tts_category_name">Kategoria %1$s</string>
     <plurals name="tts_view_all_in_category">
         <item quantity="one">Pokaż %1$d aplikację w kategorii %2$s</item>
-        <item quantity="few">Pokaż wszystkie %1$s aplikacje w kategorii %2$s</item>
-        <item quantity="many">Pokaż wszystkich %1$s aplikacji w kategorii %2$s</item>
-        <item quantity="other">Pokaż wszystkich %1$s aplikacji w kategorii %2$s</item>
+        <item quantity="few">Pokaż wszystkie %1$d aplikacje w kategorii %2$s</item>
+        <item quantity="many">Pokaż wszystkich %1$d aplikacji w kategorii %2$s</item>
+        <item quantity="other">Pokaż wszystkich %1$d aplikacji w kategorii %2$s</item>
     </plurals>
     <string name="app__install_downloaded_update">Aktualizuj</string>
     <string name="app_list__name__downloading_in_progress">Pobieranie %1$s</string>
@@ -532,4 +531,18 @@
     <string name="notification_channel_swaps_description">Wyświetla powiadomienia o wymianie aplikacji P2P.</string>
     <string name="notification_channel_installs_description">Wyświetla powiadomienia o instalacji aplikacji.</string>
     <string name="notification_channel_installs_title">Instalacje</string>
+    <string name="menu_show_install_history">Pokaż historię instalacji</string>
+    <string name="menu_show_fdroid_metrics_report">Pokaż raport z metryczny</string>
+    <string name="toast_metrics_in_install_history">Raport %s Metric jest widoczny w przeglądarce historii instalacji</string>
+    <string name="send_to_fdroid_metrics_summary">Wysyła co tydzień anonimowe dane do F-Droid Metrics (wymaga Zachowaj historię instalacji)</string>
+    <string name="send_to_fdroid_metrics">Wyślij dane o użytkowaniu</string>
+    <string name="fdroid_metrics_report">%s Raport metryczny</string>
+    <string name="install_history_and_metrics">Historia i metryka instalacji</string>
+    <string name="send_fdroid_metrics_json">%s raport metryczny jako plik JSON</string>
+    <string name="send_fdroid_metrics_report">Wyślij %s Raport metryczny</string>
+    <string name="theme_follow_system">Systemowy</string>
+    <string name="use_pure_black_dark_theme_summary">Zalecane jedynie dla ekranów OLED.</string>
+    <string name="use_pure_black_dark_theme">Użyj czarnego tła w ciemnym motywie</string>
+    <string name="banner_no_data_or_wifi">Brak włączonej transmisji danych lub Wi-Fi</string>
+    <string name="banner_no_internet">Brak Internetu</string>
 </resources>

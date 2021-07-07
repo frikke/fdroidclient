@@ -78,7 +78,7 @@
     <string name="loading">Բեռնում…</string>
     <string name="newPerms">Նոր</string>
     <string name="allPerms">Բոլորը</string>
-    <string name="perms_new_perm_prefix">Նոր.</string>
+    <string name="perms_new_perm_prefix">Նոր:</string>
     <string name="downloading">Ներբեռնում եմ…</string>
     <string name="installing">Տեղադրվում է…</string>
     <string name="uninstalling">Ապատեղադրում է…</string>
@@ -91,7 +91,6 @@
     <string name="keep_forever">Ընդմիշտ</string>
     <string name="theme_light">Բաց</string>
     <string name="theme_dark">Մուգ</string>
-    <string name="theme_night">Գիշեր</string>
     <string name="notification_title_single_update_available">Թարմացում է հասանելի</string>
     <string name="notification_title_single_ready_to_install">Պատրաստ է տեղադրման</string>
     <string name="notification_title_single_ready_to_install_update">Թարմացումը պատրաստ է տեղադրման</string>
@@ -169,9 +168,7 @@
     <string name="interval_1w">Ստուգել թարմացումները ամեն շաբաթ</string>
     <string name="interval_2w">Ստուգել թարմացումները 2 շաբաթը մեկ</string>
     <string name="crash_dialog_title">F-Droidը կործանվեց</string>
-    <string name="crash_dialog_comment_prompt">Այստեղ կարող ես ավելացնել հավելյալ տեղեկատվություն և
-        մեկնաբանություններ.
-    </string>
+    <string name="crash_dialog_comment_prompt">Այստեղ կարող ես ավելացնել հավելյալ տեղեկատվություն և մեկնաբանություններ՝</string>
     <string name="enable_nfc_send">Միացնել NFC Sendը…</string>
     <string name="unstable_updates_summary">Առաջարկել թարմացումներ անկայուն տարբերակների համար</string>
     <string name="update_auto_download_summary">Ներբեռնել թարմացումները ետնապատկերում</string>
@@ -191,7 +188,7 @@
     <string name="menu_upgrade">Թարմացնել</string>
     <string name="main_menu__latest_apps">Ամենանորը</string>
     <string name="adding_apks_format">Ավելացնում եմ %s շտեմարանին…</string>
-    <string name="update_notification_title">Թարմացնում եմ շտեմարանները</string>
+    <string name="banner_updating_repositories">Թարմացնում եմ շտեմարանները</string>
     <string name="repos_unchanged">Բոլոր շտեմարանները արդի են</string>
     <string name="repo_details">Շտեմարան</string>
     <string name="repo_not_yet_updated">Այս շտեմարանը դեռևս չի օգտագործվել։
@@ -214,7 +211,7 @@
     <string name="menu_video">Տեսանյութ</string>
     <string name="update_all">Բոլորը թարմացնել</string>
     <string name="app_size">Չափս. %1$s</string>
-    <string name="app__install_downloaded_update">թարմացնել</string>
+    <string name="app__install_downloaded_update">Թարմացնել</string>
     <string name="app_details_donate_prompt">%1$s ստեղծվել է %2$s֊ի կողմից։ Սուրճ հյուրասիրիր նրանց։</string>
     <string name="over_wifi">Wi-Fi֊ով</string>
     <string name="details_last_updated_today">Թարմացվել է այսօր</string>
@@ -246,4 +243,36 @@
     <string name="swap_scanning_for_peers">Փնտրել մարդկանց շրջակայքում…</string>
     <string name="install_history">Տեղադրման պատմություն</string>
     <string name="hide_all_notifications">Թաքցնել բոլոր ծանուցումները</string>
+    <plurals name="notification_summary_installed">
+        <item quantity="one">%1$d ափփ տեղադրվեց</item>
+        <item quantity="other">%1$d ափփեր տեղադրվեցին</item>
+    </plurals>
+    <string name="app_recommended_version_installed">Տարբերակ %1$s (Ցանկալի)</string>
+    <plurals name="details_last_update_years">
+        <item quantity="one">Թարմացվել է %1$d տարի առաջ</item>
+        <item quantity="other">Թարմացվել է %1$d տարի առաջ</item>
+    </plurals>
+    <plurals name="details_last_update_months">
+        <item quantity="one">Թարմացվել է %1$d ամիս առաջ</item>
+        <item quantity="other">Թարմացվել է %1$d ամիս առաջ</item>
+    </plurals>
+    <plurals name="details_last_update_weeks">
+        <item quantity="one">Թարմացվել է %1$d շաբաթ առաջ</item>
+        <item quantity="other">Թարմացվել է %1$d շաբաթ առաջ</item>
+    </plurals>
+    <plurals name="details_last_update_days">
+        <item quantity="one">Թարմացվել է %1$d օր առաջ</item>
+        <item quantity="other">Թարմացվել է %1$d օր առաջ</item>
+    </plurals>
+    <plurals name="updates__download_updates_for_apps">
+        <item quantity="one">Թարմացնել %1$d ափփ։</item>
+        <item quantity="other">Թարմացնել %1$d ափփ։</item>
+    </plurals>
+    <string name="updates__show_updateable_apps">Ցույց տալ</string>
+    <string name="updates__hide_updateable_apps">Փաքցնել</string>
+    <string name="app_list__dismiss_app_update">Թարմացումն արհամարված է</string>
+    <string name="app_list_download_ready">Բեռնվել է, պատրաստ է տեղադրման</string>
+    <string name="send_installed_apps">Կիսվել տեղադրված հավելվածներով</string>
+    <string name="sort_search">Դասակարգել արդյունքները</string>
+    <string name="antifeatures">Անցանկալի ֆունկցիաներ</string>
 </resources>

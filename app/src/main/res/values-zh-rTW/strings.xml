@@ -47,7 +47,6 @@
     <string name="enable">啟用</string>
     <string name="repo_add_url">軟體庫位址</string>
     <string name="repo_add_fingerprint">金鑰指紋（選填）</string>
-    <string name="theme_night">夜間</string>
     <string name="theme_dark">暗色</string>
     <string name="crash_dialog_comment_prompt">您可以在此加入額外的資訊及評論：</string>
     <string name="overwrite">覆寫</string>
@@ -117,7 +116,7 @@
     <string name="deleting_repo">正在刪除目前的軟體庫…</string>
     <string name="adding_apks_format">正在加入 %s 到軟體庫…</string>
     <string name="copying_icons">正在複製應用程式圖示至軟體庫…</string>
-    <string name="update_notification_title">正在更新軟體庫</string>
+    <string name="banner_updating_repositories">正在更新軟體庫</string>
     <string name="repos_unchanged">所有軟體庫已更新至最新的版本</string>
     <string name="all_other_repos_fine">所有其它軟體庫都沒有出現錯誤。</string>
     <string name="global_error_updating_repos">更新時發生錯誤：%s</string>
@@ -485,4 +484,18 @@
     <string name="notification_channel_swaps_title">切換</string>
     <string name="notification_channel_installs_description">顯示應用程式安裝通知。</string>
     <string name="notification_channel_installs_title">安裝</string>
+    <string name="menu_show_install_history">顯示安裝歷史紀錄</string>
+    <string name="menu_show_fdroid_metrics_report">顯示指標回報</string>
+    <string name="toast_metrics_in_install_history">在「安裝歷史紀錄檢視器」中可以檢視 %s 指標回報</string>
+    <string name="send_to_fdroid_metrics_summary">每週傳送匿名資料給 F-Droid Metrics（需要保留安裝歷史紀錄）</string>
+    <string name="send_to_fdroid_metrics">傳送使用情況資料</string>
+    <string name="fdroid_metrics_report">%s 指標回報</string>
+    <string name="install_history_and_metrics">安裝歷史紀錄與指標</string>
+    <string name="send_fdroid_metrics_json">%s 指標回報為 JSON 檔</string>
+    <string name="send_fdroid_metrics_report">傳送 %s 指標回報</string>
+    <string name="theme_follow_system">跟隨系統</string>
+    <string name="use_pure_black_dark_theme_summary">僅建議用於 OLED 螢幕。</string>
+    <string name="use_pure_black_dark_theme">在深色主題中使用純黑色背景</string>
+    <string name="banner_no_data_or_wifi">未啟用行動數據或 WiFi</string>
+    <string name="banner_no_internet">沒有網際網路</string>
 </resources>

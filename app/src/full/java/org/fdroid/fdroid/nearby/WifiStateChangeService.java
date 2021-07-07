@@ -10,11 +10,13 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
-import androidx.annotation.Nullable;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
-import cc.mvdan.accesspoint.WifiApControl;
+
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import org.apache.commons.net.util.SubnetUtils;
 import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.FDroidApp;
@@ -32,6 +34,9 @@ import java.net.SocketException;
 import java.security.cert.Certificate;
 import java.util.Enumeration;
 import java.util.Locale;
+
+import cc.mvdan.accesspoint.WifiApControl;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 /**
  * Handle state changes to the device's wifi, storing the required bits.
@@ -67,6 +72,8 @@ public class WifiStateChangeService extends IntentService {
     private static int previousWifiState = Integer.MIN_VALUE;
     private static int wifiState;
 
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+
     public WifiStateChangeService() {
         super("WifiStateChangeService");
     }
@@ -80,6 +87,12 @@ public class WifiStateChangeService extends IntentService {
     }
 
     @Override
+    public void onDestroy() {
+        compositeDisposable.dispose();
+        super.onDestroy();
+    }
+
+    @Override
     protected void onHandleIntent(Intent intent) {
         android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_LOWEST);
         if (intent == null) {
@@ -88,7 +101,7 @@ public class WifiStateChangeService extends IntentService {
         }
         Utils.debugLog(TAG, "WiFi change service started.");
         NetworkInfo ni = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
-        wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
+        wifiManager = ContextCompat.getSystemService(getApplicationContext(), WifiManager.class);
         wifiState = wifiManager.getWifiState();
         Utils.debugLog(TAG, "ni == " + ni + "  wifiState == " + printWifiState(wifiState));
         if (ni == null
@@ -106,7 +119,7 @@ public class WifiStateChangeService extends IntentService {
             }
 
             if (Build.VERSION.SDK_INT < 21 && wifiState == WifiManager.WIFI_STATE_ENABLED) {
-                UpdateService.scheduleIfStillOnWifi(this);
+                compositeDisposable.add(UpdateService.scheduleIfStillOnWifi(this).subscribe());
             }
         }
     }

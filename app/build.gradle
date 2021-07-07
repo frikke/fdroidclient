@@ -21,14 +21,14 @@ def basicApplicationId = "org.fdroid.basic"
 def privilegedExtensionApplicationId = '"org.fdroid.fdroid.privileged"'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
 
     defaultConfig {
-        versionCode 1010001
+        versionCode 1013050
         versionName getVersionName()
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
-        minSdkVersion 14
+        minSdkVersion 22
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 25
         /*
@@ -38,6 +38,7 @@ android {
           passing the following argument to the test runner: disableAnalytics "true".
          */
         testInstrumentationRunnerArguments disableAnalytics: 'true'
+        vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes {
@@ -75,6 +76,8 @@ android {
 
     compileOptions {
         compileOptions.encoding = "UTF-8"
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     aaptOptions {
@@ -99,6 +102,10 @@ android {
                     events "skipped", "failed", "standardOut", "standardError"
                     showStandardStreams = true
                 }
+                systemProperty 'robolectric.dependency.repo.url', 'https://repo1.maven.org/maven2'
+
+                // hack to avoid memory leak crashes
+                forkEvery = 1
             }
         }
     }
@@ -135,32 +142,35 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
-    implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.palette:palette:1.0.0'
+    implementation 'androidx.work:work-runtime:2.4.0'
 
-    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.google.android.material:material:1.3.0'
 
-    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     implementation 'com.google.zxing:core:3.3.3'
-    implementation 'info.guardianproject.netcipher:netcipher:2.0.0-beta1'
+    implementation 'info.guardianproject.netcipher:netcipher:2.2.0-alpha'
     implementation 'info.guardianproject.panic:panic:1.0'
     implementation 'commons-io:commons-io:2.6'
     implementation 'commons-net:commons-net:3.6'
     implementation 'ch.acra:acra:4.9.1'
-    implementation 'io.reactivex:rxjava:1.1.0'
     implementation 'com.hannesdorfmann:adapterdelegates3:3.0.1'
-    implementation 'com.ashokvarma.android:bottom-navigation-bar:2.0.5'
+
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.9'
 
     implementation 'com.fasterxml.jackson.core:jackson-core:2.11.1'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.11.1'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.1'
+
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
     implementation 'org.bouncycastle:bcprov-jdk15on:1.65'
     fullImplementation 'org.bouncycastle:bcpkix-jdk15on:1.65'
@@ -168,20 +178,22 @@ dependencies {
     fullImplementation 'org.jmdns:jmdns:3.5.5'
     fullImplementation 'org.nanohttpd:nanohttpd:2.3.1'
 
-    testImplementation 'androidx.test:core:1.2.0'
-    testImplementation 'junit:junit:4.13'
+    testImplementation 'androidx.test:core:1.3.0'
+    testImplementation 'junit:junit:4.13.1'
     testImplementation 'org.robolectric:robolectric:4.3'
     testImplementation 'org.mockito:mockito-core:3.3.3'
     testImplementation 'org.hamcrest:hamcrest:2.2'
     testImplementation 'org.bouncycastle:bcprov-jdk15on:1.65'
 
-    androidTestImplementation 'androidx.test:core:1.2.0'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test:rules:1.2.0'
-    androidTestImplementation 'androidx.test:monitor:1.2.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.arch.core:core-testing:2.1.0'
+    androidTestImplementation 'androidx.test:core:1.3.0'
+    androidTestImplementation 'androidx.test:runner:1.3.0'
+    androidTestImplementation 'androidx.test:rules:1.3.0'
+    androidTestImplementation 'androidx.test:monitor:1.3.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+    androidTestImplementation 'androidx.work:work-testing:2.4.0'
 }
 
 checkstyle {

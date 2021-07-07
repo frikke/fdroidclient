@@ -5,7 +5,7 @@
     <string name="installIncompatible">Appen er ikke kompatibel med din enhed. Vil du installere den alligevel\?</string>
     <string name="version">Version</string>
     <string name="delete">Slet</string>
-    <string name="enable_nfc_send">Aktiver NFC Send…</string>
+    <string name="enable_nfc_send">Aktiver NFC send…</string>
     <string name="cache_downloaded">Behold cache-lagrede apps</string>
     <string name="updates">Opdat.</string>
     <string name="unstable_updates">Ustabile opdateringer</string>
@@ -108,7 +108,7 @@
     <string name="proxy_port_summary">Proxy portnummer (e.g. 8118)</string>
     <string name="status_download">Henter\n%2$s / %3$s (%4$d%%) fra\n%1$s</string>
     <string name="status_download_unknown_size">Henter\n%2$s fra\n%1$s</string>
-    <string name="update_notification_title">Opdaterer depoter</string>
+    <string name="banner_updating_repositories">Opdaterer depoter</string>
     <string name="status_processing_xml_percent">Behandler %2$s / %3$s (%4$d%%) fra %1$s</string>
     <string name="status_connecting_to_repo">Forbinder til\n%1$s</string>
     <string name="status_inserting_apps">Gemmer app-detaljer</string>
@@ -234,7 +234,6 @@
     <string name="interval_2w">Søg efter opdateringer hver anden uge</string>
     <string name="theme_light">Lys</string>
     <string name="theme_dark">Mørk</string>
-    <string name="theme_night">Nat</string>
     <string name="menu_email">E-mail forfatter</string>
     <string name="antinonfreeassetslist">Denne app indeholder ikke-frit indhold</string>
     <string name="empty_search_available_app_list">Ingen matchende apps tilgængelige.</string>
@@ -494,4 +493,16 @@
     <string name="notification_channel_swaps_title">Bytter</string>
     <string name="notification_channel_installs_description">Viser program installation påmindelser.</string>
     <string name="notification_channel_installs_title">Installeringer</string>
+    <string name="theme_follow_system">Følg systemet</string>
+    <string name="use_pure_black_dark_theme_summary">Anbefales kun til OLED-skærme.</string>
+    <string name="use_pure_black_dark_theme">Anvend helt sort baggrund i mørkt tema</string>
+    <string name="menu_show_install_history">Vis installationshistorik</string>
+    <string name="menu_show_fdroid_metrics_report">Vis målingsrapport</string>
+    <string name="toast_metrics_in_install_history">Rapporten %s Metric kan ses i fremviser til Installationshistorik</string>
+    <string name="send_to_fdroid_metrics_summary">Send anonyme data ugentligt til F-Droid Metrics (kræver at Keep installerer historik)</string>
+    <string name="send_to_fdroid_metrics">Send forbrugsdata</string>
+    <string name="fdroid_metrics_report">%s Målerapport</string>
+    <string name="install_history_and_metrics">Installér historik og måling</string>
+    <string name="send_fdroid_metrics_json">%s målerapport som en JSON-fil</string>
+    <string name="send_fdroid_metrics_report">Send %s målerapport</string>
 </resources>

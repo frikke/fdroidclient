@@ -4,16 +4,9 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.CursorLoader;
-import androidx.loader.content.Loader;
-import androidx.cursoradapter.widget.CursorAdapter;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.ContextThemeWrapper;
@@ -26,9 +19,18 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.data.InstalledAppProvider;
 import org.fdroid.fdroid.data.Schema.InstalledAppTable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.cursoradapter.widget.CursorAdapter;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
 
 public class SelectAppsView extends SwapView implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -138,14 +140,14 @@ public class SelectAppsView extends SwapView implements LoaderManager.LoaderCall
         private LayoutInflater getInflater(Context context) {
             if (inflater == null) {
                 Context themedContext = new ContextThemeWrapper(context, R.style.SwapTheme_AppList_ListItem);
-                inflater = (LayoutInflater) themedContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                inflater = ContextCompat.getSystemService(themedContext, LayoutInflater.class);
             }
             return inflater;
         }
 
         private Drawable getDefaultAppIcon(Context context) {
             if (defaultAppIcon == null) {
-                defaultAppIcon = context.getResources().getDrawable(android.R.drawable.sym_def_app_icon);
+                defaultAppIcon = ContextCompat.getDrawable(context, android.R.drawable.sym_def_app_icon);
             }
             return defaultAppIcon;
         }
@@ -197,8 +199,6 @@ public class SelectAppsView extends SwapView implements LoaderManager.LoaderCall
                     }
                 });
             }
-
-            updateCheckedIndicatorView(view, listView.isItemChecked(listPosition));
         }
 
         public void updateCheckedIndicatorView(int position, boolean checked) {
@@ -207,26 +207,7 @@ public class SelectAppsView extends SwapView implements LoaderManager.LoaderCall
 
             if (position >= firstListItemPosition && position <= lastListItemPosition) {
                 final int childIndex = position - firstListItemPosition;
-                updateCheckedIndicatorView(listView.getChildAt(childIndex), checked);
-            }
-        }
-
-        private void updateCheckedIndicatorView(View view, boolean checked) {
-            ImageView imageView = (ImageView) view.findViewById(R.id.checked);
-            if (imageView != null) {
-                int resource;
-                int colour;
-                if (checked) {
-                    resource = R.drawable.ic_check_circle_white;
-                    colour = getResources().getColor(R.color.swap_bright_blue);
-                } else {
-                    resource = R.drawable.ic_add_circle_outline_white;
-                    colour = 0xFFD0D0D4;
-                }
-                imageView.setImageDrawable(getResources().getDrawable(resource));
-                imageView.setColorFilter(colour, PorterDuff.Mode.MULTIPLY);
             }
         }
     }
-
 }

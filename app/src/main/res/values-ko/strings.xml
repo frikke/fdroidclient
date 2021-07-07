@@ -114,7 +114,8 @@
 \n
 \n저장소로부터 앱을 설치하려면 이 저장소를 다시 활성화해야 합니다.</string>
     <string name="repo_added">패키지 저장소 %1$s 저장되었습니다.</string>
-    <string name="repo_searching_address">%1$s에서 패키지 저장소를 찾는 중</string>
+    <string name="repo_searching_address">%1$s
+\n에서 패키지 저장소를 찾는 중</string>
     <string name="not_on_same_wifi">당신의 기기는 당신이 추가한 로컬 저장소와 같은 Wi-Fi 네트워크 상에 있지 않습니다! 이 네트워크로 접속을 시도해보세요: %s</string>
     <string name="requires_features">필요: %1$s</string>
     <string name="category_Development">개발</string>
@@ -160,7 +161,7 @@
     <string name="status_download_unknown_size">%1$s에서
 \n%2$s
 \n다운로드 중</string>
-    <string name="update_notification_title">저장소 업데이트 중</string>
+    <string name="banner_updating_repositories">저장소 업데이트 중</string>
     <string name="status_processing_xml_percent">%1$s에서 %2$s / %3$s (%4$d%%) 처리 중</string>
     <string name="status_inserting_apps">앱 자세한 사항 저장 중</string>
     <string name="permissions">권한</string>
@@ -236,7 +237,6 @@
     <string name="interval_2w">2주마다 업데이트를 확인</string>
     <string name="theme_light">밝음</string>
     <string name="theme_dark">어두움</string>
-    <string name="theme_night">야간</string>
     <string name="update_auto_download">업데이트를 자동으로 얻기</string>
     <string name="update_auto_download_summary">업데이트를 자동으로 다운로드하고 업데이트의 설치를 알려줍니다</string>
     <string name="repo_provider">저장소: %s</string>
@@ -434,7 +434,7 @@
     <string name="send_version_and_uuid_summary">이 앱의 버전과 임의의, 고유한 ID를 포함하며, 다음에 앱을 다시 시작하면 영향을 받습니다.</string>
     <string name="share_repository">저장소 공유</string>
     <string name="send_install_history">설치 내역 보내기</string>
-    <string name="send_history_csv">설치 내역을 CSV 파일로 %s</string>
+    <string name="send_history_csv">%s 설치 내역을 CSV 파일로</string>
     <string name="allow_push_requests">저장소에 앱을 설치/제거할 수 있도록 하기</string>
     <string name="allow_push_requests_summary">저장소 메타데이터에는 설치 또는 제거를 위한 푸시 요청을 포함할 수 있습니다</string>
     <string name="updates_disabled_by_settings">모든 업데이트가 데이터/WiFi 설정에 의해 비활성화됨</string>
@@ -479,4 +479,25 @@
     <string name="swap_error_cannot_start_bluetooth">블루투스를 켤 수 없습니다!</string>
     <string name="swap_toast_closing_nearby_after_timeout">유휴 상태에 따라 Nearby가 끝났습니다.</string>
     <string name="nearby_splash__document_tree">레포지터리와 미러를 위해 USB OTG를 검색합니다.</string>
+    <string name="notification_channel_updates_description">애플리케이션과 저장소 업데이트 알림을 표시합니다.</string>
+    <string name="notification_channel_updates_title">업데이트</string>
+    <string name="notification_channel_swaps_description">P2P 애플리케이션 교환 알림을 표시합니다.</string>
+    <string name="notification_channel_swaps_title">교환</string>
+    <string name="notification_channel_installs_description">애플리케이션 설치 과정을 알림으로 표시합니다.</string>
+    <string name="notification_channel_installs_title">설치</string>
+    <string name="menu_opencollective">OpenCollective</string>
+    <string name="theme_follow_system">시스템 따르기</string>
+    <string name="banner_no_data_or_wifi">활성화된 데이터나 WiFi 없음</string>
+    <string name="banner_no_internet">인터넷 없음</string>
+    <string name="menu_show_install_history">설치 내역 보기</string>
+    <string name="use_pure_black_dark_theme_summary">OLED 화면에만 권장됩니다.</string>
+    <string name="use_pure_black_dark_theme">어두운 테마에서 순수한 검은 배경 사용</string>
+    <string name="menu_show_fdroid_metrics_report">메트릭 데이터 보이기</string>
+    <string name="toast_metrics_in_install_history">%s 메트릭 보고서는 설치 내역 뷰어에서 볼 수 있습니다</string>
+    <string name="send_to_fdroid_metrics_summary">익명으로 데이터를 매주 F-Droid 메트릭으로 보냅니다 (설치 내역 유지 필요)</string>
+    <string name="send_to_fdroid_metrics">사용 데이터 보내기</string>
+    <string name="fdroid_metrics_report">%s 메트릭 보고서</string>
+    <string name="send_fdroid_metrics_report">%s 메트릭 보고서 보내기</string>
+    <string name="install_history_and_metrics">설치 내역 및 메트릭</string>
+    <string name="send_fdroid_metrics_json">%s 메트릭 보고서를 JSON 파일로</string>
 </resources>

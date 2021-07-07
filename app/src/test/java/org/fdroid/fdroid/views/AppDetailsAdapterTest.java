@@ -1,5 +1,7 @@
 package org.fdroid.fdroid.views;
 
+import static org.junit.Assert.assertEquals;
+
 import android.app.Application;
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,9 +11,6 @@ import android.view.ViewGroup;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.core.app.ApplicationProvider;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.fdroid.fdroid.Assert;
 import org.fdroid.fdroid.Preferences;
@@ -30,8 +29,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-import static org.junit.Assert.assertEquals;
-
 @Config(application = Application.class)
 @RunWith(RobolectricTestRunner.class)
 public class AppDetailsAdapterTest extends FDroidProviderTest {
@@ -41,19 +38,20 @@ public class AppDetailsAdapterTest extends FDroidProviderTest {
 
     @Before
     public void setup() {
-        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(context));
         Preferences.setupForTests(context);
 
         Repo repo = RepoProviderTest.insertRepo(context, "http://www.example.com/fdroid/repo", "", "", "Test Repo");
         app = AppProviderTest.insertApp(contentResolver, context, "com.example.app", "Test App",
                 new ContentValues(), repo.getId());
 
-        themeContext = new ContextThemeWrapper(ApplicationProvider.getApplicationContext(), R.style.AppBaseThemeDark);
+        // Must manually set the theme again here other than in AndroidManifest,xml
+        // https://github.com/mozilla-mobile/fenix/pull/15646#issuecomment-707345798
+        ApplicationProvider.getApplicationContext().setTheme(R.style.Theme_App);
+        themeContext = new ContextThemeWrapper(ApplicationProvider.getApplicationContext(), R.style.Theme_App);
     }
 
     @After
     public void teardown() {
-        ImageLoader.getInstance().destroy();
         DBHelper.clearDbHelperSingleton();
     }
 

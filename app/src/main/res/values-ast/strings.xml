@@ -170,7 +170,7 @@
     <string name="bad_fingerprint">Buelga incorreuta</string>
     <string name="invalid_url">Esto nun ye una URL válida.</string>
     <string name="menu_changelog">Rexistru de cambeos</string>
-    <string name="update_notification_title">Anovando depósitos</string>
+    <string name="banner_updating_repositories">Anovando depósitos</string>
     <string name="pref_language">Llingua</string>
     <string name="pref_language_default">La del sistema</string>
     <string name="wifi">Wi-Fi</string>
@@ -227,7 +227,6 @@
     <string name="more">Más</string>
     <string name="less">Menos</string>
     <string name="permissions">Permisos</string>
-    <string name="theme_night">Nueche</string>
     <string name="menu_settings">Axustes</string>
     <string name="login_title">Ríquese l\'autenticación</string>
     <string name="login_name">Nome d\'usuariu</string>
@@ -352,8 +351,8 @@
     <string name="notification_title_summary_ready_to_install_update">L\'anovamientu ta preparáu pa instalase</string>
     <string name="notification_title_summary_installed">Instalóse con ésitu</string>
     <plurals name="tts_view_all_in_category">
-        <item quantity="one">Ver %1$s aplicación de la estaya %2$s</item>
-        <item quantity="other">Ver les %1$s aplicaciones de la estaya %2$s</item>
+        <item quantity="one">Ver %1$d aplicación de la estaya %2$s</item>
+        <item quantity="other">Ver les %1$d aplicaciones de la estaya %2$s</item>
     </plurals>
     <plurals name="details_last_update_weeks">
         <item quantity="one">Anovóse hai %1$d selmana</item>

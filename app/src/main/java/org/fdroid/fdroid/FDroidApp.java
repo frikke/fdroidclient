@@ -23,8 +23,6 @@
 
 package org.fdroid.fdroid;
 
-import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.Application;
@@ -35,28 +33,18 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StrictMode;
-import androidx.annotation.Nullable;
-import androidx.collection.LongSparseArray;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
-import android.view.Display;
 import android.view.WindowManager;
 import android.widget.Toast;
-import com.nostra13.universalimageloader.cache.disc.DiskCache;
-import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
-import com.nostra13.universalimageloader.cache.disc.impl.ext.LruDiskCache;
-import com.nostra13.universalimageloader.core.DefaultConfigurationFactory;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.process.BitmapProcessor;
-import info.guardianproject.netcipher.NetCipher;
-import info.guardianproject.netcipher.proxy.OrbotHelper;
+
+import com.bumptech.glide.Glide;
+
 import org.acra.ACRA;
 import org.acra.ReportField;
 import org.acra.ReportingInteractionMode;
@@ -65,25 +53,35 @@ import org.apache.commons.net.util.SubnetUtils;
 import org.fdroid.fdroid.Preferences.ChangeListener;
 import org.fdroid.fdroid.Preferences.Theme;
 import org.fdroid.fdroid.compat.PRNGFixes;
+import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.data.AppProvider;
 import org.fdroid.fdroid.data.InstalledAppProviderService;
 import org.fdroid.fdroid.data.Repo;
 import org.fdroid.fdroid.installer.ApkFileProvider;
 import org.fdroid.fdroid.installer.InstallHistoryService;
+import org.fdroid.fdroid.nearby.PublicSourceDirProvider;
 import org.fdroid.fdroid.nearby.SDCardScannerService;
+import org.fdroid.fdroid.nearby.WifiStateChangeService;
 import org.fdroid.fdroid.net.ConnectivityMonitorService;
 import org.fdroid.fdroid.net.Downloader;
 import org.fdroid.fdroid.net.HttpDownloader;
-import org.fdroid.fdroid.net.ImageLoaderForUIL;
-import org.fdroid.fdroid.nearby.WifiStateChangeService;
 import org.fdroid.fdroid.panic.HidingManager;
+import org.fdroid.fdroid.work.CleanCacheWorker;
 
-import javax.microedition.khronos.opengles.GL10;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.security.Security;
 import java.util.List;
 import java.util.UUID;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.collection.LongSparseArray;
+import androidx.core.content.ContextCompat;
+import info.guardianproject.netcipher.NetCipher;
+import info.guardianproject.netcipher.proxy.OrbotHelper;
 
 @ReportsCrashes(mailTo = BuildConfig.ACRA_REPORT_EMAIL,
         mode = ReportingInteractionMode.DIALOG,
@@ -105,7 +103,7 @@ import java.util.UUID;
                 ReportField.STACK_TRACE,
         }
 )
-public class FDroidApp extends Application {
+public class FDroidApp extends Application implements androidx.work.Configuration.Provider {
 
     private static final String TAG = "FDroidApp";
     private static final String ACRA_ID = BuildConfig.APPLICATION_ID + ":acra";
@@ -148,38 +146,55 @@ public class FDroidApp extends Application {
 
     private static Theme curTheme = Theme.light;
 
-    public void reloadTheme() {
-        curTheme = Preferences.get().getTheme();
-    }
-
-    public void applyTheme(Activity activity) {
-        activity.setTheme(getCurThemeResId());
-        setSecureWindow(activity);
-    }
-
-    public static int getCurThemeResId() {
-        switch (curTheme) {
-            case light:
-                return R.style.AppThemeLight;
-            case dark:
-                return R.style.AppThemeDark;
-            case night:
-                return R.style.AppThemeNight;
-            default:
-                return R.style.AppThemeLight;
+    /**
+     * Apply pure black background in dark theme setting. Must be called in every activity's
+     * {@link AppCompatActivity#onCreate()}, before super.onCreate().
+     *
+     * @param activity The activity to apply the setting.
+     */
+    public void applyPureBlackBackgroundInDarkTheme(AppCompatActivity activity) {
+        final boolean isPureBlack = Preferences.get().isPureBlack();
+        if (isPureBlack) {
+            activity.setTheme(R.style.Theme_App_Black);
         }
     }
 
-    public static boolean isAppThemeLight() {
-        return curTheme == Theme.light;
+    public void applyTheme() {
+        curTheme = Preferences.get().getTheme();
+        switch (curTheme) {
+            case dark:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                break;
+            case light:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                break;
+            default:
+                // `Set by Battery Saver` for Q above (inclusive), `Use system default` for Q below
+                // https://medium.com/androiddevelopers/appcompat-v23-2-daynight-d10f90c83e94
+                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY);
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                }
+                break;
+        }
     }
 
-    public void applyDialogTheme(Activity activity) {
+    //    TODO: ResId no longer exists.
+    public static int getCurThemeResId() {
+        return R.style.Theme_App;
+    }
+
+    public static boolean isAppThemeLight() {
+        return AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO;
+    }
+
+    public void applyDialogTheme(AppCompatActivity activity) {
         activity.setTheme(getCurDialogThemeResId());
         setSecureWindow(activity);
     }
 
-    public void setSecureWindow(Activity activity) {
+    public void setSecureWindow(AppCompatActivity activity) {
         if (Preferences.get().preventScreenshots()) {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
         }
@@ -187,33 +202,12 @@ public class FDroidApp extends Application {
 
     private static int getCurDialogThemeResId() {
         switch (curTheme) {
-            case light:
-                return R.style.MinWithDialogBaseThemeLight;
             case dark:
-                return R.style.MinWithDialogBaseThemeDark;
             case night:
                 return R.style.MinWithDialogBaseThemeDark;
             default:
                 return R.style.MinWithDialogBaseThemeLight;
         }
-    }
-
-    /**
-     * Force reload the {@link Activity to make theme changes take effect.}
-     * Same as {@link Languages#forceChangeLanguage(Activity)}
-     *
-     * @param activity the {@code Activity} to force reload
-     */
-    public static void forceChangeTheme(Activity activity) {
-        Intent intent = activity.getIntent();
-        if (intent == null) { // when launched as LAUNCHER
-            return;
-        }
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        activity.finish();
-        activity.overridePendingTransition(0, 0);
-        activity.startActivity(intent);
-        activity.overridePendingTransition(0, 0);
     }
 
     public static void enableBouncyCastle() {
@@ -264,7 +258,7 @@ public class FDroidApp extends Application {
      * @see #getTimeout()
      * @see Repo#getRandomMirror(String)
      */
-    public static String getNewMirrorOnError(@Nullable String urlString, Repo repo2) throws IOException {
+    public static synchronized String getNewMirrorOnError(@Nullable String urlString, Repo repo2) throws IOException {
         if (repo2.hasMirrors()) {
             if (numTries <= 0) {
                 if (timeout == Downloader.DEFAULT_TIMEOUT) {
@@ -323,6 +317,7 @@ public class FDroidApp extends Application {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         Languages.setLanguage(this);
+        App.systemLocaleList = null;
 
         // update the descriptions based on the new language preferences
         SharedPreferences atStartTime = getAtStartTimeSharedPreferences();
@@ -355,10 +350,7 @@ public class FDroidApp extends Application {
     }
 
     private void clearImageLoaderMemoryCache() {
-        ImageLoader imageLoader = ImageLoader.getInstance();
-        if (imageLoader.isInited()) {
-            imageLoader.clearMemoryCache();
-        }
+        Glide.get(getApplicationContext()).clearMemory();
     }
 
     @Override
@@ -388,7 +380,8 @@ public class FDroidApp extends Application {
 
         PRNGFixes.apply();
 
-        curTheme = preferences.getTheme();
+        applyTheme();
+
         configureProxy(preferences);
 
 
@@ -419,55 +412,9 @@ public class FDroidApp extends Application {
             }
         });
 
-        CleanCacheService.schedule(this);
+        CleanCacheWorker.schedule(this);
 
         notificationHelper = new NotificationHelper(getApplicationContext());
-
-        // There are a couple things to pay attention to with this config: memory usage,
-        // especially on small devices; and, image processing vulns, since images are
-        // submitted via app's git repos, so anyone with commit privs there could submit
-        // exploits hidden in images.  Luckily, F-Droid doesn't need EXIF at all, and
-        // that is where the JPEG/PNG vulns have been. So it can be entirely stripped.
-        Display display = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
-        int maxSize = GL10.GL_MAX_TEXTURE_SIZE; // see ImageScaleType.NONE_SAFE javadoc
-        int width = display.getWidth();
-        if (width > maxSize) {
-            maxSize = width;
-        }
-        int height = display.getHeight();
-        if (height > maxSize) {
-            maxSize = height;
-        }
-
-        DiskCache diskCache;
-        long available = Utils.getImageCacheDirAvailableMemory(this);
-        int percentageFree = Utils.getPercent(available, Utils.getImageCacheDirTotalMemory(this));
-        if (percentageFree > 5) {
-            diskCache = new UnlimitedDiskCache(Utils.getImageCacheDir(this));
-        } else {
-            Log.i(TAG, "Switching to LruDiskCache(" + available / 2L + ") to save disk space!");
-            try {
-                diskCache = new LruDiskCache(Utils.getImageCacheDir(this),
-                        DefaultConfigurationFactory.createFileNameGenerator(),
-                        available / 2L);
-            } catch (IOException e) {
-                diskCache = new UnlimitedDiskCache(Utils.getImageCacheDir(this));
-            }
-        }
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
-                .imageDownloader(new ImageLoaderForUIL(getApplicationContext()))
-                .defaultDisplayImageOptions(Utils.getDefaultDisplayImageOptionsBuilder().build())
-                .diskCache(diskCache)
-                .diskCacheExtraOptions(maxSize, maxSize, new BitmapProcessor() {
-                    @Override
-                    public Bitmap process(Bitmap bitmap) {
-                        // converting JPEGs to Bitmaps, then saving them removes EXIF metadata
-                        return bitmap;
-                    }
-                })
-                .threadPoolSize(getThreadPoolSize())
-                .build();
-        ImageLoader.getInstance().init(config);
 
         if (preferences.isIndexNeverUpdated()) {
             preferences.setDefaultForDataOnlyConnection(this);
@@ -536,7 +483,9 @@ public class FDroidApp extends Application {
             atStartTime.edit().remove(queryStringKey).apply();
         }
 
-        SDCardScannerService.scan(this);
+        if (Preferences.get().isScanRemovableStorageEnabled()) {
+            SDCardScannerService.scan(this);
+        }
     }
 
     /**
@@ -546,7 +495,7 @@ public class FDroidApp extends Application {
      * problems that arise from executing the code twice. This happens due to the `android:process`
      * statement in AndroidManifest.xml causes another process to be created to run
      * {@link org.fdroid.fdroid.acra.CrashReportActivity}. This was causing lots of things to be
-     * started/run twice including {@link CleanCacheService} and {@link WifiStateChangeService}.
+     * started/run twice including {@link CleanCacheWorker} and {@link WifiStateChangeService}.
      * <p>
      * Note that it is not perfect, because some devices seem to not provide a list of running app
      * processes when asked. In such situations, F-Droid may regress to the behaviour where some
@@ -554,7 +503,7 @@ public class FDroidApp extends Application {
      * for end users than experiencing a deterministic crash every time F-Droid is started.
      */
     private boolean isAcraProcess() {
-        ActivityManager manager = (ActivityManager) this.getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager manager = ContextCompat.getSystemService(this, ActivityManager.class);
         List<RunningAppProcessInfo> processes = manager.getRunningAppProcesses();
         if (processes == null) {
             return false;
@@ -570,30 +519,12 @@ public class FDroidApp extends Application {
         return false;
     }
 
-    /**
-     * Return the number of threads Universal Image Loader should use, based on
-     * the total RAM in the device.  Devices with lots of RAM can do lots of
-     * parallel operations for fast icon loading.
-     */
-    @TargetApi(16)
-    private int getThreadPoolSize() {
-        if (Build.VERSION.SDK_INT >= 16) {
-            ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-            ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
-            if (activityManager != null) {
-                activityManager.getMemoryInfo(memInfo);
-                return (int) Math.max(1, Math.min(16, memInfo.totalMem / 256 / 1024 / 1024));
-            }
-        }
-        return 2;
-    }
-
     private SharedPreferences getAtStartTimeSharedPreferences() {
         return getSharedPreferences("at-start-time", Context.MODE_PRIVATE);
     }
 
-    public void sendViaBluetooth(Activity activity, int resultCode, String packageName) {
-        if (resultCode == Activity.RESULT_CANCELED) {
+    public void sendViaBluetooth(AppCompatActivity activity, int resultCode, String packageName) {
+        if (resultCode == AppCompatActivity.RESULT_CANCELED) {
             return;
         }
 
@@ -607,7 +538,7 @@ public class FDroidApp extends Application {
             sendBt = new Intent(Intent.ACTION_SEND);
 
             // The APK type ("application/vnd.android.package-archive") is blocked by stock Android, so use zip
-            sendBt.setType("application/zip");
+            sendBt.setType(PublicSourceDirProvider.SHARE_APK_MIME_TYPE);
             sendBt.putExtra(Intent.EXTRA_STREAM, ApkFileProvider.getSafeUri(this, packageInfo));
 
             // not all devices have the same Bluetooth Activities, so
@@ -642,7 +573,7 @@ public class FDroidApp extends Application {
 
     /**
      * Put proxy settings (or Tor settings) globally into effect based on whats configured in Preferences.
-     *
+     * <p>
      * Must be called on App startup and after every proxy configuration change.
      */
     public static void configureProxy(Preferences preferences) {
@@ -663,5 +594,27 @@ public class FDroidApp extends Application {
 
     public static Context getInstance() {
         return instance;
+    }
+
+    /**
+     * Set up WorkManager on demand to avoid slowing down starts.
+     *
+     * @see CleanCacheWorker
+     * @see org.fdroid.fdroid.work.FDroidMetricsWorker
+     * @see org.fdroid.fdroid.work.UpdateWorker
+     * @see <a href="https://developer.android.com/codelabs/android-adv-workmanager#3">example</a>
+     */
+    @NonNull
+    @Override
+    public androidx.work.Configuration getWorkManagerConfiguration() {
+        if (BuildConfig.DEBUG) {
+            return new androidx.work.Configuration.Builder()
+                    .setMinimumLoggingLevel(Log.DEBUG)
+                    .build();
+        } else {
+            return new androidx.work.Configuration.Builder()
+                    .setMinimumLoggingLevel(Log.ERROR)
+                    .build();
+        }
     }
 }

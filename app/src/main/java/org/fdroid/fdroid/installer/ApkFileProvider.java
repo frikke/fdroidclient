@@ -24,13 +24,15 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.net.Uri;
 import android.os.Build;
-import androidx.core.content.FileProvider;
+
 import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.SanitizedFile;
 
 import java.io.File;
 import java.io.IOException;
+
+import androidx.core.content.FileProvider;
 
 /**
  * Helper methods for preparing APKs and arbitrary files for installation,
@@ -42,13 +44,16 @@ import java.io.IOException;
  * <i>"/Android/data/[app_package_name]/cache/apks"</i> (if card is mounted and app has
  * appropriate permission) or on device's file system depending incoming parameters</li>
  * <li>Before installation, the APK is copied into the private data directory of the F-Droid,
- * <i>"/data/data/[app_package_name]/files/install-$random.apk"</i></li>
+ * <i>"/data/data/[app_package_name]/files/install-$random.apk"</i> so that the install
+ * process broken if the user clears the cache while it is running.</li>
  * <li>The hash of the file is checked against the expected hash from the repository</li>
  * <li>For {@link Build.VERSION_CODES#M < android-23}, a {@code file://} {@link Uri}
  * pointing to the {@link File} is returned, for {@link Build.VERSION_CODES#M >= android-23},
  * a {@code content://} {@code Uri} is returned using support lib's
  * {@link FileProvider}</li>
  * </ol>
+ *
+ * @see org.fdroid.fdroid.work.CleanCacheWorker
  */
 public class ApkFileProvider extends FileProvider {
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">F-Droid</string>
-    <string name="SignatureMismatch">La versión nuevo está firmada con una llave diferente a la antigua. Para instalar la nueva versión, la antigua debe ser desinstalada primero. Hacé esto y probá de nuevo, por favor. (Tené en cuenta que al desinstalar, todos los datos internos guardados de la aplicación serán eliminados)</string>
+    <string name="SignatureMismatch">La nueva versión está firmada con una llave diferente a la antigua. Para instalar la nueva versión, la antigua debe ser desinstalada primero. Hacé esto y probá de nuevo, por favor. (Tené en cuenta que al desinstalar, todos los datos internos guardados de la aplicación serán eliminados)</string>
     <string name="installIncompatible">Aplicación incompatible con tu dispositivo, ¿instalar igual\?</string>
     <string name="version">Versión</string>
     <string name="by_author_format">por %s</string>
@@ -230,7 +230,7 @@
     <string name="search_hint">Buscar aplicaciones</string>
     <string name="appcompatibility">Compatibilidad de aplicación</string>
     <string name="show_incompat_versions">Incluir versiones incompatibles</string>
-    <string name="menu_downgrade">Downgrade</string>
+    <string name="menu_downgrade">Desactualizar</string>
     <string name="antiadslist">Esta aplicación tiene publicidad</string>
     <string name="show_incompat_versions_on">Mostrar versiones de aplicaciones que son incompatibles con el dispositivo</string>
     <string name="show_anti_feature_apps">Incluir aplicaciones controversiales</string>
@@ -287,7 +287,7 @@
 \n%2$s desde
 \n%1$s</string>
     <string name="download_404">El archivo pedido no fue encontrado.</string>
-    <string name="update_notification_title">Actualizando repositorios</string>
+    <string name="banner_updating_repositories">Actualizando repositorios</string>
     <string name="status_processing_xml_percent">Procesando %2$s / %3$s (%4$d%%) de %1$s</string>
     <string name="status_connecting_to_repo">Conectando a 
 \n%1$s</string>
@@ -296,7 +296,7 @@
     <string name="repos_unchanged">Todos los repositorios están actualizados</string>
     <string name="all_other_repos_fine">Todos los otros repositorios no crearon errores.</string>
     <string name="global_error_updating_repos">Error al actualizar: %s</string>
-    <string name="no_permissions">no permisos</string>
+    <string name="no_permissions">Sin permisos</string>
     <string name="permissions">Permisos</string>
     <string name="no_handler_app">No tenés ninguna aplicación disponible que pueda manejar %s.</string>
     <string name="theme">Tema</string>
@@ -420,7 +420,6 @@
     <string name="keep_forever">Siempre</string>
     <string name="theme_light">Claro</string>
     <string name="theme_dark">Oscuro</string>
-    <string name="theme_night">Noche</string>
     <string name="crash_dialog_comment_prompt">Podés añadir información extra y comentarios acá:</string>
     <plurals name="notification_summary_more">
         <item quantity="one">+%1$d más…</item>
@@ -490,6 +489,26 @@
     <string name="swap_error_cannot_start_bluetooth">¡No se puede iniciar el Bluetooth!</string>
     <string name="swap_toast_closing_nearby_after_timeout">Cercano cerrado como estaba inactivo.</string>
     <string name="nearby_splash__document_tree">Busque USB OTG para repositorios y espejos.</string>
-    <string name="menu_select_for_wipe">Seleccionar para borrar</string>
+    <string name="menu_select_for_wipe">Seleccioná para eliminar</string>
     <string name="menu_opencollective">OpenCollective</string>
+    <string name="notification_channel_updates_description">Muestra notificaciones de actualización de aplicaciones y repositorios.</string>
+    <string name="notification_channel_updates_title">Actualizaciones</string>
+    <string name="notification_channel_swaps_description">Muestra notificaciones de intercambio de aplicaciones P2P.</string>
+    <string name="notification_channel_swaps_title">Intercambios</string>
+    <string name="notification_channel_installs_description">Muestra notificaciones de instalación de aplicaciones.</string>
+    <string name="notification_channel_installs_title">Instalaciones</string>
+    <string name="menu_show_install_history">Ver historial de instalación</string>
+    <string name="menu_show_fdroid_metrics_report">Ver métricas de reporte</string>
+    <string name="fdroid_metrics_report">%s métricas de reporte</string>
+    <string name="toast_metrics_in_install_history">Las métricas de reporte %s son visibles en el Historial de instalación</string>
+    <string name="send_to_fdroid_metrics_summary">Enviar datos métricos anónimos semanales a F-Droid (requiere Mantener historial de instalaciones)</string>
+    <string name="send_to_fdroid_metrics">Enviar datos de uso</string>
+    <string name="install_history_and_metrics">Historial de instalaciones y métricas</string>
+    <string name="send_fdroid_metrics_json">%s métricas como archivos JSON</string>
+    <string name="send_fdroid_metrics_report">Enviar %s Métricas de reportes</string>
+    <string name="theme_follow_system">Usar el del sistema</string>
+    <string name="use_pure_black_dark_theme_summary">Recomendado solo para pantallas OLED.</string>
+    <string name="use_pure_black_dark_theme">Usar un fondo negro puro en el tema oscuro</string>
+    <string name="banner_no_data_or_wifi">Sin datos o WiFi activo</string>
+    <string name="banner_no_internet">Sin Internet</string>
 </resources>

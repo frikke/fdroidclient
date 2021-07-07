@@ -1,13 +1,15 @@
 package org.fdroid.fdroid.views.main;
 
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 import android.widget.FrameLayout;
+
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.views.PreferencesFragment;
 import org.fdroid.fdroid.views.updates.UpdatesViewBinder;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Decides which view on the main screen to attach to a given {@link FrameLayout}. This class
@@ -30,10 +32,10 @@ class MainViewController extends RecyclerView.ViewHolder {
     }
 
     /**
-     * @see WhatsNewViewBinder
+     * @see LatestViewBinder
      */
-    public void bindWhatsNewView() {
-        new WhatsNewViewBinder(activity, frame);
+    public void bindLatestView() {
+        new LatestViewBinder(activity, frame);
     }
 
     /**

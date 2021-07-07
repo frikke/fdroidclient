@@ -1,31 +1,39 @@
 package org.fdroid.fdroid.data;
 
+import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
+import android.os.IBinder;
 import android.os.Process;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.JobIntentService;
+import android.os.RemoteException;
 import android.util.Log;
+
 import org.acra.ACRA;
 import org.fdroid.fdroid.AppUpdateStatusManager;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Schema.InstalledAppTable;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
-import rx.subjects.PublishSubject;
+import org.fdroid.fdroid.installer.PrivilegedInstaller;
+import org.fdroid.fdroid.privileged.IPrivilegedService;
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.JobIntentService;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.subjects.PublishSubject;
 
 /**
  * Handles all updates to {@link InstalledAppProvider}, whether checking the contents
@@ -48,7 +56,6 @@ import java.util.concurrent.TimeUnit;
  * process was underway, e.g. uninstalling via {@code adb}, updates via Google
  * Play, Yalp, etc.
  */
-@SuppressWarnings("LineLength")
 public class InstalledAppProviderService extends JobIntentService {
     private static final String TAG = "InstalledAppProviderSer";
 
@@ -58,12 +65,14 @@ public class InstalledAppProviderService extends JobIntentService {
     private static final String EXTRA_PACKAGE_INFO = "org.fdroid.fdroid.data.extra.PACKAGE_INFO";
 
     /**
-     * This is for notifing the users of this {@link android.content.ContentProvider}
-     * that the contents has changed.  Since {@link Intent}s can come in slow
+     * This is for notifying the users of this {@link android.content.ContentProvider}
+     * that the contents have changed. Since {@link Intent}s can come in slow
      * or fast, and this can trigger a lot of UI updates, the actual
      * notifications are rate limited to one per second.
      */
     private PublishSubject<String> packageChangeNotifier;
+
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
     public void onCreate() {
@@ -74,17 +83,16 @@ public class InstalledAppProviderService extends JobIntentService {
         // only emit an event to the subscriber after it has not received any new events for one second.
         // This ensures that we don't constantly ask our lists of apps to update as we iterate over
         // the list of installed apps and insert them to the database...
-        packageChangeNotifier
-                .subscribeOn(Schedulers.newThread())
-                .debounce(3, TimeUnit.SECONDS)
-                .subscribe(new Action1<String>() {
-                    @Override
-                    public void call(String packageName) {
-                        Utils.debugLog(TAG, "Notifying content providers (so they can update the relevant views).");
-                        getContentResolver().notifyChange(AppProvider.getContentUri(), null);
-                        getContentResolver().notifyChange(ApkProvider.getContentUri(), null);
-                    }
-                });
+        compositeDisposable.add(
+                packageChangeNotifier
+                        .subscribeOn(Schedulers.newThread())
+                        .debounce(3, TimeUnit.SECONDS)
+                        .subscribe(packageName -> {
+                            Utils.debugLog(TAG, "Notifying content providers to update relevant views.");
+                            getContentResolver().notifyChange(AppProvider.getContentUri(), null);
+                            getContentResolver().notifyChange(ApkProvider.getContentUri(), null);
+                        })
+        );
 
         // ...alternatively, this non-debounced version will instantly emit an event about the
         // particular package being updated. This is required so that our AppDetails view can update
@@ -93,14 +101,18 @@ public class InstalledAppProviderService extends JobIntentService {
         // only for changes to specific URIs in the AppProvider. These are triggered when a more
         // general notification (e.g. to AppProvider.getContentUri()) is fired, but not when a
         // sibling such as AppProvider.getHighestPriorityMetadataUri() is fired.
-        packageChangeNotifier.subscribeOn(Schedulers.newThread())
-                .subscribe(new Action1<String>() {
-                    @Override
-                    public void call(String packageName) {
-                        getContentResolver()
-                                .notifyChange(AppProvider.getHighestPriorityMetadataUri(packageName), null);
-                    }
-                });
+        compositeDisposable.add(
+                packageChangeNotifier
+                        .subscribeOn(Schedulers.newThread())
+                        .subscribe(packageName -> getContentResolver()
+                                .notifyChange(AppProvider.getHighestPriorityMetadataUri(packageName), null))
+        );
+    }
+
+    @Override
+    public void onDestroy() {
+        compositeDisposable.dispose();
+        super.onDestroy();
     }
 
     /**
@@ -174,19 +186,48 @@ public class InstalledAppProviderService extends JobIntentService {
      *
      * @see <a href="https://gitlab.com/fdroid/fdroidclient/issues/819>issue #819</a>
      */
-    public static void compareToPackageManager(Context context) {
+    public static void compareToPackageManager(final Context context) {
         Utils.debugLog(TAG, "Comparing package manager to our installed app cache.");
-        Map<String, Long> cachedInfo = InstalledAppProvider.Helper.lastUpdateTimes(context);
 
-        List<PackageInfo> packageInfoList = context.getPackageManager()
-                .getInstalledPackages(PackageManager.GET_SIGNATURES);
-        Collections.sort(packageInfoList, new Comparator<PackageInfo>() {
-            @Override
-            public int compare(PackageInfo o1, PackageInfo o2) {
-                return o1.packageName.compareTo(o2.packageName);
-            }
-        });
-        for (PackageInfo packageInfo : packageInfoList) {
+        if (Build.VERSION.SDK_INT >= 29 &&
+                PrivilegedInstaller.isExtensionInstalledCorrectly(context) ==
+                        PrivilegedInstaller.IS_EXTENSION_INSTALLED_YES) {
+            ServiceConnection mServiceConnection = new ServiceConnection() {
+                @Override
+                public void onServiceConnected(ComponentName name, IBinder service) {
+                    IPrivilegedService privService = IPrivilegedService.Stub.asInterface(service);
+                    List<PackageInfo> packageInfoList = null;
+                    try {
+                        packageInfoList = privService.getInstalledPackages(PackageManager.GET_SIGNATURES);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                    compareToPackageManager(context, packageInfoList);
+                }
+
+                @Override
+                public void onServiceDisconnected(ComponentName componentName) {
+                    // Nothing to tear down from onServiceConnected
+                }
+            };
+
+            Intent serviceIntent = new Intent(PrivilegedInstaller.PRIVILEGED_EXTENSION_SERVICE_INTENT);
+            serviceIntent.setPackage(PrivilegedInstaller.PRIVILEGED_EXTENSION_PACKAGE_NAME);
+            context.getApplicationContext().bindService(serviceIntent, mServiceConnection,
+                    Context.BIND_AUTO_CREATE);
+        } else {
+            compareToPackageManager(context, null);
+        }
+    }
+
+    private static void compareToPackageManager(Context context, List<PackageInfo> packageInfoList) {
+        if (packageInfoList == null || packageInfoList.isEmpty()) {
+            packageInfoList = context.getPackageManager().getInstalledPackages(PackageManager.GET_SIGNATURES);
+        }
+        Map<String, Long> cachedInfo = InstalledAppProvider.Helper.lastUpdateTimes(context);
+        TreeSet<PackageInfo> packageInfoSet = new TreeSet<>((o1, o2) -> o1.packageName.compareTo(o2.packageName));
+        packageInfoSet.addAll(packageInfoList);
+        for (PackageInfo packageInfo : packageInfoSet) {
             if (cachedInfo.containsKey(packageInfo.packageName)) {
                 if (packageInfo.lastUpdateTime < 1262300400000L // 2010-01-01 00:00
                         || packageInfo.lastUpdateTime > cachedInfo.get(packageInfo.packageName)) {
@@ -207,12 +248,7 @@ public class InstalledAppProviderService extends JobIntentService {
     public static File getPathToInstalledApk(PackageInfo packageInfo) {
         File apk = new File(packageInfo.applicationInfo.publicSourceDir);
         if (apk.isDirectory()) {
-            FilenameFilter filter = new FilenameFilter() {
-                @Override
-                public boolean accept(File dir, String name) {
-                    return name.endsWith(".apk");
-                }
-            };
+            FilenameFilter filter = (dir, name) -> name.endsWith(".apk");
             File[] files = apk.listFiles(filter);
             if (files == null) {
                 String msg = packageInfo.packageName + " sourceDir has no APKs: " + apk.getAbsolutePath();

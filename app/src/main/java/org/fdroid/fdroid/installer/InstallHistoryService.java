@@ -26,8 +26,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Process;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.text.TextUtils;
+
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Apk;
 
@@ -37,6 +37,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 /**
  * Saves all activity of installs and uninstalls to the database for later use, like
@@ -89,6 +91,12 @@ public class InstallHistoryService extends IntentService {
         context.startService(intent);
     }
 
+    public static File getInstallHistoryFile(Context context) {
+        File installHistoryDir = new File(context.getCacheDir(), "install_history");
+        installHistoryDir.mkdir();
+        return new File(installHistoryDir, "all");
+    }
+
     public InstallHistoryService() {
         super("InstallHistoryService");
     }
@@ -112,9 +120,7 @@ public class InstallHistoryService extends IntentService {
         values.add(String.valueOf(versionCode));
         values.add(intent.getAction());
 
-        File installHistoryDir = new File(getCacheDir(), "install_history");
-        installHistoryDir.mkdir();
-        File logFile = new File(installHistoryDir, "all");
+        File logFile = getInstallHistoryFile(this);
         FileWriter fw = null;
         PrintWriter out = null;
         try {

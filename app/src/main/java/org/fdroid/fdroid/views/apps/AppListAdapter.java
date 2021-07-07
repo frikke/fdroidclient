@@ -1,21 +1,23 @@
 package org.fdroid.fdroid.views.apps;
 
-import android.app.Activity;
 import android.database.Cursor;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.ViewGroup;
+
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.data.Schema;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
 class AppListAdapter extends RecyclerView.Adapter<StandardAppListItemController> {
 
     private Cursor cursor;
-    private final Activity activity;
+    private final AppCompatActivity activity;
     private final AppListItemDivider divider;
 
-    AppListAdapter(Activity activity) {
+    AppListAdapter(AppCompatActivity activity) {
         this.activity = activity;
         divider = new AppListItemDivider(activity);
         setHasStableIds(true);

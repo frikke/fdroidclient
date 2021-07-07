@@ -3,11 +3,14 @@ package org.fdroid.fdroid.nearby;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
-import androidx.annotation.ColorInt;
-import androidx.annotation.LayoutRes;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
+
 import org.fdroid.fdroid.R;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.LayoutRes;
+import androidx.core.content.ContextCompat;
 
 /**
  * A {@link android.view.View} that registers to handle the swap events from
@@ -42,7 +45,7 @@ public class SwapView extends RelativeLayout {
         final TypedArray a = context.obtainStyledAttributes(
                 attrs, R.styleable.SwapView, 0, 0);
         toolbarColor = a.getColor(R.styleable.SwapView_toolbarColor,
-                getResources().getColor(R.color.swap_blue));
+                ContextCompat.getColor(context, R.color.swap_blue));
         toolbarTitle = a.getString(R.styleable.SwapView_toolbarTitle);
         a.recycle();
     }
@@ -53,7 +56,7 @@ public class SwapView extends RelativeLayout {
         final TypedArray a = context.obtainStyledAttributes(
                 attrs, R.styleable.SwapView, 0, 0);
         toolbarColor = a.getColor(R.styleable.SwapView_toolbarColor,
-                getResources().getColor(R.color.swap_blue));
+                ContextCompat.getColor(context, R.color.swap_blue));
         toolbarTitle = a.getString(R.styleable.SwapView_toolbarTitle);
         a.recycle();
     }

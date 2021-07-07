@@ -28,11 +28,19 @@
         drawer.
     </string>
     <string name="send_install_history">Send Install History</string>
+    <string name="send_fdroid_metrics_report">Send %s Metrics Report</string>
     <string name="send_history_csv">%s install history as CSV file</string>
+    <string name="send_fdroid_metrics_json">%s metrics report as JSON file</string>
     <string name="install_history">Install history</string>
+    <string name="install_history_and_metrics">Install history and metrics</string>
+    <string name="fdroid_metrics_report">%s Metrics Report</string>
     <string name="install_history_summary">View the private log of all installs and uninstalls</string>
     <string name="keep_install_history">Keep install history</string>
     <string name="keep_install_history_summary">Store a log of all installs and uninstalls in a private store</string>
+    <string name="send_to_fdroid_metrics">Send usage data</string>
+    <string name="send_to_fdroid_metrics_summary">Sends anonymous data weekly to F-Droid Metrics (requires "Keep install history")</string>
+    <!-- message shown as a "toast" when the user enables the Send to F-Droid Metrics preference -->
+    <string name="toast_metrics_in_install_history">The %s Metric report is viewable in the Install History viewer</string>
     <string name="send_version_and_uuid">Send version and UUID to servers</string>
     <string name="send_version_and_uuid_summary">Include this app\'s version and a random, unique ID when
         downloading, takes affect next app restart.</string>
@@ -245,6 +253,11 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <!-- The bottom bar button label.  The updates tab isn't only about software updates. It is also about queued offline installs, in progress installs, known vulnerabilities, and in the future, also donation reminders and other things. In English, you can also say "do you have an update on your progress?" or "Keep me updated on how things are going". That combined with "software updates" is why the tab is called "Updates". Ideally, the Updates Tab would actually be a different word than the word used for "software update" to highlight that the Updates Tab is more than just software updates. -->
     <string name="main_menu__updates">Updates</string>
 
+    <!-- Used to switch the Install History viewer to showing the FDroid Metrics report -->
+    <string name="menu_show_fdroid_metrics_report">Show metrics report</string>
+    <!-- Used to switch the FDroid Metrics report to showing the Install History viewer -->
+    <string name="menu_show_install_history">Show install history</string>
+
     <string name="latest__empty_state__no_recent_apps">No recent apps found</string>
     <string name="latest__empty_state__never_updated">Once your list of apps has been updated, the latest apps should
         show here
@@ -365,7 +378,12 @@ This often occurs with apps installed via Google Play or other sources, if they 
     -->
     <string name="status_download_unknown_size">Downloading\n%2$s from\n%1$s</string>
     <string name="download_404">The requested file was not found.</string>
-    <string name="update_notification_title">Updating repositories</string>
+    <!-- This is a banner title, it should be maximum 30 characters -->
+    <string name="banner_updating_repositories">Updating repositories</string>
+    <!-- This is a banner title, it should be maximum 30 characters -->
+    <string name="banner_no_internet">No Internet</string>
+    <!-- This is a banner title, it should be maximum 30 characters -->
+    <string name="banner_no_data_or_wifi">No Data or WiFi enabled</string>
     <string name="status_processing_xml_percent">Processing %2$s / %3$s (%4$d%%) from %1$s</string>
     <string name="status_connecting_to_repo">Connecting to\n%1$s</string>
     <string name="status_inserting_apps">Saving app details</string>
@@ -380,6 +398,8 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="permissions">Permissions</string>
     <string name="no_handler_app">You don\'t have any available app that can handle %s.</string>
     <string name="theme">Theme</string>
+    <string name="use_pure_black_dark_theme">Use pure black background in dark theme</string>
+    <string name="use_pure_black_dark_theme_summary">Recommended only for OLED screens.</string>
     <string name="unsigned">Unsigned</string>
     <string name="unverified">Unverified</string>
     <string name="repo_details">Repository</string>
@@ -457,6 +477,8 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="system_install_denied_permissions">The privileged permissions have not been granted to the extension!
         Please create a bug report!
     </string>
+
+    <string name="share_apk_error">Could not share app file</string>
 
     <string name="nearby_splash__download_apps_from_people_nearby">No Internet? Get apps from people near you!</string>
     <!-- The word "nearby" should be the same as used for Google/Android Nearby. This is a button label, it should ideally be 10-20 characters. -->
@@ -599,7 +621,7 @@ This often occurs with apps installed via Google Play or other sources, if they 
 
     <string name="theme_light">Light</string>
     <string name="theme_dark">Dark</string>
-    <string name="theme_night">Night</string>
+    <string name="theme_follow_system">Follow system</string>
 
     <string name="crash_dialog_title">F-Droid has crashed</string>
     <string name="crash_dialog_text">An unexpected error occurred
@@ -659,9 +681,9 @@ This often occurs with apps installed via Google Play or other sources, if they 
 
     <string name="details_last_updated_today">Updated today</string>
     <string name="warning_scaning_qr_code">Your camera doesn\'t seem to have an autofocus. It might be difficult to scan the code.</string>
-	<string name="undo">Undo</string>
-	<string name="app_list__dismiss_installing_app">Installation cancelled</string>
-	<plurals name="details_last_update_days">
+    <string name="undo">Undo</string>
+    <string name="app_list__dismiss_installing_app">Installation cancelled</string>
+    <plurals name="details_last_update_days">
         <item quantity="one">Updated %1$d day ago</item>
         <item quantity="other">Updated %1$d days ago</item>
     </plurals>

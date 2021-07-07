@@ -6,30 +6,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-import androidx.core.os.ConfigurationCompat;
-import androidx.core.os.LocaleListCompat;
-import androidx.core.view.ViewCompat;
-import androidx.core.widget.TextViewCompat;
-import androidx.appcompat.app.AlertDialog;
-import androidx.gridlayout.widget.GridLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.LinearSmoothScroller;
-import androidx.recyclerview.widget.RecyclerView;
-import android.text.Html;
 import android.text.Spannable;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.text.method.LinkMovementMethod;
 import android.text.style.URLSpan;
+import android.text.util.Linkify;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import org.apache.commons.io.FilenameUtils;
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.R;
@@ -63,9 +52,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.core.os.ConfigurationCompat;
+import androidx.core.os.LocaleListCompat;
+import androidx.core.text.HtmlCompat;
+import androidx.core.text.util.LinkifyCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.widget.TextViewCompat;
+import androidx.gridlayout.widget.GridLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
+import androidx.recyclerview.widget.RecyclerView;
+
 @SuppressWarnings("LineLength")
 public class AppDetailsRecyclerViewAdapter
         extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    public static final String TAG = "AppDetailsRecyclerViewA";
 
     public interface AppDetailsRecyclerViewAdapterCallbacks {
 
@@ -254,7 +262,8 @@ public class AppDetailsRecyclerViewAdapter
                 uriIsSetAndCanBeOpened(app.getBitcoinUri()) ||
                 uriIsSetAndCanBeOpened(app.getLitecoinUri()) ||
                 uriIsSetAndCanBeOpened(app.getFlattrUri()) ||
-                uriIsSetAndCanBeOpened(app.getLiberapayUri());
+                uriIsSetAndCanBeOpened(app.getLiberapayUri()) ||
+                uriIsSetAndCanBeOpened(app.getOpenCollectiveUri());
     }
 
     private void notifyVersionViewsChanged() {
@@ -402,10 +411,10 @@ public class AppDetailsRecyclerViewAdapter
             authorView = (TextView) view.findViewById(R.id.author);
             lastUpdateView = (TextView) view.findViewById(R.id.text_last_update);
             summaryView = (TextView) view.findViewById(R.id.summary);
-            whatsNewView = (TextView) view.findViewById(R.id.whats_new);
+            whatsNewView = (TextView) view.findViewById(R.id.latest);
             descriptionView = (TextView) view.findViewById(R.id.description);
             descriptionMoreView = (TextView) view.findViewById(R.id.description_more);
-            antiFeaturesSectionView =  view.findViewById(R.id.anti_features_section);
+            antiFeaturesSectionView = view.findViewById(R.id.anti_features_section);
             antiFeaturesLabelView = (TextView) view.findViewById(R.id.label_anti_features);
             antiFeaturesWarningView = view.findViewById(R.id.anti_features_warning);
             antiFeaturesListingView = view.findViewById(R.id.anti_features_full_listing);
@@ -524,9 +533,12 @@ public class AppDetailsRecyclerViewAdapter
                 // the changelog if its content becomes too long to fit on screen.
                 recyclerView.requestChildFocus(itemView, itemView);
             }
-            final Spanned desc = Html.fromHtml(app.description, null, new Utils.HtmlTagHandler());
+            final Spanned desc = HtmlCompat.fromHtml(app.description, HtmlCompat.FROM_HTML_MODE_LEGACY,
+                    null, new Utils.HtmlTagHandler());
             descriptionView.setMovementMethod(LinkMovementMethod.getInstance());
             descriptionView.setText(trimTrailingNewlines(desc));
+            LinkifyCompat.addLinks(descriptionView, Linkify.WEB_URLS);
+
             if (descriptionView.getText() instanceof Spannable) {
                 Spannable spannable = (Spannable) descriptionView.getText();
                 URLSpan[] spans = spannable.getSpans(0, spannable.length(), URLSpan.class);
@@ -604,7 +616,7 @@ public class AppDetailsRecyclerViewAdapter
                             }
                         });
                     } else if (!app.isApk && mediaApk != null) {
-                        final File installedFile = new File(mediaApk.getMediaInstallPath(context), mediaApk.apkName);
+                        final File installedFile = mediaApk.getInstalledMediaFile(context);
                         if (!installedFile.toString().startsWith(context.getApplicationInfo().dataDir)) {
                             final Intent viewIntent = new Intent(Intent.ACTION_VIEW);
                             Uri uri = FileProvider.getUriForFile(context, Installer.AUTHORITY, installedFile);
@@ -753,7 +765,8 @@ public class AppDetailsRecyclerViewAdapter
                 donateHeading.setText(context.getString(R.string.app_details_donate_prompt_unknown_author, app.name));
             } else {
                 String author = "<strong>" + app.authorName + "</strong>";
-                donateHeading.setText(Html.fromHtml(context.getString(R.string.app_details_donate_prompt, app.name, author)));
+                final String prompt = context.getString(R.string.app_details_donate_prompt, app.name, author);
+                donateHeading.setText(HtmlCompat.fromHtml(prompt, HtmlCompat.FROM_HTML_MODE_LEGACY));
             }
 
             donationOptionsLayout.removeAllViews();
@@ -830,7 +843,12 @@ public class AppDetailsRecyclerViewAdapter
          * user can expand/collapse this item.
          */
         protected void updateExpandableItem(boolean isExpanded) {
-            TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(headerView, getIcon(), 0, isExpanded ? R.drawable.ic_expand_less_grey600 : R.drawable.ic_expand_more_grey600, 0);
+            final int icon = getIcon();
+            Drawable iconDrawable = ContextCompat.getDrawable(headerView.getContext(), icon);
+            final Drawable expandLess = ContextCompat.getDrawable(headerView.getContext(), R.drawable.ic_expand_less);
+            final Drawable expandMore = ContextCompat.getDrawable(headerView.getContext(), R.drawable.ic_expand_more);
+            TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(headerView,
+                    iconDrawable, null, isExpanded ? expandLess : expandMore, null);
         }
     }
 
@@ -855,7 +873,7 @@ public class AppDetailsRecyclerViewAdapter
 
         @DrawableRes
         protected int getIcon() {
-            return R.drawable.ic_access_time_24dp_grey600;
+            return R.drawable.ic_versions;
         }
     }
 
@@ -865,7 +883,11 @@ public class AppDetailsRecyclerViewAdapter
         NoVersionsViewHolder(View view) {
             super(view);
             headerView = (TextView) view.findViewById(R.id.information);
-            TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(headerView, R.drawable.ic_access_time_24dp_grey600, 0, 0, 0);
+            final Drawable accessTime = DrawableCompat.wrap(ContextCompat.getDrawable(headerView.getContext(),
+                    R.drawable.ic_versions)).mutate();
+            DrawableCompat.setTint(accessTime, Color.parseColor("#B4B4B4"));
+            TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(headerView,
+                    accessTime, null, null, null);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -956,7 +978,7 @@ public class AppDetailsRecyclerViewAdapter
 
         @DrawableRes
         protected int getIcon() {
-            return R.drawable.ic_lock_24dp_grey600;
+            return R.drawable.ic_lock;
         }
     }
 
@@ -1004,7 +1026,7 @@ public class AppDetailsRecyclerViewAdapter
 
             // Issues button
             if (uriIsSetAndCanBeOpened(app.issueTracker)) {
-                addLinkItemView(contentView, R.string.menu_issues, R.drawable.ic_issues, app.issueTracker);
+                addLinkItemView(contentView, R.string.menu_issues, R.drawable.ic_error, app.issueTracker);
             }
 
             // Translation button
@@ -1281,7 +1303,7 @@ public class AppDetailsRecyclerViewAdapter
             expandedLayout.setVisibility(expand ? View.VISIBLE : View.GONE);
             versionCode.setVisibility(expand ? View.VISIBLE : View.GONE);
             expandArrow.setImageDrawable(ContextCompat.getDrawable(context, expand ?
-                    R.drawable.ic_expand_less_grey600 : R.drawable.ic_expand_more_grey600));
+                    R.drawable.ic_expand_less : R.drawable.ic_expand_more));
 
             // This is required to make these labels
             // auto-scrollable when they are too long

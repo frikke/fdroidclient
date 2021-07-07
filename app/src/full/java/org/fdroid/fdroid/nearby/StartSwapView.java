@@ -7,9 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.WifiConfiguration;
-import androidx.annotation.Nullable;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.appcompat.widget.SwitchCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -22,13 +19,19 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import cc.mvdan.accesspoint.WifiApControl;
+
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.nearby.peers.Peer;
 
 import java.util.ArrayList;
+
+import androidx.annotation.Nullable;
+import com.google.android.material.switchmaterial.SwitchMaterial;
+import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import cc.mvdan.accesspoint.WifiApControl;
 
 @SuppressWarnings("LineLength")
 public class StartSwapView extends SwapView {
@@ -67,7 +70,7 @@ public class StartSwapView extends SwapView {
             Peer peer = getItem(position);
             ((TextView) convertView.findViewById(R.id.peer_name)).setText(peer.getName());
             ((ImageView) convertView.findViewById(R.id.icon))
-                    .setImageDrawable(getResources().getDrawable(peer.getIcon()));
+                    .setImageDrawable(ContextCompat.getDrawable(getContext(), peer.getIcon()));
 
             return convertView;
         }
@@ -76,7 +79,7 @@ public class StartSwapView extends SwapView {
     @Nullable /* Emulators typically don't have bluetooth adapters */
     private final BluetoothAdapter bluetooth = BluetoothAdapter.getDefaultAdapter();
 
-    private SwitchCompat bluetoothSwitch;
+    private SwitchMaterial bluetoothSwitch;
     private TextView viewBluetoothId;
     private TextView textBluetoothVisible;
     private TextView viewWifiId;
@@ -172,7 +175,7 @@ public class StartSwapView extends SwapView {
 
             textBluetoothVisible = findViewById(R.id.bluetooth_visible);
 
-            bluetoothSwitch = (SwitchCompat) findViewById(R.id.switch_bluetooth);
+            bluetoothSwitch = (SwitchMaterial) findViewById(R.id.switch_bluetooth);
             bluetoothSwitch.setOnCheckedChangeListener(onBluetoothSwitchToggled);
             bluetoothSwitch.setChecked(SwapService.getBluetoothVisibleUserPreference());
             bluetoothSwitch.setEnabled(true);

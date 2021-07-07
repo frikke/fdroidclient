@@ -5,10 +5,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
+
 import org.fdroid.fdroid.data.Repo;
 import org.fdroid.fdroid.data.RepoProvider;
 import org.fdroid.fdroid.views.ManageReposActivity;
@@ -17,6 +16,9 @@ import org.fdroid.fdroid.views.main.MainActivity;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Locale;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * Handles requests to add new repos via URLs.  This is an {@code IntentService}
@@ -31,7 +33,7 @@ import java.util.Locale;
  * <p>
  * This only really properly queues {@link Intent}s that get filtered out. The
  * {@code Intent}s that go on to {@code ManageReposActivity} will not wait
- * until for that {@code Activity} to be ready to handle the next.  So when
+ * until for that {@code AppCompatActivity} to be ready to handle the next.  So when
  * multiple mirrors are discovered at once, only one in that session will
  * likely be added.
  */

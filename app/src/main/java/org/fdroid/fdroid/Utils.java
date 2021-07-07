@@ -19,6 +19,7 @@
 
 package org.fdroid.fdroid;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -32,10 +33,6 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.StatFs;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.text.Editable;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
@@ -51,11 +48,21 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.Toast;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-import com.nostra13.universalimageloader.utils.StorageUtils;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.DisplayCompat;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.encode.Contents;
+import com.google.zxing.encode.QRCodeEncoder;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import org.fdroid.fdroid.compat.FileCompat;
 import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.data.Repo;
@@ -93,6 +100,10 @@ import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 public final class Utils {
 
     private static final String TAG = "Utils";
@@ -101,7 +112,7 @@ public final class Utils {
 
     // The date format used for storing dates (e.g. lastupdated, added) in the
     // database.
-    private static final SimpleDateFormat DATE_FORMAT =
+    public static final SimpleDateFormat DATE_FORMAT =
             new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
     private static final SimpleDateFormat TIME_FORMAT =
@@ -113,14 +124,13 @@ public final class Utils {
             "%.0f B", "%.0f KiB", "%.1f MiB", "%.2f GiB",
     };
 
-    private static DisplayImageOptions.Builder defaultDisplayImageOptionsBuilder;
-    private static DisplayImageOptions repoAppDisplayImageOptions;
+    private static RequestOptions repoAppDisplayImageOptions;
 
     private static Pattern safePackageNamePattern;
 
     private static Handler toastHandler;
 
-    public static final String FALLBACK_ICONS_DIR = "/icons/";
+    public static final String FALLBACK_ICONS_DIR = "icons";
 
     /*
      * @param dpiMultiplier Lets you grab icons for densities larger or
@@ -132,29 +142,29 @@ public final class Utils {
         final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         final double dpi = metrics.densityDpi * dpiMultiplier;
         if (dpi >= 640) {
-            return "/icons-640/";
+            return "icons-640";
         }
         if (dpi >= 480) {
-            return "/icons-480/";
+            return "icons-480";
         }
         if (dpi >= 320) {
-            return "/icons-320/";
+            return "icons-320";
         }
         if (dpi >= 240) {
-            return "/icons-240/";
+            return "icons-240";
         }
         if (dpi >= 160) {
-            return "/icons-160/";
+            return "icons-160";
         }
 
-        return "/icons-120/";
+        return "icons-120";
     }
 
     /**
      * @return the directory where cached icons/feature graphics/screenshots are stored
      */
     public static File getImageCacheDir(Context context) {
-        File cacheDir = StorageUtils.getCacheDirectory(context.getApplicationContext(), true);
+        File cacheDir = Glide.getPhotoCacheDir(context.getApplicationContext());
         return new File(cacheDir, "icons");
     }
 
@@ -405,10 +415,26 @@ public final class Utils {
         return ret;
     }
 
+
     /**
      * Get the fingerprint used to represent an APK signing key in F-Droid.
      * This is a custom fingerprint algorithm that was kind of accidentally
      * created, but is still in use.
+     *
+     * @see #getPackageSig(PackageInfo)
+     * @see org.fdroid.fdroid.data.Apk#sig
+     */
+    public static String getsig(byte[] rawCertBytes) {
+        return Utils.hashBytes(toHexString(rawCertBytes).getBytes(), "md5");
+    }
+
+    /**
+     * Get the fingerprint used to represent an APK signing key in F-Droid.
+     * This is a custom fingerprint algorithm that was kind of accidentally
+     * created, but is still in use.
+     *
+     * @see #getsig(byte[])
+     * @see org.fdroid.fdroid.data.Apk#sig
      */
     public static String getPackageSig(PackageInfo info) {
         if (info == null || info.signatures == null || info.signatures.length < 1) {
@@ -456,36 +482,15 @@ public final class Utils {
     }
 
     /**
-     * Since there have been vulnerabilities in EXIF processing in Android, this
-     * disables all use of EXIF.
-     *
-     * @see <a href="https://securityaffairs.co/wordpress/51043/mobile-2/android-cve-2016-3862-flaw.html">CVE-2016-3862</a>
-     */
-    public static DisplayImageOptions.Builder getDefaultDisplayImageOptionsBuilder() {
-        if (defaultDisplayImageOptionsBuilder == null) {
-            defaultDisplayImageOptionsBuilder = new DisplayImageOptions.Builder()
-                    .cacheInMemory(true)
-                    .cacheOnDisk(true)
-                    .considerExifParams(false)
-                    .bitmapConfig(Bitmap.Config.RGB_565)
-                    .imageScaleType(ImageScaleType.EXACTLY);
-        }
-        return defaultDisplayImageOptionsBuilder;
-    }
-
-    /**
-     * Gets the {@link DisplayImageOptions} instance used to configure
-     * {@link com.nostra13.universalimageloader.core.ImageLoader} instances
+     * Gets the {@link RequestOptions} instance used to configure
+     * {@link Glide} instances
      * used to display app icons.  It lazy loads a reusable static instance.
      */
-    public static DisplayImageOptions getRepoAppDisplayImageOptions() {
+    public static RequestOptions getRepoAppDisplayImageOptions() {
         if (repoAppDisplayImageOptions == null) {
-            repoAppDisplayImageOptions = getDefaultDisplayImageOptionsBuilder()
-                    .showImageOnLoading(R.drawable.ic_repo_app_default)
-                    .showImageForEmptyUri(R.drawable.ic_repo_app_default)
-                    .showImageOnFail(R.drawable.ic_repo_app_default)
-                    .displayer(new FadeInBitmapDisplayer(200, true, true, false))
-                    .build();
+            repoAppDisplayImageOptions = new RequestOptions()
+                    .error(R.drawable.ic_repo_app_default)
+                    .fallback(R.drawable.ic_repo_app_default);
         }
         return repoAppDisplayImageOptions;
     }
@@ -496,19 +501,8 @@ public final class Utils {
      * We fall back to the placeholder icon otherwise.
      */
     public static void setIconFromRepoOrPM(@NonNull App app, ImageView iv, Context context) {
-        if (app.getIconUrl(iv.getContext()) == null) {
-            try {
-                iv.setImageDrawable(context.getPackageManager().getApplicationIcon(app.packageName));
-            } catch (PackageManager.NameNotFoundException e) {
-                DisplayImageOptions options = Utils.getRepoAppDisplayImageOptions();
-                iv.setImageDrawable(options.shouldShowImageForEmptyUri()
-                        ? options.getImageForEmptyUri(FDroidApp.getInstance().getResources())
-                        : null);
-            }
-        } else {
-            ImageLoader.getInstance().displayImage(
-                    app.getIconUrl(iv.getContext()), iv, Utils.getRepoAppDisplayImageOptions());
-        }
+        RequestOptions options = Utils.getRepoAppDisplayImageOptions();
+        Glide.with(context).load(app.getIconUrl(iv.getContext())).apply(options).into(iv);
     }
 
     // this is all new stuff being added
@@ -555,7 +549,7 @@ public final class Utils {
             }
 
             byte[] mdbytes = md.digest();
-            return toHexString(mdbytes).toLowerCase(Locale.ENGLISH);
+            return toHexString(mdbytes);
         } catch (IOException e) {
             String message = e.getMessage();
             if (message.contains("read failed: EIO (I/O error)")) {
@@ -575,7 +569,7 @@ public final class Utils {
      * Computes the base 16 representation of the byte array argument.
      *
      * @param bytes an array of bytes.
-     * @return the bytes represented as a string of hexadecimal digits.
+     * @return the bytes represented as a string of lowercase hexadecimal digits.
      * @see <a href="https://stackoverflow.com/a/9855338">source</a>
      */
     public static String toHexString(byte[] bytes) {
@@ -588,7 +582,7 @@ public final class Utils {
         return new String(hexChars);
     }
 
-    private static final char[] HEX_LOOKUP_ARRAY = "0123456789ABCDEF".toCharArray();
+    private static final char[] HEX_LOOKUP_ARRAY = "0123456789abcdef".toCharArray();
 
     public static int parseInt(String str, int fallback) {
         if (str == null || str.length() == 0) {
@@ -794,6 +788,10 @@ public final class Utils {
         return versionName;
     }
 
+    public static String getUserAgent() {
+        return "F-Droid " + BuildConfig.VERSION_NAME;
+    }
+
     /**
      * Try to get the {@link PackageInfo} for the {@code packageName} provided.
      *
@@ -802,6 +800,21 @@ public final class Utils {
     public static PackageInfo getPackageInfo(Context context, String packageName) {
         try {
             return context.getPackageManager().getPackageInfo(packageName, 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            debugLog(TAG, "Could not get PackageInfo: ", e);
+        }
+        return null;
+    }
+
+    /**
+     * Try to get the {@link PackageInfo} with signature info for the {@code packageName} provided.
+     *
+     * @return null on failure
+     */
+    @SuppressLint("PackageManagerGetSignatures")
+    public static PackageInfo getPackageInfoWithSignatures(Context context, String packageName) {
+        try {
+            return context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_SIGNATURES);
         } catch (PackageManager.NameNotFoundException e) {
             debugLog(TAG, "Could not get PackageInfo: ", e);
         }
@@ -943,8 +956,27 @@ public final class Utils {
         }
     }
 
+    @NonNull
+    public static Single<Bitmap> generateQrBitmap(@NonNull final AppCompatActivity activity,
+                                                  @NonNull final String qrData) {
+        return Single.fromCallable(() -> {
+            // TODO: Use DisplayCompat.getMode() once it becomes available in Core 1.6.0.
+            final DisplayCompat.ModeCompat displayMode = DisplayCompat.getSupportedModes(activity,
+                    activity.getWindowManager().getDefaultDisplay())[0];
+            final int qrCodeDimension = Math.min(displayMode.getPhysicalWidth(),
+                    displayMode.getPhysicalHeight());
+            debugLog(TAG, "generating QRCode Bitmap of " + qrCodeDimension + "x" + qrCodeDimension);
+
+            return new QRCodeEncoder(qrData, null, Contents.Type.TEXT,
+                    BarcodeFormat.QR_CODE.toString(), qrCodeDimension).encodeAsBitmap();
+        })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnError(throwable -> Log.e(TAG, "Could not encode QR as bitmap", throwable));
+    }
+
     /**
-     * Keep an instance of this class as an field in an Activity for figuring out whether the on
+     * Keep an instance of this class as an field in an AppCompatActivity for figuring out whether the on
      * screen keyboard is currently visible or not.
      */
     public static class KeyboardStateMonitor {
@@ -952,7 +984,7 @@ public final class Utils {
         private boolean visible = false;
 
         /**
-         * @param contentView this must be the top most Container of the layout used by the Activity
+         * @param contentView this must be the top most Container of the layout used by the AppCompatActivity
          */
         public KeyboardStateMonitor(final View contentView) {
             contentView.getViewTreeObserver().addOnGlobalLayoutListener(

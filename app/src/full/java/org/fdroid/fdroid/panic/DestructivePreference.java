@@ -1,11 +1,14 @@
 package org.fdroid.fdroid.panic;
 
 import android.content.Context;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
+
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.R;
+
+import androidx.core.content.ContextCompat;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 public class DestructivePreference extends Preference {
     public DestructivePreference(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -28,9 +31,9 @@ public class DestructivePreference extends Preference {
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
         if (FDroidApp.isAppThemeLight()) {
-            holder.itemView.setBackgroundColor(getContext().getResources().getColor(R.color.panic_destructive_light));
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.panic_destructive_light));
         } else {
-            holder.itemView.setBackgroundColor(getContext().getResources().getColor(R.color.panic_destructive_dark));
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.panic_destructive_dark));
         }
     }
 }

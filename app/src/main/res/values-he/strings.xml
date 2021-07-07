@@ -92,7 +92,7 @@
     <string name="status_download">מתבצעת הורדה 
 \n%2$s / %3$s (%4$d%%) מתוך 
 \n%1$s</string>
-    <string name="update_notification_title">המאגרים מתעדכנים</string>
+    <string name="banner_updating_repositories">המאגרים מתעדכנים</string>
     <string name="status_processing_xml_percent">%2$s בהליכי עיבוד / %3$s (%4$d%%) מתוך %1$s</string>
     <string name="status_connecting_to_repo">מתבצעת התחברות אל 
 \n%1$s</string>
@@ -234,7 +234,6 @@
     <string name="permissions">הרשאות</string>
     <string name="repo_details">מאגר</string>
     <string name="repo_url">כתובת</string>
-    <string name="theme_night">לילה</string>
     <string name="system_install_denied_permissions">ההרשאות המיוחדות לא הוענקו להרחבה! נא לדווח על באג!</string>
     <string name="login_title">נדרש אימות</string>
     <string name="login_name">שם משתמש</string>
@@ -518,4 +517,18 @@
     <string name="notification_channel_swaps_description">מציג התראות החלפת יישומונים בין עמיתים.</string>
     <string name="notification_channel_swaps_title">החלפות</string>
     <string name="notification_channel_installs_title">התקנות</string>
+    <string name="send_to_fdroid_metrics_summary">שליחת נתונים אלמוניים למדדי F-Droid מדי שבוע (מחייב שמירה על היסטוריית ההתקנות)</string>
+    <string name="menu_show_install_history">הצגת היסטוריית התקנות</string>
+    <string name="menu_show_fdroid_metrics_report">הצגת דוח מדדים</string>
+    <string name="toast_metrics_in_install_history">דוח מדדי %s ניתן לצפייה במציג היסטוריית ההתקנות</string>
+    <string name="send_to_fdroid_metrics">שליחת נתוני שימוש</string>
+    <string name="fdroid_metrics_report">דוח מדדי %s</string>
+    <string name="install_history_and_metrics">היסטוריית התקנה ומדדים</string>
+    <string name="send_fdroid_metrics_json">דוח מדדי %s כקובץ JSON</string>
+    <string name="send_fdroid_metrics_report">שליחת דוח מדדי %s</string>
+    <string name="theme_follow_system">כמו המערכת</string>
+    <string name="use_pure_black_dark_theme_summary">מומלץ למסכי OLED בלבד.</string>
+    <string name="use_pure_black_dark_theme">להשתמש ברקע שחור טהור בערכת עיצוב כהה</string>
+    <string name="banner_no_data_or_wifi">הרשתות האלחוטית והסלולרית מושבתות</string>
+    <string name="banner_no_internet">אין אינטרנט</string>
 </resources>

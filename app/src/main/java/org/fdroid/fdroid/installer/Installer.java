@@ -28,9 +28,8 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.PatternMatcher;
-import androidx.annotation.NonNull;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.text.TextUtils;
+
 import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Apk;
@@ -41,6 +40,9 @@ import org.fdroid.fdroid.privileged.views.InstallConfirmActivity;
 import org.fdroid.fdroid.privileged.views.UninstallDialogActivity;
 
 import java.io.IOException;
+
+import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 /**
  * Handles the actual install process.  Subclasses implement the details.
@@ -80,7 +82,7 @@ public abstract class Installer {
     /**
      * Returns permission screen for given apk.
      *
-     * @return Intent with Activity to show required permissions.
+     * @return Intent with AppCompatActivity to show required permissions.
      * Returns null if Installer handles that on itself, e.g., with DefaultInstaller,
      * or if no new permissions have been introduced during an update
      */

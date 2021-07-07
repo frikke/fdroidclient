@@ -22,9 +22,9 @@
 package org.fdroid.fdroid.views;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -35,22 +35,16 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewTreeObserver;
 import android.widget.Toast;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
+
+import com.bumptech.glide.request.RequestOptions;
+import com.google.android.material.appbar.MaterialToolbar;
+
 import org.fdroid.fdroid.AppUpdateStatusManager;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.NfcHelper;
@@ -66,13 +60,21 @@ import org.fdroid.fdroid.installer.InstallManagerService;
 import org.fdroid.fdroid.installer.Installer;
 import org.fdroid.fdroid.installer.InstallerFactory;
 import org.fdroid.fdroid.installer.InstallerService;
+import org.fdroid.fdroid.nearby.PublicSourceDirProvider;
 import org.fdroid.fdroid.views.apps.FeatureImage;
 
 import java.util.Iterator;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 public class AppDetailsActivity extends AppCompatActivity
-        implements ShareChooserDialog.ShareChooserDialogListener,
-        AppDetailsRecyclerViewAdapter.AppDetailsRecyclerViewAdapterCallbacks {
+        implements AppDetailsRecyclerViewAdapter.AppDetailsRecyclerViewAdapterCallbacks {
 
     public static final String EXTRA_APPID = "appid";
     private static final String TAG = "AppDetailsActivity";
@@ -102,15 +104,15 @@ public class AppDetailsActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        fdroidApp = (FDroidApp) getApplication();
-        fdroidApp.applyTheme(this);
+        FDroidApp fdroidApp = (FDroidApp) getApplication();
+        fdroidApp.applyPureBlackBackgroundInDarkTheme(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_details2);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(""); // Nice and clean toolbar
-        toolbar.setNavigationIcon(R.drawable.ic_back);
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false); // clear title
         supportPostponeEnterTransition();
 
         String packageName = getPackageNameFromIntent(getIntent());
@@ -146,9 +148,9 @@ public class AppDetailsActivity extends AppCompatActivity
 
         // Load the feature graphic, if present
         final FeatureImage featureImage = (FeatureImage) findViewById(R.id.feature_graphic);
-        DisplayImageOptions displayImageOptions = Utils.getRepoAppDisplayImageOptions();
+        RequestOptions displayImageOptions = new RequestOptions();
         String featureGraphicUrl = app.getFeatureGraphicUrl(this);
-        featureImage.loadImageAndDisplay(ImageLoader.getInstance(), displayImageOptions,
+        featureImage.loadImageAndDisplay(displayImageOptions,
                 featureGraphicUrl, app.getIconUrl(this));
     }
 
@@ -255,18 +257,62 @@ public class AppDetailsActivity extends AppCompatActivity
         return true;
     }
 
+    /**
+     * An app can create an {@link Intent#ACTION_SEND} to share a file
+     * and/or text to another app.  This {@link Intent} can provide an
+     * {@link java.io.InputStream} to get the actual file via
+     * {@link Intent#EXTRA_STREAM}.  This {@link Intent} can also include
+     * {@link Intent#EXTRA_TEXT} to describe what the shared file is.  Apps
+     * like K-9Mail, Gmail, Signal, etc. correctly handle this case and
+     * include both the file itself and the related text in the draft message.
+     * <p>
+     * This is used in F-Droid to share apps.  The text is the
+     * name/description of the app and the URL that points to the app's page
+     * on f-droid.org.  The {@link Intent#EXTRA_STREAM} is the actual APK if available.
+     * Having all together means that the user can choose to share a message
+     * or the actual APK, depending on the receiving app.
+     * <p>
+     * Unfortunately, not all apps handle this well.  WhatsApp and Element
+     * only attach the file and ignore the text.
+     *
+     * @see <a href="https://github.com/vector-im/element-android/issues/3637"></a>
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_share) {
-            Intent shareIntent = new Intent(Intent.ACTION_SEND);
-            shareIntent.setType("text/plain");
-            shareIntent.putExtra(Intent.EXTRA_SUBJECT, app.name);
-            shareIntent.putExtra(Intent.EXTRA_TEXT, app.name + " (" + app.summary
-                    + ") - https://f-droid.org/packages/" + app.packageName);
+            String extraText = String.format("%s (%s)\nhttps://f-droid.org/packages/%s/",
+                    app.name, app.summary, app.packageName);
 
-            boolean showNearbyItem = app.isInstalled(getApplicationContext()) && bluetoothAdapter != null;
-            CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.rootCoordinator);
-            ShareChooserDialog.createChooser(coordinatorLayout, this, this, shareIntent, showNearbyItem);
+            Intent uriIntent = new Intent(Intent.ACTION_SEND);
+            uriIntent.setData(Uri.parse(String.format("https://f-droid.org/packages/%s/", app.packageName)));
+            uriIntent.putExtra(Intent.EXTRA_TITLE, app.name);
+
+            Intent textIntent = new Intent(Intent.ACTION_SEND);
+            textIntent.setType("text/plain");
+            textIntent.putExtra(Intent.EXTRA_SUBJECT, app.name);
+            textIntent.putExtra(Intent.EXTRA_TITLE, app.name);
+            textIntent.putExtra(Intent.EXTRA_TEXT, extraText);
+
+            if (app.isInstalled(getApplicationContext())) {
+                // allow user to share APK if app is installed
+                Intent streamIntent = PublicSourceDirProvider.getApkShareIntent(this, app.packageName);
+                streamIntent.putExtra(Intent.EXTRA_SUBJECT, "Shared from F-Droid: " + app.name + ".apk");
+                streamIntent.putExtra(Intent.EXTRA_TITLE, app.name + ".apk");
+                streamIntent.putExtra(Intent.EXTRA_TEXT, extraText);
+
+                Intent chooserIntent = Intent.createChooser(streamIntent, getString(R.string.menu_share));
+                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{
+                        textIntent,
+                        uriIntent,
+                });
+                startActivity(chooserIntent);
+            } else {
+                Intent chooserIntent = Intent.createChooser(textIntent, getString(R.string.menu_share));
+                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{
+                        uriIntent,
+                });
+                startActivity(chooserIntent);
+            }
             return true;
         } else if (item.getItemId() == R.id.action_ignore_all) {
             app.getPrefs(this).ignoreAllUpdates ^= true;
@@ -289,8 +335,8 @@ public class AppDetailsActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onNearby() {
+    /*
+    private void shareApkBluetooth() {
         // If Bluetooth has not been enabled/turned on, then
         // enabling device discoverability will automatically enable Bluetooth
         Intent discoverBt = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
@@ -298,11 +344,7 @@ public class AppDetailsActivity extends AppCompatActivity
         startActivityForResult(discoverBt, REQUEST_ENABLE_BLUETOOTH);
         // if this is successful, the Bluetooth transfer is started
     }
-
-    @Override
-    public void onResolvedShareIntent(Intent shareIntent) {
-        startActivity(shareIntent);
-    }
+     */
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -312,14 +354,14 @@ public class AppDetailsActivity extends AppCompatActivity
                 fdroidApp.sendViaBluetooth(this, resultCode, app.packageName);
                 break;
             case REQUEST_PERMISSION_DIALOG:
-                if (resultCode == Activity.RESULT_OK) {
+                if (resultCode == AppCompatActivity.RESULT_OK) {
                     Uri uri = data.getData();
                     Apk apk = ApkProvider.Helper.findByUri(this, uri, Schema.ApkTable.Cols.ALL);
                     InstallManagerService.queue(this, app, apk);
                 }
                 break;
             case REQUEST_UNINSTALL_DIALOG:
-                if (resultCode == Activity.RESULT_OK) {
+                if (resultCode == AppCompatActivity.RESULT_OK) {
                     startUninstall();
                 }
                 break;
@@ -459,7 +501,9 @@ public class AppDetailsActivity extends AppCompatActivity
                         Toast.makeText(this, R.string.details_notinstalled, Toast.LENGTH_LONG).show();
                     } else {
                         String msg = newStatus.errorText;
-                        if (!newStatus.getCanonicalUrl().equals(msg)) msg += " " + newStatus.getCanonicalUrl();
+                        if (!newStatus.getCanonicalUrl().equals(msg)) {
+                            msg += " " + newStatus.getCanonicalUrl();
+                        }
                         Toast.makeText(this, R.string.download_error, Toast.LENGTH_SHORT).show();
                         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
                     }
@@ -702,7 +746,7 @@ public class AppDetailsActivity extends AppCompatActivity
         if (Build.VERSION.SDK_INT < 18) {
             return BluetoothAdapter.getDefaultAdapter();
         }
-        return ((android.bluetooth.BluetoothManager) getSystemService(BLUETOOTH_SERVICE)).getAdapter();
+        return ContextCompat.getSystemService(this, BluetoothManager.class).getAdapter();
     }
 
     @Override

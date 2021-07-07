@@ -46,7 +46,9 @@
     <string name="search_hint">Procurar aplicacións</string>
     <string name="appcompatibility">Compatibilidade das aplicacións</string>
     <string name="show_incompat_versions">Inclúe versións incompatíbeis</string>
-    <string name="status_download">Estase a baixar %2$s / %3$s (%4$d%%) dende %1$s</string>
+    <string name="status_download">Estase a baixar
+\n%2$s / %3$s (%4$d%%) dende
+\n%1$s</string>
     <string name="status_connecting_to_repo">Estase a conectar con 
 \n%1$s</string>
     <string name="no_permissions">Sen permisos</string>
@@ -102,7 +104,7 @@
     <string name="status_download_unknown_size">Estase a baixar 
 \n%2$s dende 
 \n%1$s</string>
-    <string name="update_notification_title">Estanse a actualizar os repositorios</string>
+    <string name="banner_updating_repositories">Estanse a actualizar os repositorios</string>
     <string name="status_processing_xml_percent">Estase a procesar %2$s / %3$s (%4$d%%) dende %1$s</string>
     <string name="repos_unchanged">Tódolos repositorios están actualizados</string>
     <string name="all_other_repos_fine">Os demais repositorios non xeraron erros.</string>
@@ -136,9 +138,9 @@
     <string name="category_Time">Tempo</string>
     <string name="category_Writing">Escrita</string>
     <string name="uninstall_error_unknown">Fallou ó desinstalar por un erro descoñecido</string>
-    <string name="swap_nfc_title">Preme para facer intercambio (swap)</string>
+    <string name="swap_nfc_title">Preme para intercambiar</string>
     <string name="swap">Intercambiar aplicacións</string>
-    <string name="swap_success">Intercambio feito con éxito!</string>
+    <string name="swap_success">Intercambio exitoso!</string>
     <string name="swap_view_available_networks">Preme para abrir as redes dispoñíbeis</string>
     <string name="open_qr_code_scanner">Abrir o lector QR</string>
     <string name="swap_welcome">Benvido ó F-Droid!</string>
@@ -171,7 +173,6 @@
     <string name="interval_2w">Procurar actualizacións cada dúas semanas</string>
     <string name="theme_light">Claro</string>
     <string name="theme_dark">Escuro</string>
-    <string name="theme_night">Noite</string>
     <string name="unstable_updates_summary">Suxire actualizacións para versións inestábeis</string>
     <string name="antiupstreamnonfreelist">O código fonte non é completamente libre</string>
     <string name="proxy_host">Servidor proxy</string>
@@ -362,8 +363,8 @@
     </plurals>
     <string name="details_last_updated_today">Actualizada hoxe</string>
     <plurals name="details_last_update_days">
-        <item quantity="one">Actualizado hai %1$s día</item>
-        <item quantity="other">Actualizado hai %1$s días</item>
+        <item quantity="one">Actualizado hai %1$d día</item>
+        <item quantity="other">Actualizado hai %1$d días</item>
     </plurals>
     <string name="app_details__no_versions__explain_incompatible_signatures">A versión instalada non é compatíbel con ningunha das versións dispoñíbeis. Desinstalar a aplicación permitirache ollar e instalar as versións compatíbeis. Isto acontece acotío con aplicacións instaladas através da Google Play ou outras fontes, se foron asinadas cun certificado diferente.</string>
     <string name="app_permission_storage">O F-Droid precisa permiso para acceder ó almacenamento. Por favor concede ese permiso na seguinte pantalla para proseguer ca instalación.</string>
@@ -478,7 +479,7 @@
     <string name="panic_add_apps_to_uninstall">Engadir as aplicacións que se van desinstalar e eliminar</string>
     <string name="panic_reset_repos_title">Restabelecer repositorios</string>
     <string name="panic_reset_repos_summary">Restabelecer a configuración dos repositorios</string>
-    <string name="swap_visible_hotspot">Visíbel por punto Wi-Fi</string>
+    <string name="swap_visible_hotspot">Visible a través dun punto de acceso</string>
     <string name="swap_blank_wifi_ssid">(en branco)</string>
     <string name="swap_hidden_wifi_ssid">(agochado)</string>
     <string name="swap_setting_up_hotspot">Estase a inciar o punto wifi…</string>
@@ -489,4 +490,23 @@
     <string name="swap_error_cannot_start_bluetooth">Non se pode iniciar o Bluetooth!</string>
     <string name="swap_toast_closing_nearby_after_timeout">O Preto (Nearby) foi pechado dende que estaba inhabilitado.</string>
     <string name="nearby_splash__document_tree">Procurar repositorios e espellos (mirrors) en USB OTG.</string>
+    <string name="notification_channel_updates_title">Actualizacións</string>
+    <string name="notification_channel_swaps_title">Intercambios</string>
+    <string name="menu_opencollective">OpenCollective</string>
+    <string name="notification_channel_updates_description">Amosa notificacións de actualización de aplicacións e repositorio.</string>
+    <string name="notification_channel_swaps_description">Mostra notificacións de intercambio de aplicacións P2P.</string>
+    <string name="notification_channel_installs_description">Mostra notificacións de instalación de aplicacións.</string>
+    <string name="notification_channel_installs_title">Instalacións</string>
+    <string name="use_pure_black_dark_theme_summary">Recomendado só para pantallas OLED.</string>
+    <string name="use_pure_black_dark_theme">Usar un fondo negro puro para o tema escuro</string>
+    <string name="banner_no_data_or_wifi">Datos móbiles ou WiFi desactivados</string>
+    <string name="banner_no_internet">Sen Internet</string>
+    <string name="menu_show_install_history">Mostrar historial de instalación</string>
+    <string name="menu_show_fdroid_metrics_report">Mostrar informe de métricas</string>
+    <string name="send_to_fdroid_metrics_summary">Enviar datos anónimos semanalmente a métricas de F-Droid (require Manter historial de instalacións)</string>
+    <string name="send_to_fdroid_metrics">Enviar datos de uso</string>
+    <string name="fdroid_metrics_report">Informe de métricas %s</string>
+    <string name="install_history_and_metrics">Instalar historial e métricas</string>
+    <string name="send_fdroid_metrics_json">Informe de métricas %s como ficheiro JSON</string>
+    <string name="send_fdroid_metrics_report">Enviar informe de métricas %s</string>
 </resources>

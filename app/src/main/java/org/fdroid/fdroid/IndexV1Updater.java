@@ -24,10 +24,10 @@ package org.fdroid.fdroid;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.net.Uri;
-import androidx.annotation.NonNull;
+import android.content.pm.PackageInfo;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonFactory;
@@ -36,6 +36,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.InjectableValues;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.apache.commons.io.FileUtils;
 import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.App;
@@ -47,10 +48,6 @@ import org.fdroid.fdroid.data.Schema;
 import org.fdroid.fdroid.net.Downloader;
 import org.fdroid.fdroid.net.DownloaderFactory;
 
-import javax.net.ssl.SSLHandshakeException;
-import javax.net.ssl.SSLKeyException;
-import javax.net.ssl.SSLPeerUnverifiedException;
-import javax.net.ssl.SSLProtocolException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -70,6 +67,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+
+import javax.net.ssl.SSLHandshakeException;
+import javax.net.ssl.SSLKeyException;
+import javax.net.ssl.SSLPeerUnverifiedException;
+import javax.net.ssl.SSLProtocolException;
+
+import androidx.annotation.NonNull;
 
 /**
  * Receives the index data about all available apps and packages via the V1
@@ -92,20 +96,15 @@ public class IndexV1Updater extends IndexUpdater {
     public static final String SIGNED_FILE_NAME = "index-v1.jar";
     public static final String DATA_FILE_NAME = "index-v1.json";
 
+    private static String platformSigCache;
+
     public IndexV1Updater(@NonNull Context context, @NonNull Repo repo) {
         super(context, repo);
     }
 
     @Override
-    /**
-     * Storage Access Framework URLs have a crazy encoded path within the URL path.
-     */
     protected String getIndexUrl(@NonNull Repo repo) {
-        if (repo.address.startsWith("content://")) {
-            return repo.address + "%2F" + SIGNED_FILE_NAME;
-        } else {
-            return Uri.parse(repo.address).buildUpon().appendPath(SIGNED_FILE_NAME).build().toString();
-        }
+        return repo.getFileUrl(SIGNED_FILE_NAME);
     }
 
     /**
@@ -176,7 +175,7 @@ public class IndexV1Updater extends IndexUpdater {
                     if (downloader != null) {
                         FileUtils.deleteQuietly(downloader.outputFile);
                     }
-                    throw new IndexUpdater.UpdateException("Error getting F-Droid index file", e2);
+                    throw new IndexUpdater.UpdateException(repo, "Error getting F-Droid index file", e2);
                 } catch (InterruptedException e2) {
                     // ignored if canceled, the local database just won't be updated
                 }
@@ -185,7 +184,7 @@ public class IndexV1Updater extends IndexUpdater {
             if (downloader != null) {
                 FileUtils.deleteQuietly(downloader.outputFile);
             }
-            throw new IndexUpdater.UpdateException("Error getting F-Droid index file", e);
+            throw new IndexUpdater.UpdateException(repo, "Error getting F-Droid index file", e);
         } catch (InterruptedException e) {
             // ignored if canceled, the local database just won't be updated
         }
@@ -278,7 +277,7 @@ public class IndexV1Updater extends IndexUpdater {
         long timestamp = (Long) repoMap.get("timestamp") / 1000;
 
         if (repo.timestamp > timestamp) {
-            throw new IndexUpdater.UpdateException("index.jar is older that current index! "
+            throw new IndexUpdater.UpdateException(repo, "index.jar is older that current index! "
                     + timestamp + " < " + repo.timestamp);
         }
 
@@ -305,6 +304,11 @@ public class IndexV1Updater extends IndexUpdater {
         repo.maxage = getIntRepoValue(repoMap, "maxage");
         repo.version = getIntRepoValue(repoMap, "version");
 
+        if (TextUtils.isEmpty(platformSigCache)) {
+            PackageInfo androidPackageInfo = Utils.getPackageInfoWithSignatures(context, "android");
+            platformSigCache = Utils.getPackageSig(androidPackageInfo);
+        }
+
         RepoPersister repoPersister = new RepoPersister(context, repo);
         if (apps != null && apps.length > 0) {
             int appCount = 0;
@@ -326,6 +330,8 @@ public class IndexV1Updater extends IndexUpdater {
                     for (Apk apk : apks) {
                         if (!apk.isApk()) {
                             app.isApk = false;
+                        } else if (apk.sig.equals(platformSigCache)) {
+                            app.preferredSigner = platformSigCache;
                         }
                     }
                 }

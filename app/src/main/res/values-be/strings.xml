@@ -101,7 +101,7 @@
     <string name="search_hint">Пошук праграм</string>
     <string name="appcompatibility">Сумяшчальнасць</string>
     <string name="show_incompat_versions">Паказваць несумяшчальныя версіі</string>
-    <string name="show_incompat_versions_on">Паказваць версіі праграм несумяшчальных з прыладай</string>
+    <string name="show_incompat_versions_on">Паказваць версіі праграм, якія несумяшчальныя з прыладай</string>
     <string name="local_repo">Лакальны рэпазіторый</string>
     <string name="local_repo_running">F-Droid гатовы да абмену</string>
     <string name="touch_to_configure_local_repo">Дакраніцеся, каб праглядзець падрабязнасці і дазволіць абмен паміж праграмамі.</string>
@@ -128,7 +128,7 @@
     <string name="status_download_unknown_size">Спампоўванне
 \n%2$s з
 \n%1$s</string>
-    <string name="update_notification_title">Абнаўленне рэпазіторыяў</string>
+    <string name="banner_updating_repositories">Абнаўленне рэпазіторыяў</string>
     <string name="status_processing_xml_percent">Апрацоўка %2$s / %3$s (%4$d%%) з %1$s</string>
     <string name="status_connecting_to_repo">Злучэнне з
 \n%1$s</string>
@@ -268,7 +268,6 @@
     <string name="keep_forever">Заўсёды</string>
     <string name="theme_light">Светлая</string>
     <string name="theme_dark">Цёмная</string>
-    <string name="theme_night">Начная</string>
     <string name="crash_dialog_title">F-Droid даў хібу</string>
     <string name="crash_dialog_text">Узнікла нечаканая памылка, што прывяла да аварыйнага спынення праграмы. Хочаце адправіць электронны ліст з падрабязнасцямі, каб дапамагчы выправіць гэтую праблему\?</string>
     <string name="crash_dialog_comment_prompt">Можаце ўвясці дадатковую інфармацыю і каментары сюды:</string>
@@ -312,10 +311,10 @@
     <string name="preference_manage_installed_apps">Кіраванне ўсталяванымі праграмамі</string>
     <string name="tts_category_name">Катэгорыя %1$s</string>
     <plurals name="tts_view_all_in_category">
-        <item quantity="one">Паказаць %1$s праграму з катэгорыі %2$s</item>
-        <item quantity="few">Паказаць %1$s праграмы з катэгорыі %2$s</item>
-        <item quantity="many">Паказаць %1$s праграм з катэгорыі %2$s</item>
-        <item quantity="other">Паказаць %1$s праграм з катэгорыі %2$s</item>
+        <item quantity="one">Паказаць %1$d праграму з катэгорыі %2$s</item>
+        <item quantity="few">Паказаць %1$d праграмы з катэгорыі %2$s</item>
+        <item quantity="many">Паказаць %1$d праграм з катэгорыі %2$s</item>
+        <item quantity="other">Паказаць %1$d праграм з катэгорыі %2$s</item>
     </plurals>
     <string name="app__install_downloaded_update">Абнавіць</string>
     <string name="app_list__name__downloading_in_progress">Спампоўванне %1$s</string>
@@ -370,22 +369,22 @@
         <item quantity="other">+%1$d больш…</item>
     </plurals>
     <plurals name="details_last_update_weeks">
-        <item quantity="one">Абноўлена %1$s тыдзень таму</item>
-        <item quantity="few">Абноўлена %1$s тыдні таму</item>
-        <item quantity="many">Абноўлена %1$s тыдняў таму</item>
-        <item quantity="other">Абноўлена %1$s тыдняў таму</item>
+        <item quantity="one">Абноўлена %1$d тыдзень таму</item>
+        <item quantity="few">Абноўлена %1$d тыдні таму</item>
+        <item quantity="many">Абноўлена %1$d тыдняў таму</item>
+        <item quantity="other">Абноўлена %1$d тыдняў таму</item>
     </plurals>
     <plurals name="details_last_update_months">
-        <item quantity="one">Абноўлена %1$s месяц таму</item>
-        <item quantity="few">Абноўлена %1$s месяцы таму</item>
-        <item quantity="many">Абноўлена %1$s месяцаў таму</item>
-        <item quantity="other">Абноўлена %1$s месяцаў таму</item>
+        <item quantity="one">Абноўлена %1$d месяц таму</item>
+        <item quantity="few">Абноўлена %1$d месяцы таму</item>
+        <item quantity="many">Абноўлена %1$d месяцаў таму</item>
+        <item quantity="other">Абноўлена %1$d месяцаў таму</item>
     </plurals>
     <plurals name="details_last_update_years">
-        <item quantity="one">Абноўлена %1$s год таму</item>
-        <item quantity="few">Абноўлена %1$s гады таму</item>
-        <item quantity="many">Абноўлена %1$s гадоў таму</item>
-        <item quantity="other">Абноўлена %1$s гадоў таму</item>
+        <item quantity="one">Абноўлена %1$d год таму</item>
+        <item quantity="few">Абноўлена %1$d гады таму</item>
+        <item quantity="many">Абноўлена %1$d гадоў таму</item>
+        <item quantity="other">Абноўлена %1$d гадоў таму</item>
     </plurals>
     <string name="by_author_format">ад %s</string>
     <string name="download_404">Запытаны файл не знойдзены.</string>

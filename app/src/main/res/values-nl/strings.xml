@@ -142,7 +142,7 @@
     <string name="bad_fingerprint">Slechte vingerafdruk</string>
     <string name="invalid_url">Dit is geen geldige URL.</string>
     <string name="menu_changelog">Lijst van veranderingen</string>
-    <string name="update_notification_title">Applicatiebronnen worden bijgewerkt</string>
+    <string name="banner_updating_repositories">Applicatiebronnen worden bijgewerkt</string>
     <string name="status_processing_xml_percent">%2$s / %3$s (%4$d%%) van %1$s worden verwerkt</string>
     <string name="pref_language">Taal</string>
     <string name="pref_language_default">Systeemstandaard</string>
@@ -225,7 +225,9 @@
     <string name="menu_bitcoin">Bitcoin</string>
     <string name="menu_litecoin">Litecoin</string>
     <string name="menu_flattr">Flattr</string>
-    <string name="status_download_unknown_size">%2$s worden van %1$s gedownload</string>
+    <string name="status_download_unknown_size">%2$s van
+\n%1$s
+\ndownloaden</string>
     <string name="permissions">Machtigingen</string>
     <string name="repo_details">Bron</string>
     <string name="repo_url">Adres</string>
@@ -233,7 +235,6 @@
         aan!
     </string>
     <string name="download_error">Download is mislukt!</string>
-    <string name="theme_night">Nacht</string>
     <string name="menu_settings">Instellingen</string>
     <string name="login_name">Gebruikersnaam</string>
     <string name="login_password">Wachtwoord</string>
@@ -246,7 +247,7 @@
     <string name="antinonfreeassetslist">Deze app bevat niet-vrije elementen</string>
     <string name="empty_search_available_app_list">Er zijn geen overeenkomende apps beschikbaar.</string>
     <string name="crash_dialog_title">F-Droid is gecrasht</string>
-    <string name="crash_dialog_text">Een onverwachte fout is opgetreden waardoor de app gestopt is. Wilt u de details over deze fout e-mailen om zo het probleem in de toekomst te helpen voorkomen\?</string>
+    <string name="crash_dialog_text">Een onverwachte fout is opgetreden waardoor de app is gestopt. Wilt u de details over deze fout e-mailen om zo het probleem in de toekomst te helpen voorkomen\?</string>
     <string name="crash_dialog_comment_prompt">Je kan extra informatie en commentaar hier toevoegen:</string>
     <string name="repo_provider">Bron: %s</string>
     <string name="useTor">Gebruik Tor</string>
@@ -285,7 +286,7 @@
     <string name="updates__tts__download_app">Downloaden</string>
     <string name="update_all">Update alles</string>
     <string name="updates__hide_updateable_apps">Verberg apps</string>
-    <string name="updates__show_updateable_apps">Weergeef apps</string>
+    <string name="updates__show_updateable_apps">Geef apps weer</string>
     <plurals name="updates__download_updates_for_apps">
         <item quantity="one">Download updates voor %1$d app.</item>
         <item quantity="other">Download updates voor %1$d apps.</item>
@@ -495,4 +496,24 @@
     <string name="swap_toast_closing_nearby_after_timeout">Dichtbij gesloten wegens inactiviteit.</string>
     <string name="nearby_splash__document_tree">Doorzoek USB-OTG naar applicatiebronnen en mirrors.</string>
     <string name="menu_opencollective">OpenCollective</string>
+    <string name="notification_channel_updates_description">Toont app- en repository-updatenotificaties.</string>
+    <string name="notification_channel_updates_title">Updates</string>
+    <string name="notification_channel_swaps_description">Toon P2P app-uitwisselingsnotificaties.</string>
+    <string name="notification_channel_swaps_title">Uitwisselingen</string>
+    <string name="notification_channel_installs_description">Toon app-installatienotificaties.</string>
+    <string name="notification_channel_installs_title">Installaties</string>
+    <string name="menu_show_install_history">Installatie geschiedenis tonen</string>
+    <string name="menu_show_fdroid_metrics_report">Statistiek Verslag tonen</string>
+    <string name="toast_metrics_in_install_history">Het %s Statistiek verslag is zichtbaar in de Installatie Geschiedenis scherm</string>
+    <string name="send_to_fdroid_metrics_summary">Verstuur anonieme gegevens wekelijks naar F-Droid Statistieken (vereist het Behoud van Installatie geschiedenis)</string>
+    <string name="send_to_fdroid_metrics">Verstuur gebruik data</string>
+    <string name="fdroid_metrics_report">%s Statistiek Verslag</string>
+    <string name="install_history_and_metrics">Installatie historie en statistieken</string>
+    <string name="send_fdroid_metrics_json">%s statistiekverslag als JSON bestand</string>
+    <string name="send_fdroid_metrics_report">Verstuur %s Statistiek Verslag</string>
+    <string name="theme_follow_system">Volg systeem</string>
+    <string name="use_pure_black_dark_theme_summary">Alleen aanbevolen voor OLED-schermen.</string>
+    <string name="use_pure_black_dark_theme">Gebruik puur zwarte achtergrond bij donker thema</string>
+    <string name="banner_no_data_or_wifi">Data of Wi-Fi niet ingeschakeld</string>
+    <string name="banner_no_internet">Geen internet</string>
 </resources>

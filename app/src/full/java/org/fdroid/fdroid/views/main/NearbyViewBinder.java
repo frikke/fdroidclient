@@ -1,7 +1,6 @@
 package org.fdroid.fdroid.views.main;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.UriPermission;
@@ -13,9 +12,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
-import androidx.annotation.RequiresApi;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+import android.provider.DocumentsContract;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +21,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.nearby.SDCardScannerService;
@@ -32,6 +30,11 @@ import org.fdroid.fdroid.nearby.TreeUriScannerIntentService;
 
 import java.io.File;
 import java.util.List;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 /**
  * A splash screen encouraging people to start the swap process. The swap
@@ -59,6 +62,8 @@ import java.util.List;
  *
  * @see TreeUriScannerIntentService
  * @see org.fdroid.fdroid.nearby.SDCardScannerService
+ * <p>
+ * TODO use {@link StorageManager#registerStorageVolumeCallback(Executor, StorageManager.StorageVolumeCallback)}
  */
 public class NearbyViewBinder {
     public static final String TAG = "NearbyViewBinder";
@@ -66,7 +71,7 @@ public class NearbyViewBinder {
     private static File externalStorage = null;
     private static View swapView;
 
-    NearbyViewBinder(final Activity activity, FrameLayout parent) {
+    NearbyViewBinder(final AppCompatActivity activity, FrameLayout parent) {
         swapView = activity.getLayoutInflater().inflate(R.layout.main_tab_swap, parent, true);
 
         TextView subtext = swapView.findViewById(R.id.both_parties_need_fdroid_text);
@@ -86,7 +91,7 @@ public class NearbyViewBinder {
                     ActivityCompat.requestPermissions(activity, new String[]{coarseLocation},
                             MainActivity.REQUEST_LOCATION_PERMISSIONS);
                 } else {
-                    SwapService.start(activity);
+                    ContextCompat.startForegroundService(activity, new Intent(activity, SwapService.class));
                 }
             }
         });
@@ -159,15 +164,30 @@ public class NearbyViewBinder {
         storageVolumeText.setVisibility(View.GONE);
         requestStorageVolume.setVisibility(View.GONE);
 
-        final StorageManager storageManager = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
+        final StorageManager storageManager = ContextCompat.getSystemService(context, StorageManager.class);
         for (final StorageVolume storageVolume : storageManager.getStorageVolumes()) {
             if (storageVolume.isRemovable() && !storageVolume.isPrimary()) {
                 Log.i(TAG, "StorageVolume: " + storageVolume);
-                final Intent intent = storageVolume.createAccessIntent(null);
-                if (intent == null) {
+                Intent tmpIntent = null;
+                if (Build.VERSION.SDK_INT < 29) {
+                    tmpIntent = storageVolume.createAccessIntent(null);
+                } else {
+                    tmpIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+                    tmpIntent.putExtra(DocumentsContract.EXTRA_INITIAL_URI,
+                            Uri.parse("content://"
+                                    + TreeUriScannerIntentService.EXTERNAL_STORAGE_PROVIDER_AUTHORITY
+                                    + "/tree/"
+                                    + storageVolume.getUuid()
+                                    + "%3A/document/"
+                                    + storageVolume.getUuid()
+                                    + "%3A"));
+                }
+                if (tmpIntent == null) {
                     Utils.debugLog(TAG, "Got null Storage Volume access Intent");
                     return;
                 }
+                final Intent intent = tmpIntent;
+
                 storageVolumeText.setVisibility(View.VISIBLE);
 
                 String text = storageVolume.getDescription(context);
@@ -194,8 +214,23 @@ public class NearbyViewBinder {
                                 return;
                             }
                         }
-                        ((Activity) context).startActivityForResult(intent,
-                            MainActivity.REQUEST_STORAGE_ACCESS);
+
+                        AppCompatActivity activity = null;
+                        if (context instanceof AppCompatActivity) {
+                            activity = (AppCompatActivity) context;
+                        } else if (swapView != null && swapView.getContext() instanceof AppCompatActivity) {
+                            activity = (AppCompatActivity) swapView.getContext();
+                        }
+
+                        if (activity != null) {
+                            activity.startActivityForResult(intent, MainActivity.REQUEST_STORAGE_ACCESS);
+                        } else {
+                            // scan in the background without requesting permissions
+                            Toast.makeText(context.getApplicationContext(),
+                                    context.getString(R.string.scan_removable_storage_toast, externalStorage),
+                                    Toast.LENGTH_SHORT).show();
+                            SDCardScannerService.scan(context);
+                        }
                     }
                 });
             }

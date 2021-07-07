@@ -18,15 +18,12 @@
 
 package org.fdroid.fdroid.privileged.views;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.fragment.app.FragmentActivity;
-import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,7 +32,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
-import com.nostra13.universalimageloader.core.ImageLoader;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
+
+import com.bumptech.glide.Glide;
+
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.Utils;
@@ -50,7 +53,7 @@ import org.fdroid.fdroid.data.Schema;
  * Parts are based on AOSP src/com/android/packageinstaller/PackageInstallerActivity.java
  * latest included commit: c23d802958158d522e7350321ad9ac6d43013883
  */
-public class InstallConfirmActivity extends FragmentActivity implements OnCancelListener, OnClickListener {
+public class InstallConfirmActivity extends AppCompatActivity implements OnCancelListener, OnClickListener {
 
     private Intent intent;
 
@@ -76,8 +79,10 @@ public class InstallConfirmActivity extends FragmentActivity implements OnCancel
         TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
 
         appName.setText(app.name);
-        ImageLoader.getInstance().displayImage(app.getIconUrl(this), appIcon,
-                Utils.getRepoAppDisplayImageOptions());
+        Glide.with(this)
+                .load(app.getIconUrl(this))
+                .apply(Utils.getRepoAppDisplayImageOptions())
+                .into(appIcon);
 
         tabHost.setup();
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
@@ -118,8 +123,7 @@ public class InstallConfirmActivity extends FragmentActivity implements OnCancel
         final int n = perms.getPermissionCount(AppSecurityPermissions.WHICH_ALL);
         if (n > 0) {
             permVisible = true;
-            LayoutInflater inflater = (LayoutInflater) getSystemService(
-                    Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = ContextCompat.getSystemService(this, LayoutInflater.class);
             View root = inflater.inflate(R.layout.permissions_list, null);
             if (scrollView == null) {
                 scrollView = (CaffeinatedScrollView) root.findViewById(R.id.scrollview);
@@ -172,9 +176,10 @@ public class InstallConfirmActivity extends FragmentActivity implements OnCancel
 
     @Override
     protected void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+        FDroidApp fdroidApp = (FDroidApp) getApplication();
+        fdroidApp.applyPureBlackBackgroundInDarkTheme(this);
 
-        ((FDroidApp) getApplication()).applyTheme(this);
+        super.onCreate(icicle);
 
         intent = getIntent();
         Uri uri = intent.getData();

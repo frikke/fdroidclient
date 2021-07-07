@@ -19,7 +19,6 @@
 
 package org.fdroid.fdroid.views;
 
-import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.ContentResolver;
@@ -32,23 +31,15 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.loader.app.LoaderManager;
-import androidx.core.app.NavUtils;
-import androidx.core.app.TaskStackBuilder;
-import androidx.loader.content.CursorLoader;
-import androidx.loader.content.Loader;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Pair;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -57,6 +48,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.textfield.TextInputLayout;
+
 import org.fdroid.fdroid.AddRepoIntentService;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.IndexUpdater;
@@ -79,6 +75,22 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NavUtils;
+import androidx.core.app.TaskStackBuilder;
+import androidx.core.content.ContextCompat;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 public class ManageReposActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<Cursor>, RepoAdapter.EnabledListener {
     private static final String TAG = "ManageReposActivity";
@@ -93,25 +105,47 @@ public class ManageReposActivity extends AppCompatActivity
         IS_SWAP
     }
 
-    private Toolbar toolbar;
-
     /**
      * True if activity started with an intent such as from QR code. False if
      * opened from, e.g. the main menu.
      */
     private boolean finishAfterAddingRepo;
 
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FDroidApp fdroidApp = (FDroidApp) getApplication();
+        fdroidApp.applyPureBlackBackgroundInDarkTheme(this);
 
-        ((FDroidApp) getApplication()).applyTheme(this);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.repo_list_activity);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                if (menuItem.getItemId() == R.id.action_add_repo) {
+                    showAddRepo();
+                    return true;
+                }
+                return false;
+            }
+        });
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent upIntent = NavUtils.getParentActivityIntent(ManageReposActivity.this);
+                if (NavUtils.shouldUpRecreateTask(ManageReposActivity.this, upIntent) || isTaskRoot()) {
+                    TaskStackBuilder.create(ManageReposActivity.this).addNextIntentWithParentStack(upIntent)
+                            .startActivities();
+                } else {
+                    NavUtils.navigateUpTo(ManageReposActivity.this, upIntent);
+                }
+            }
+        });
 
         final ListView repoList = (ListView) findViewById(R.id.list);
         repoAdapter = new RepoAdapter(this);
@@ -124,6 +158,19 @@ public class ManageReposActivity extends AppCompatActivity
                 editRepo(repo);
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        compositeDisposable.dispose();
+        super.onDestroy();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.manage_repos, menu);
+        return true;
     }
 
     @Override
@@ -151,35 +198,9 @@ public class ManageReposActivity extends AppCompatActivity
         super.finish();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        toolbar.inflateMenu(R.menu.manage_repos);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_add_repo:
-                showAddRepo();
-                return true;
-            case android.R.id.home:
-                Intent upIntent = NavUtils.getParentActivityIntent(this);
-                if (NavUtils.shouldUpRecreateTask(this, upIntent) || isTaskRoot()) {
-                    TaskStackBuilder.create(this)
-                            .addNextIntentWithParentStack(upIntent)
-                            .startActivities();
-                } else {
-                    NavUtils.navigateUpTo(this, upIntent);
-                }
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     public String getPrimaryClipAsText() {
         CharSequence text = null;
-        ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipboardManager clipboardManager = ContextCompat.getSystemService(this, ClipboardManager.class);
         if (clipboardManager.hasPrimaryClip()) {
             ClipData data = clipboardManager.getPrimaryClip();
             if (data.getItemCount() > 0) {
@@ -205,7 +226,7 @@ public class ManageReposActivity extends AppCompatActivity
         String text = getPrimaryClipAsText();
         String fingerprint = null;
         String username = null;
-        String password = null;
+        StringBuilder password = null;
         if (!TextUtils.isEmpty(text)) {
             try {
                 new URL(text);
@@ -221,9 +242,9 @@ public class ManageReposActivity extends AppCompatActivity
                     String[] userInfoTokens = userInfo.split(":");
                     if (userInfoTokens.length >= 2) {
                         username = userInfoTokens[0];
-                        password = userInfoTokens[1];
+                        password = new StringBuilder(userInfoTokens[1]);
                         for (int i = 2; i < userInfoTokens.length; i++) {
-                            password += ":" + userInfoTokens[i];
+                            password.append(":").append(userInfoTokens[i]);
                         }
                     }
                 }
@@ -237,7 +258,7 @@ public class ManageReposActivity extends AppCompatActivity
         if (TextUtils.isEmpty(text)) {
             text = DEFAULT_NEW_REPO_TEXT;
         }
-        showAddRepo(text, fingerprint, username, password);
+        showAddRepo(text, fingerprint, username, password != null ? password.toString() : null);
     }
 
     private void showAddRepo(String newAddress, String newFingerprint, String username, String password) {
@@ -286,22 +307,23 @@ public class ManageReposActivity extends AppCompatActivity
             }
 
             final View view = getLayoutInflater().inflate(R.layout.addrepo, null);
-            addRepoDialog = new AlertDialog.Builder(context).setView(view).create();
-            final EditText uriEditText = (EditText) view.findViewById(R.id.edit_uri);
-            final EditText fingerprintEditText = (EditText) view.findViewById(R.id.edit_fingerprint);
+            MaterialAlertDialogBuilder addRepoDialogBuilder = new MaterialAlertDialogBuilder(context);
+            addRepoDialogBuilder.setView(view);
+            final TextInputLayout uriEditTextLayout = view.findViewById(R.id.edit_uri);
+            final TextInputLayout fingerprintEditTextLayout = view.findViewById(R.id.edit_fingerprint);
+            final EditText uriEditText = uriEditTextLayout.getEditText();
+            final EditText fingerprintEditText = fingerprintEditTextLayout.getEditText();
 
-            addRepoDialog.setTitle(R.string.repo_add_title);
-            addRepoDialog.setButton(DialogInterface.BUTTON_NEGATIVE,
-                    getString(R.string.cancel),
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            if (finishAfterAddingRepo) {
-                                ManageReposActivity.this.finish();
-                            }
-                        }
-                    });
+            addRepoDialogBuilder.setTitle(R.string.repo_add_title);
+            addRepoDialogBuilder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    if (finishAfterAddingRepo) {
+                        finish();
+                    }
+                }
+            });
 
             // HACK:
             // After adding a new repo, need to show feedback to the user.
@@ -316,15 +338,14 @@ public class ManageReposActivity extends AppCompatActivity
             // hang around so we can show further info on it.
             //
             // Thus, the hack described at http://stackoverflow.com/a/15619098 is implemented.
-            addRepoDialog.setButton(DialogInterface.BUTTON_POSITIVE,
-                    getString(R.string.repo_add_add),
+            addRepoDialogBuilder.setPositiveButton(getString(R.string.repo_add_add),
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     });
 
-            addRepoDialog.show();
+            addRepoDialog = addRepoDialogBuilder.show();
 
             // This must be *after* addRepoDialog.show() otherwise getButtion() returns null:
             // https://code.google.com/p/android/issues/detail?id=6360
@@ -538,7 +559,8 @@ public class ManageReposActivity extends AppCompatActivity
                     overwriteMessage.setText(getString(messageRes, name));
                     overwriteMessage.setVisibility(View.VISIBLE);
                     if (redMessage) {
-                        overwriteMessage.setTextColor(getResources().getColor(R.color.red));
+                        overwriteMessage.setTextColor(ContextCompat.getColor(ManageReposActivity.this,
+                                R.color.red));
                     } else {
                         overwriteMessage.setTextColor(defaultTextColour);
                     }
@@ -561,10 +583,8 @@ public class ManageReposActivity extends AppCompatActivity
         /**
          * Adds a new repo to the database.
          */
-        @SuppressLint("StaticFieldLeak")
         private void prepareToCreateNewRepo(final String originalAddress, final String fingerprint,
                                             final String username, final String password) {
-
             final View addRepoForm = addRepoDialog.findViewById(R.id.add_repo_form);
             addRepoForm.setVisibility(View.GONE);
             final View positiveButton = addRepoDialog.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -576,153 +596,117 @@ public class ManageReposActivity extends AppCompatActivity
             final Button skip = addRepoDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
             skip.setText(R.string.skip);
 
-            final AsyncTask<String, String, String> checker = new AsyncTask<String, String, String>() {
+            final int refreshDialog = Integer.MAX_VALUE;
+            final Disposable disposable = Single.fromCallable(() -> {
+                int statusCode = -1;
 
-                private int statusCode = -1;
-                private static final int REFRESH_DIALOG = Integer.MAX_VALUE;
-
-                @Override
-                protected String doInBackground(String... params) {
-                    final String originalAddress = params[0];
-
-                    if (fingerprintRepoMap.containsKey(fingerprint)) {
-                        statusCode = REFRESH_DIALOG;
-                        return originalAddress;
-                    }
-
-                    if (originalAddress.startsWith(ContentResolver.SCHEME_CONTENT)
-                            || originalAddress.startsWith(ContentResolver.SCHEME_FILE)) {
-                        // TODO check whether there is read access
-                        return originalAddress;
-                    }
-
-                    final String[] pathsToCheck = {"", "fdroid/repo", "repo"};
-                    for (final String path : pathsToCheck) {
-
-                        Utils.debugLog(TAG, "Check for repo at " + originalAddress + " with suffix '" + path + "'");
-                        Uri.Builder builder = Uri.parse(originalAddress).buildUpon().appendEncodedPath(path);
-                        final String addressWithoutIndex = builder.build().toString();
-                        publishProgress(addressWithoutIndex);
-
-                        if (urlRepoMap.containsKey(addressWithoutIndex)) {
-                            statusCode = REFRESH_DIALOG;
-                            return addressWithoutIndex;
-                        }
-
-                        final Uri uri = builder.appendPath(IndexUpdater.SIGNED_FILE_NAME).build();
-
-                        try {
-                            if (checkForRepository(uri)) {
-                                Utils.debugLog(TAG, "Found F-Droid repo at " + addressWithoutIndex);
-                                return addressWithoutIndex;
-                            }
-                        } catch (IOException e) {
-                            Log.e(TAG, "Error while searching for repo at " + addressWithoutIndex, e);
-                            return originalAddress;
-                        }
-
-                        if (isCancelled()) {
-                            Utils.debugLog(TAG, "Not checking more repo addresses, because process was skipped.");
-                            break;
-                        }
-                    }
-                    return originalAddress;
-
+                if (fingerprintRepoMap.containsKey(fingerprint)) {
+                    statusCode = refreshDialog;
+                    return Pair.create(statusCode, originalAddress);
                 }
 
-                private boolean checkForRepository(Uri indexUri) throws IOException {
-                    final URL url = new URL(indexUri.toString());
-                    final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("HEAD");
-
-                    statusCode = connection.getResponseCode();
-
-                    return statusCode == HttpURLConnection.HTTP_UNAUTHORIZED
-                            || statusCode == HttpURLConnection.HTTP_OK;
+                if (originalAddress.startsWith(ContentResolver.SCHEME_CONTENT)
+                        || originalAddress.startsWith(ContentResolver.SCHEME_FILE)) {
+                    // TODO check whether there is read access
+                    return Pair.create(statusCode, originalAddress);
                 }
 
-                @Override
-                protected void onProgressUpdate(String... values) {
-                    String address = values[0];
-                    textSearching.setText(getString(R.string.repo_searching_address, address));
+                final String[] pathsToCheck = {"", "fdroid/repo", "repo"};
+                for (final String path : pathsToCheck) {
+                    Utils.debugLog(TAG, "Check for repo at " + originalAddress + " with suffix '" + path + "'");
+                    Uri.Builder builder = Uri.parse(originalAddress).buildUpon().appendEncodedPath(path);
+                    final String addressWithoutIndex = builder.build().toString();
+                    runOnUiThread(() -> textSearching.setText(getString(R.string.repo_searching_address,
+                            addressWithoutIndex)));
+
+                    if (urlRepoMap.containsKey(addressWithoutIndex)) {
+                        statusCode = refreshDialog;
+                        return Pair.create(statusCode, addressWithoutIndex);
+                    }
+
+                    final Uri uri = builder.appendPath(IndexUpdater.SIGNED_FILE_NAME).build();
+
+                    try {
+                        final URL url = new URL(uri.toString());
+                        final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                        connection.setRequestMethod("HEAD");
+
+                        statusCode = connection.getResponseCode();
+
+                        if (statusCode == HttpURLConnection.HTTP_UNAUTHORIZED
+                                || statusCode == HttpURLConnection.HTTP_OK) {
+                            Utils.debugLog(TAG, "Found F-Droid repo at " + addressWithoutIndex);
+                            return Pair.create(statusCode, addressWithoutIndex);
+                        }
+                    } catch (IOException e) {
+                        Log.e(TAG, "Error while searching for repo at " + addressWithoutIndex, e);
+                        return Pair.create(statusCode, originalAddress);
+                    }
                 }
+                return Pair.create(statusCode, originalAddress);
+            })
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnDispose(() -> Utils.debugLog(TAG,
+                            "Not checking more repo addresses, because process was skipped."))
+                    .subscribe(codeAddressPair -> {
+                        final int statusCode = codeAddressPair.first;
+                        final String newAddress = codeAddressPair.second;
 
-                @Override
-                protected void onPostExecute(final String newAddress) {
+                        if (addRepoDialog.isShowing()) {
+                            if (statusCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
+                                final View view = getLayoutInflater().inflate(R.layout.login, null);
+                                final AlertDialog credentialsDialog = new AlertDialog.Builder(context)
+                                        .setView(view).create();
+                                final EditText nameInput = (EditText) view.findViewById(R.id.edit_name);
+                                final EditText passwordInput = (EditText) view.findViewById(R.id.edit_password);
 
-                    if (addRepoDialog.isShowing()) {
+                                if (username != null) {
+                                    nameInput.setText(username);
+                                }
+                                if (password != null) {
+                                    passwordInput.setText(password);
+                                }
 
-                        if (statusCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
-
-                            final View view = getLayoutInflater().inflate(R.layout.login, null);
-                            final AlertDialog credentialsDialog = new AlertDialog.Builder(context)
-                                    .setView(view).create();
-                            final EditText nameInput = (EditText) view.findViewById(R.id.edit_name);
-                            final EditText passwordInput = (EditText) view.findViewById(R.id.edit_password);
-
-                            if (username != null) {
-                                nameInput.setText(username);
-                            }
-                            if (password != null) {
-                                passwordInput.setText(password);
-                            }
-
-                            credentialsDialog.setTitle(R.string.login_title);
-                            credentialsDialog.setButton(DialogInterface.BUTTON_NEGATIVE,
-                                    getString(R.string.cancel),
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
+                                credentialsDialog.setTitle(R.string.login_title);
+                                credentialsDialog.setButton(DialogInterface.BUTTON_NEGATIVE,
+                                        getString(R.string.cancel), (dialog, which) -> {
                                             dialog.dismiss();
                                             // cancel parent dialog, don't add repo
                                             addRepoDialog.cancel();
-                                        }
-                                    });
+                                        });
 
-                            credentialsDialog.setButton(DialogInterface.BUTTON_POSITIVE,
-                                    getString(R.string.ok),
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            createNewRepo(newAddress, fingerprint,
-                                                    nameInput.getText().toString(),
-                                                    passwordInput.getText().toString());
-                                        }
-                                    });
+                                credentialsDialog.setButton(DialogInterface.BUTTON_POSITIVE,
+                                        getString(R.string.ok),
+                                        (dialog, which) -> createNewRepo(newAddress, fingerprint,
+                                                nameInput.getText().toString(),
+                                                passwordInput.getText().toString()));
 
-                            credentialsDialog.show();
-
-                        } else if (statusCode == REFRESH_DIALOG) {
-                            addRepoForm.setVisibility(View.VISIBLE);
-                            positiveButton.setVisibility(View.VISIBLE);
-                            textSearching.setText("");
-                            skip.setText(R.string.cancel);
-                            skip.setOnClickListener(null);
-                            validateRepoDetails(newAddress, fingerprint);
-                        } else {
-
-                            // create repo without username/password
-                            createNewRepo(newAddress, fingerprint);
+                                credentialsDialog.show();
+                            } else if (statusCode == refreshDialog) {
+                                addRepoForm.setVisibility(View.VISIBLE);
+                                positiveButton.setVisibility(View.VISIBLE);
+                                textSearching.setText("");
+                                skip.setText(R.string.cancel);
+                                skip.setOnClickListener(null);
+                                validateRepoDetails(newAddress, fingerprint);
+                            } else {
+                                // create repo without username/password
+                                createNewRepo(newAddress, fingerprint);
+                            }
                         }
-                    }
-                }
-            };
+                    });
+            compositeDisposable.add(disposable);
 
-            skip.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Still proceed with adding the repo, just don't bother searching for
-                    // a better alternative than the one provided.
-                    // The reason for this is that if they are not connected to the internet,
-                    // or their internet is playing up, then you'd have to wait for several
-                    // connection timeouts before being able to proceed.
-
-                    createNewRepo(originalAddress, fingerprint);
-                    checker.cancel(false);
-                }
+            skip.setOnClickListener(v -> {
+                // Still proceed with adding the repo, just don't bother searching for
+                // a better alternative than the one provided.
+                // The reason for this is that if they are not connected to the internet,
+                // or their internet is playing up, then you'd have to wait for several
+                // connection timeouts before being able to proceed.
+                createNewRepo(originalAddress, fingerprint);
+                disposable.dispose();
             });
-
-            checker.execute(originalAddress);
         }
 
         /**
@@ -834,7 +818,8 @@ public class ManageReposActivity extends AppCompatActivity
     private void checkIfNewRepoOnSameWifi(NewRepoConfig newRepo) {
         // if this is a local repo, check we're on the same wifi
         if (!TextUtils.isEmpty(newRepo.getBssid())) {
-            WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+            WifiManager wifiManager = ContextCompat.getSystemService(getApplicationContext(),
+                    WifiManager.class);
             WifiInfo wifiInfo = wifiManager.getConnectionInfo();
             String bssid = wifiInfo.getBSSID();
             if (TextUtils.isEmpty(bssid)) { /* not all devices have wifi */

@@ -1,7 +1,6 @@
 package org.fdroid.fdroid.views.apps;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,13 +10,6 @@ import android.graphics.Outline;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.core.content.ContextCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.core.util.Pair;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewOutlineProvider;
@@ -27,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import org.fdroid.fdroid.AppUpdateStatusManager;
 import org.fdroid.fdroid.AppUpdateStatusManager.AppUpdateStatus;
 import org.fdroid.fdroid.Preferences;
@@ -45,6 +38,15 @@ import org.fdroid.fdroid.views.updates.UpdatesAdapter;
 import java.io.File;
 import java.util.Iterator;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.util.Pair;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Supports the following layouts:
@@ -66,7 +68,7 @@ public abstract class AppListItemController extends RecyclerView.ViewHolder {
 
     private static Preferences prefs;
 
-    protected final Activity activity;
+    protected final AppCompatActivity activity;
 
     @NonNull
     private final ImageView icon;
@@ -109,7 +111,7 @@ public abstract class AppListItemController extends RecyclerView.ViewHolder {
     private AppUpdateStatus currentStatus;
 
     @TargetApi(21)
-    public AppListItemController(final Activity activity, View itemView) {
+    public AppListItemController(final AppCompatActivity activity, View itemView) {
         super(itemView);
         this.activity = activity;
         if (prefs == null) {
@@ -444,15 +446,13 @@ public abstract class AppListItemController extends RecyclerView.ViewHolder {
 
             Intent intent = new Intent(activity, AppDetailsActivity.class);
             intent.putExtra(AppDetailsActivity.EXTRA_APPID, currentApp.packageName);
-            if (Build.VERSION.SDK_INT >= 21) {
-                String transitionAppIcon = activity.getString(R.string.transition_app_item_icon);
-                Pair<View, String> iconTransitionPair = Pair.create((View) icon, transitionAppIcon);
-                Bundle bundle = ActivityOptionsCompat
-                        .makeSceneTransitionAnimation(activity, iconTransitionPair).toBundle();
-                activity.startActivity(intent, bundle);
-            } else {
-                activity.startActivity(intent);
-            }
+            String transitionAppIcon = activity.getString(R.string.transition_app_item_icon);
+            Pair<View, String> iconTransitionPair = Pair.create((View) icon, transitionAppIcon);
+            // unchecked since the right type is passed as 2nd varargs arg: Pair<View, String>
+            @SuppressWarnings("unchecked")
+            Bundle bundle = ActivityOptionsCompat
+                    .makeSceneTransitionAnimation(activity, iconTransitionPair).toBundle();
+            ContextCompat.startActivity(activity, intent, bundle);
         }
     };
 

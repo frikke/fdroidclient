@@ -36,8 +36,7 @@
     <string name="enable">Attiva</string>
     <string name="add_key">Aggiungi chiave</string>
     <string name="overwrite">Sovrascrivi</string>
-    <string name="bluetooth_activity_not_found">Non è possibile inviare via Bluetooth, scegliere un altro metodo!
-    </string>
+    <string name="bluetooth_activity_not_found">Nessun metodo di invio Bluetooth trovato, scegline uno!</string>
     <string name="choose_bt_send">Scegli invio mediante Bluetooth</string>
     <string name="repo_add_url">Indirizzo repository</string>
     <string name="repo_add_fingerprint">Impronta digitale (opzionale)</string>
@@ -115,9 +114,9 @@
     </string>
     <string name="unknown">Sconosciuta</string>
     <string name="repo_confirm_delete_title">Eliminare il repository?</string>
-    <string name="repo_confirm_delete_body">Eliminare un repository implica che le app contenute non saranno più disponibili. 
+    <string name="repo_confirm_delete_body">L\'eliminazione di un repository significa che le app da esso non saranno più disponibili.
 \n 
-\nNota: Tutte le app installate precedentemente rimarranno sul dispositivo.</string>
+\nNota: Tutte le applicazioni installate in precedenza rimarranno sul tuo dispositivo.</string>
     <string name="repo_disabled_notification">%1$s disattivato.
 \n
 \nDovrai riattivare nuovamente questo repository per installare le app contenute.</string>
@@ -158,7 +157,7 @@
     <string name="interval_2w">Cerca aggiornamenti ogni 2 settimane</string>
     <string name="interval_4h">Cerca aggiornamenti ogni 4 ore</string>
     <string name="interval_12h">Cerca aggiornamenti ogni 12 ore</string>
-    <string name="interval_1h">Cerca aggiornamenti ogni ora</string>
+    <string name="interval_1h">Controlla gli aggiornamenti ogni ora</string>
     <string name="downloading">Scaricamento…</string>
     <string name="download_error">Scaricamento fallito!</string>
     <string name="perms_new_perm_prefix">Nuovo:</string>
@@ -196,7 +195,6 @@
     </string>
     <string name="theme_light">Chiaro</string>
     <string name="theme_dark">Scuro</string>
-    <string name="theme_night">Notte</string>
     <string name="permissions">Autorizzazioni</string>
     <string name="unstable_updates_summary">Suggerisci aggiornamenti a versioni non stabili</string>
     <string name="login_title">Autenticazione richiesta</string>
@@ -210,7 +208,7 @@
     <string name="menu_changelog">Cronologia</string>
     <string name="menu_litecoin">Litecoin</string>
     <string name="menu_flattr">Flattr</string>
-    <string name="update_notification_title">Aggiornamento dei repository</string>
+    <string name="banner_updating_repositories">Aggiornamento dei repository</string>
     <string name="status_processing_xml_percent">Elaborazione %2$s/%3$s (%4$d%%) di %1$s</string>
     <string name="status_inserting_apps">Salvataggio dettagli applicazione</string>
     <string name="repo_details">Repository</string>
@@ -254,7 +252,7 @@
     <string name="install_confirm_update_no_perms">Vuoi installare un aggiornamento di questa applicazione\? I tuoi dati non andranno persi. Non occorrono accessi speciali.</string>
     <string name="install_confirm_update_system_no_perms">Vuoi installare un aggiornamento di questa applicazione integrata\? I tuoi dati non andranno persi. Non occorrono accessi speciali.</string>
     <string name="allPerms">Tutte</string>
-    <string name="swap_nearby">Scambio ravvicinato</string>
+    <string name="swap_nearby">Scambio nelle vicinanze</string>
     <string name="crash_dialog_comment_prompt">Puoi aggiungere altre informazioni e commenti qui:</string>
     <string name="menu_email">Invia un\'e-mail all\'autore</string>
     <string name="crash_dialog_text">Un errore inaspettato ha provocato il blocco dell\'applicazione. Vuoi inviare un\'e-mail con i dettagli per aiutarci a risolvere il problema\?</string>
@@ -281,7 +279,7 @@
     <string name="update_auto_install">Installa automaticamente gli aggiornamenti</string>
     <string name="update_auto_install_summary">Scarica e aggiorna le app in background, mostrando una notifica</string>
     <string name="keep_install_history">Mantieni cronologia installazione</string>
-    <string name="keep_install_history_summary">Salva un log delle installazioni e disinstallazioni in un archivio privato</string>
+    <string name="keep_install_history_summary">Salva un log delle installazioni e disinstallazioni in un posto sicuro</string>
     <string name="versions">Versioni</string>
     <string name="warning_no_internet">Impossibile aggiornare, sei connesso ad Internet?</string>
     <string name="app_details_donate_prompt_unknown_author">Offri agli sviluppatori di %1$s un caffè!</string>
@@ -296,9 +294,9 @@
     <string name="notification_title_single_ready_to_install">Pronto per l\'installazione</string>
     <string name="notification_title_single_ready_to_install_update">Aggiornamento pronto per l\'installazione</string>
     <string name="notification_title_single_install_error">Installazione fallita</string>
-    <string name="notification_content_single_downloading">Scaricamento \"%1$s\"…</string>
+    <string name="notification_content_single_downloading">Scaricamento di \"%1$s\"…</string>
     <string name="notification_content_single_downloading_update">Scaricamento aggiornamento di \"%1$s\"…</string>
-    <string name="notification_content_single_installing">Installazione \"%1$s\"…</string>
+    <string name="notification_content_single_installing">Installazione di \"%1$s\"…</string>
     <string name="notification_content_single_installed">Installato con successo</string>
     <string name="notification_title_summary_update_available">Aggiornamento disponibile</string>
     <string name="notification_title_summary_downloading">Scaricamento…</string>
@@ -312,8 +310,8 @@
     <string name="notification_action_cancel">Annulla</string>
     <string name="notification_action_install">Installa</string>
     <string name="main_menu__swap_nearby">Qui vicino</string>
-    <string name="preference_category__my_apps">Mie App</string>
-    <string name="preference_manage_installed_apps">Gestisci app installate</string>
+    <string name="preference_category__my_apps">Le mie app</string>
+    <string name="preference_manage_installed_apps">Gestisci le applicazioni installate</string>
     <string name="latest__empty_state__never_updated">Una volta aggiornata la tua lista delle applicazioni, le ultime applicazioni dovrebbero apparire qui</string>
     <string name="latest__empty_state__no_recent_apps">Nessuna app recente trovata</string>
     <string name="latest__empty_state__no_enabled_repos">Una volta abilitato un repository e fatto aggiornare, le ultime applicazioni dovrebbero apparire qui</string>
@@ -322,7 +320,7 @@
     <string name="antifeatureswarning">Questa app ha caratteristiche che potrebbero non piacerti.</string>
     <string name="antifeatures">Anti-caratteristiche</string>
     <string name="by_author_format">da %s</string>
-    <string name="app_list__name__downloading_in_progress">Scaricamento %1$s</string>
+    <string name="app_list__name__downloading_in_progress">Scaricamento di %1$s</string>
     <string name="app_list__name__successfully_installed">%1$s installato</string>
     <string name="updates__tts__download_app">Scarica</string>
     <string name="app_recommended_version_installed">Versione %1$s (Consigliata)</string>
@@ -333,7 +331,7 @@
     <string name="installed_apps__activity_title">App Installate</string>
     <string name="installed_app__updates_ignored">Aggiornamenti ignorati</string>
     <string name="installed_app__updates_ignored_for_suggested_version">Aggiornamenti ignorati per Versione %1$s</string>
-    <string name="update_all">Aggiorna tutti</string>
+    <string name="update_all">Aggiorna tutte</string>
     <string name="updates__hide_updateable_apps">Nascondi applicazioni</string>
     <string name="updates__show_updateable_apps">Mostra applicazioni</string>
     <plurals name="updates__download_updates_for_apps">
@@ -391,7 +389,7 @@
     <string name="status_inserting_x_apps">Salvataggio dettagli app (%1$d/%2$d) da %3$s</string>
     <string name="app_permission_storage">F-Droid ha bisogno dell\'autorizzazione di archiviazione per installare questo nella memoria. Per favore abilitala nella prossima schermata per procedere con l\'installazione.</string>
     <string name="app_details__incompatible_mismatched_signature">La firma non coincide con quella della versione installata</string>
-    <string name="app_details__no_versions__show_incompat_versions">Per mostrare comunque le versioni incompatibili qui, abilita l\'impostazione \"%1$s\".</string>
+    <string name="app_details__no_versions__show_incompat_versions">Per mostrare comunque le versioni incompatibili, abilita l\'impostazione \"%1$s\".</string>
     <string name="app_details__no_versions__no_compatible_signatures">Nessuna versione con una firma compatibile</string>
     <string name="app_details__no_versions__none_compatible_with_device">Nessuna versione compatibile con il dispositivo</string>
     <string name="app_details__no_versions__explain_incompatible_signatures">La versione installata non è compatibile con nessuna versione disponibile. Disinstallare l\'applicazione ti permetterà di visualizzare ed installare le versioni compatibili. Questo accade spesso con applicazioni installate da Google Play o da altre sorgenti se firmate con un certificato differente.</string>
@@ -444,14 +442,14 @@
     <string name="swap_toast_hotspot_enabled">Hotspot Wi-Fi attivo</string>
     <string name="swap_toast_could_not_enable_hotspot">Impossibile attivare l\'hotspot Wi-Fi!</string>
     <string name="warning_scaning_qr_code">La tua fotocamera non ha l\'autofocus. Potrebbe essere complicato scansionare il codice.</string>
-    <string name="swap_toast_invalid_url">URL per scambio non valido: %1$s</string>
+    <string name="swap_toast_invalid_url">URL non valido per lo scambio: %1$s</string>
     <string name="over_wifi">Via Wi-Fi</string>
     <string name="over_data">Via dati mobili</string>
     <string name="over_network_always_summary">Usa sempre questa connessione quando disponibile</string>
-    <string name="over_network_on_demand_summary">Usa solo questa connessione quando scarico un\'app</string>
+    <string name="over_network_on_demand_summary">Usa solo questa connessione quando clicco su scarica</string>
     <string name="over_network_never_summary">Non scaricare mai nulla usando questa connessione</string>
-    <string name="antidisabledalgorithmlist">Questa app ha una firma di sicurezza debole</string>
-    <string name="antiknownvulnlist">Questa app contiene una vulnerabilità di sicurezza nota</string>
+    <string name="antidisabledalgorithmlist">Questa applicazione ha una firma digitale debole</string>
+    <string name="antiknownvulnlist">Questa applicazione contiene una falla di sicurezza nota</string>
     <string name="hide_all_notifications">Nascondi tutte le notifiche</string>
     <string name="prompt_to_send_crash_reports">Chiedi per inviare segnalazioni di errori</string>
     <string name="prompt_to_send_crash_reports_summary">Raccogli dati sugli errori e chiedi di inviarli allo sviluppatore</string>
@@ -473,7 +471,7 @@
     <string name="send_installed_apps">Condividi applicazioni installate</string>
     <string name="menu_open">Apri</string>
     <string name="menu_downgrade">Disinstalla aggiornamento</string>
-    <string name="send_installed_apps_csv">App installate da F-Droid come file CSV</string>
+    <string name="send_installed_apps_csv">Applicazioni installate da F-Droid in formato CSV</string>
     <string name="app_repository">Repository: %1$s</string>
     <string name="scan_removable_storage_title">Scansiona archivio rimovibile</string>
     <string name="scan_removable_storage_toast">Scansione %s…</string>
@@ -511,4 +509,21 @@
     <string name="notification_channel_updates_title">Aggiornamenti</string>
     <string name="notification_channel_installs_description">Mostra notifiche installazione app.</string>
     <string name="notification_channel_installs_title">Installazioni</string>
+    <string name="notification_channel_updates_description">Mostra le notifiche di aggiornamento dell\'app e del repository.</string>
+    <string name="notification_channel_swaps_description">Mostra notifiche di intercambio app P2P.</string>
+    <string name="notification_channel_swaps_title">Intercambi</string>
+    <string name="menu_show_install_history">Mostra storico installazioni</string>
+    <string name="menu_show_fdroid_metrics_report">Mostra rapporto metriche</string>
+    <string name="toast_metrics_in_install_history">Il rapporto metriche %s è visibile nel visualizzatore dello storico installazioni</string>
+    <string name="send_to_fdroid_metrics_summary">Invia settimanalmente dati anonimi alle metriche F-Droid (richiede Mantieni storico installazioni)</string>
+    <string name="send_to_fdroid_metrics">Invia dati utilizzo</string>
+    <string name="fdroid_metrics_report">Rapporto metriche %s</string>
+    <string name="install_history_and_metrics">Installa storico e metriche</string>
+    <string name="send_fdroid_metrics_json">Rapporo metriche %s come file JSON</string>
+    <string name="send_fdroid_metrics_report">Invia rapporto metriche %s</string>
+    <string name="use_pure_black_dark_theme">Utilizzare lo sfondo nero puro nel tema scuro</string>
+    <string name="use_pure_black_dark_theme_summary">Raccomandato solo per schermi OLED.</string>
+    <string name="theme_follow_system">Segui il sistema</string>
+    <string name="banner_no_data_or_wifi">Nessun dato o Wi-Fi abilitato</string>
+    <string name="banner_no_internet">Nessuna connessione</string>
 </resources>

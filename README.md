@@ -1,6 +1,6 @@
 # F-Droid Client
 
-[![build status](https://gitlab.com/fdroid/fdroidclient/badges/master/build.svg)](https://gitlab.com/fdroid/fdroidclient/builds)
+[![build status](https://gitlab.com/fdroid/fdroidclient/badges/master/pipeline.svg)](https://gitlab.com/fdroid/fdroidclient/-/jobs)
 [![Translation status](https://hosted.weblate.org/widgets/f-droid/-/svg-badge.svg)](https://hosted.weblate.org/engage/f-droid/)
 
 Client for [F-Droid](https://f-droid.org), the Free Software repository system
@@ -22,7 +22,7 @@ issues, translate the app into your language or help with development.
 
 ## IRC
 
-We are on `#fdroid` and `#fdroid-dev` on Freenode. We hold weekly dev meetings
+We are on `#fdroid` and `#fdroid-dev` on OFTC. We hold weekly dev meetings
 on `#fdroid-dev` on Thursdays at 11:30h UTC, which usually last half an hour.
 
 ## FAQ

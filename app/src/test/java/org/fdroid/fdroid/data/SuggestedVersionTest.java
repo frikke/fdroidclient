@@ -1,6 +1,7 @@
 package org.fdroid.fdroid.data;
 
 import android.app.Application;
+
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.TestUtils;
 import org.fdroid.fdroid.data.Schema.AppMetadataTable.Cols;
@@ -21,7 +22,6 @@ public class SuggestedVersionTest extends FDroidProviderTest {
 
     @Before
     public void setup() {
-        TestUtils.registerContentProvider(AppProvider.getAuthority(), AppProvider.class);
         Preferences.setupForTests(context);
 
         // This is what the FDroidApp does when this preference is changed. Need to also do this under testing.

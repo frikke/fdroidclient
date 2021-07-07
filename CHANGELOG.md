@@ -1,8 +1,92 @@
+### 1.13 (2021-07-05)
+
+* Overhaul icon loading using Glide (@proletarius101)
+
+* New adaptive icon (@12people)
+
+* Code modernization (@Isira-Seneviratne)
+
+### 1.13-alpha1 (2021-06-02)
+
+* Stop repeated updates of Trichrome Library
+
+* More changes to follow Material Design (@proletarius101)
+
+* Improve OpenCollective badge (@ConnyDuck)
+
+### 1.13-alpha0 (2021-04-22)
+
+* Theme support tied to built-in Android themes (@proletarius101)
+
+* New top banner notifications: "No Internet" and "No Data or WiFi enabled"
+
+* Improved handling of USB-OTG and SD Card repos and mirrors
+
+### 1.12.1 (2021-04-12)
+
+* Fix trove4j verification error
+
+### 1.12 (2021-04-06)
+
+* Sync translations
+
+### 1.12-alpha3 (2021-03-10)
+
+* Opt-in F-Droid Metrics
+
+### 1.12-alpha2 (2021-03-03)
+
+* Overhaul clean up of cached files
+
+* Support updating "shared library packages" like Trichrome (@uldiniad)
+
+### 1.12-alpha1 (2021-02-25)
+
+* Add extra sanitation to search terms to prevent vulnerabilities.
+
+* Fix Nearby Swap's close button (@proletarius101)
+
+* Bump to compileSdkVersion 29 to support Java8
+
+* Set up WorkManager on demand to avoid slowing down starts
+
+* Prefer system keys when APKs are signed by them (@glennmen)
+
+### 1.12-alpha0 (2021-02-08)
+
+* App description localization now fully respects lists of languages in Android
+  Language Settings
+
+* Latest Tab lists results based on the Language Settings
+
+* Latest Tab now shows results ordered newest first (@TheLastProject @IzzySoft)
+
+* Theme support modernized and tied to the built-in Android themes (@proletarius101)
+
+* Search results greatly improved (@Tvax @gcbrown76)
+
+* Let Android efficiently schedule background cache cleanup operations (@Isira-Seneviratne)
+
+* Overhaul repo URL parsing for reliable repo adding (@projectgus)
+
+### 1.11 (2020-12-29)
+
+* Improved linkifying of URLs in app descriptions
+
+* Improved handling of SDCards and USG-OTG in Nearby
+
+* Modernized code and switched PNGs to vectors (thanks @isira-seneviratne!)
+
+* Recognize longer repo URLs to support GitCDN/RawGit/etc mirrors
+
+### 1.10 (2020-10-20)
+
+* Improved language selection with multiple locales
+  (thanks @spacecowboy and @bubu!)
+
 ### 1.10-alpha1 (2020-09-29)
 
 * use notification channels for fine-grained control (@Isira-Seneviratne)
-
-* share apps using Direct Share from App Details (@fynngodau)
 
 ### 1.10-alpha0 (2020-07-20)
 

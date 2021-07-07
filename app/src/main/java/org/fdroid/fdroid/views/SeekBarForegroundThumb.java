@@ -4,10 +4,12 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import androidx.appcompat.widget.AppCompatSeekBar;
 import android.util.AttributeSet;
 
 import org.fdroid.fdroid.R;
+
+import androidx.appcompat.widget.AppCompatSeekBar;
+import androidx.core.content.ContextCompat;
 
 /**
  * SeekBar that does not show the TickMark above the thumb
@@ -34,12 +36,7 @@ public class SeekBarForegroundThumb extends AppCompatSeekBar {
 
     private void init(Context context) {
         this.context = context;
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            tickMark = context.getDrawable(R.drawable.seekbar_tickmark);
-        } else {
-            tickMark = context.getResources().getDrawable(R.drawable.seekbar_tickmark);
-        }
+        tickMark = ContextCompat.getDrawable(context, R.drawable.seekbar_tickmark);
     }
 
     private Drawable getThumbCompat() {

@@ -1,20 +1,21 @@
 package org.fdroid.fdroid.views.categories;
 
-import android.app.Activity;
 import android.database.Cursor;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.data.App;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
 class AppPreviewAdapter extends RecyclerView.Adapter<AppCardController> {
 
     private Cursor cursor;
-    private final Activity activity;
+    private final AppCompatActivity activity;
 
-    AppPreviewAdapter(Activity activity) {
+    AppPreviewAdapter(AppCompatActivity activity) {
         this.activity = activity;
     }
 

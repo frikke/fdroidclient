@@ -20,28 +20,28 @@
 package org.fdroid.fdroid.panic;
 
 import android.annotation.SuppressLint;
-import android.content.res.Resources;
 import android.database.Cursor;
-import android.graphics.LightingColorFilter;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.CursorLoader;
-import androidx.loader.content.Loader;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import com.google.android.material.appbar.MaterialToolbar;
+
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.data.InstalledAppProvider;
 import org.fdroid.fdroid.views.installed.InstalledAppListAdapter;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class SelectInstalledAppsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -54,13 +54,14 @@ public class SelectInstalledAppsActivity extends AppCompatActivity implements Lo
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FDroidApp fdroidApp = (FDroidApp) getApplication();
+        fdroidApp.applyPureBlackBackgroundInDarkTheme(this);
 
-        ((FDroidApp) getApplication()).applyTheme(this);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.installed_apps_layout);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(getString(R.string.panic_add_apps_to_uninstall));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -115,14 +116,7 @@ public class SelectInstalledAppsActivity extends AppCompatActivity implements Lo
         MenuItem menuItem = menu.add(R.string.menu_select_for_wipe);
         menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         checkId = menuItem.getItemId();
-        if (FDroidApp.isAppThemeLight()) {
-            Resources resources = getResources();
-            Drawable icon = resources.getDrawable(R.drawable.check);
-            icon.setColorFilter(new LightingColorFilter(0xffffffff, resources.getColor(android.R.color.white)));
-            menuItem.setIcon(icon);
-        } else {
-            menuItem.setIcon(R.drawable.check);
-        }
+        menuItem.setIcon(R.drawable.check);
         return true;
     }
 

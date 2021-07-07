@@ -1,14 +1,17 @@
 package org.fdroid.fdroid.views.updates.items;
 
-import android.app.Activity;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.ViewGroup;
+
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
+
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.data.App;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * List of all apps which can be updated, but have not yet been downloaded.
@@ -22,16 +25,16 @@ public class UpdateableApp extends AppUpdateData {
 
     public final App app;
 
-    public UpdateableApp(Activity activity, App app) {
+    public UpdateableApp(AppCompatActivity activity, App app) {
         super(activity);
         this.app = app;
     }
 
     public static class Delegate extends AdapterDelegate<List<AppUpdateData>> {
 
-        private final Activity activity;
+        private final AppCompatActivity activity;
 
-        public Delegate(Activity activity) {
+        public Delegate(AppCompatActivity activity) {
             this.activity = activity;
         }
 

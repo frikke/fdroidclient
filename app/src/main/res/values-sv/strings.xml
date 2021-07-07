@@ -50,7 +50,7 @@
     <string name="menu_ignore_all">Ignorera alla uppdateringar</string>
     <string name="menu_ignore_this">Ignorera denna uppdatering</string>
     <string name="menu_website">Webbplats</string>
-    <string name="menu_issues">Fel</string>
+    <string name="menu_issues">Problem</string>
     <string name="menu_source">Källkod</string>
     <string name="menu_upgrade">Uppdatera</string>
     <string name="details_notinstalled">Inte installerad</string>
@@ -154,7 +154,7 @@
     <string name="status_download_unknown_size">Hämtar
 \n%2$s från
 \n%1$s</string>
-    <string name="update_notification_title">Uppdaterar filförråd</string>
+    <string name="banner_updating_repositories">Uppdaterar filförråd</string>
     <string name="permissions">Behörigheter</string>
     <string name="repo_details">Förråd</string>
     <string name="repo_url">Adress</string>
@@ -203,8 +203,8 @@
     <string name="swap_scan_or_type_url">En person behöver skanna koden eller skriva in adressen för den andra i en webbläsare.</string>
     <string name="swap_choose_apps">Välj appar</string>
     <string name="swap_scan_qr">Skanna QR-kod</string>
-    <string name="swap_people_nearby">Folk i närheten</string>
-    <string name="swap_scanning_for_peers">Söker efter folk i närheten…</string>
+    <string name="swap_people_nearby">Personer i närheten</string>
+    <string name="swap_scanning_for_peers">Söker efter personer i närheten…</string>
     <string name="swap_intro">Anslut och byt ut appar med personer nära dig.</string>
     <string name="swap_visible_bluetooth">Synlig via Bluetooth</string>
     <string name="swap_setting_up_bluetooth">Ställer in Bluetooth…</string>
@@ -223,10 +223,10 @@
     <string name="loading">Läser in …</string>
     <string name="swap_connection_misc_error">Fel uppstod under enhetsanslutning, går inte att utföra utbyte med den!</string>
     <string name="install_confirm">behöver åtkomst till</string>
-    <string name="install_confirm_update">Vill du installera en uppdatering till den här befintliga appen? Dina befintliga data försvinner inte. Den uppdaterade appen får åtkomst till:</string>
-    <string name="install_confirm_update_system">Vill du installera en uppdatering till den här befintliga förinstallerade appen? Dina befintliga data försvinner inte. Den uppdaterade appen får åtkomst till:</string>
-    <string name="install_confirm_update_no_perms">Vill du installera en uppdatering av den befintliga appen? Dina befintliga data försvinner inte. Ingen särskild åtkomst krävs.</string>
-    <string name="install_confirm_update_system_no_perms">Vill du installera en uppdatering av den inbyggda appen? Dina befintliga data försvinner inte. Ingen särskild åtkomst krävs.</string>
+    <string name="install_confirm_update">Vill du installera en uppdatering av denna befintliga app\? Dina befintliga data kommer inte att gå förlorade. Den uppdaterade appen får åtkomst till:</string>
+    <string name="install_confirm_update_system">Vill du installera en uppdatering till den här inbyggda appen\? Dina befintliga data kommer inte att gå förlorade. Den uppdaterade appen får åtkomst till:</string>
+    <string name="install_confirm_update_no_perms">Vill du installera en uppdatering av denna befintliga app\? Dina befintliga data kommer inte att gå förlorade. Den kräver ingen speciell åtkomst.</string>
+    <string name="install_confirm_update_system_no_perms">Vill du installera en uppdatering till denna inbyggda app\? Dina befintliga data kommer inte att gå förlorade. Den kräver ingen speciell åtkomst.</string>
     <string name="newPerms">Nytt</string>
     <string name="allPerms">Alla</string>
     <string name="perm_costs_money">Detta kan kosta pengar</string>
@@ -245,7 +245,6 @@
     <string name="interval_2w">Leta efter uppdateringar varannan vecka</string>
     <string name="theme_light">Ljust</string>
     <string name="theme_dark">Mörkt</string>
-    <string name="theme_night">Natt</string>
     <string name="crash_dialog_title">F-Droid har kraschat</string>
     <string name="crash_dialog_text">Ett oväntat fel tvingade appen att avslutas. Vill du skicka detaljer med e-post för att hjälpa till att åtgärda problemet?</string>
     <string name="crash_dialog_comment_prompt">Du kan lägga till ytterligare information och kommentarer här:</string>
@@ -259,7 +258,7 @@
     <string name="keep_month">1 månad</string>
     <string name="keep_year">1 år</string>
     <string name="keep_forever">För evigt</string>
-    <string name="install_error_notify_title">Fel vid installation %s</string>
+    <string name="install_error_notify_title">Fel vid installation av %s</string>
     <string name="uninstall_error_notify_title">Fel vid avinstallation av %s</string>
     <string name="installing">Installerar…</string>
     <string name="uninstalling">Avinstallerar…</string>
@@ -290,8 +289,8 @@
         <item quantity="other">Visa alla %d</item>
     </plurals>
     <string name="notification_title_single_update_available">Uppdatering tillgänglig</string>
-    <string name="notification_title_single_ready_to_install">Färdig att installera</string>
-    <string name="notification_title_single_ready_to_install_update">Uppdatering färdig att installera</string>
+    <string name="notification_title_single_ready_to_install">Färdig att installeras</string>
+    <string name="notification_title_single_ready_to_install_update">Uppdatering redo att installeras</string>
     <string name="notification_title_single_install_error">Installationen misslyckades</string>
     <string name="notification_content_single_downloading">Hämtar \"%1$s\"…</string>
     <string name="notification_content_single_downloading_update">Hämtar uppdatering för \"%1$s\"…</string>
@@ -300,8 +299,8 @@
     <string name="notification_title_summary_update_available">Uppdatering tillgänglig</string>
     <string name="notification_title_summary_downloading">Hämtar…</string>
     <string name="notification_title_summary_downloading_update">Hämtar uppdatering…</string>
-    <string name="notification_title_summary_ready_to_install">Färdig att installera</string>
-    <string name="notification_title_summary_ready_to_install_update">Uppdatering färdig att installera</string>
+    <string name="notification_title_summary_ready_to_install">Färdig att installeras</string>
+    <string name="notification_title_summary_ready_to_install_update">Uppdatering redo att installeras</string>
     <string name="notification_title_summary_installing">Installerar</string>
     <string name="notification_title_summary_installed">Installationen lyckades</string>
     <string name="notification_title_summary_install_error">Installation misslyckades</string>
@@ -373,7 +372,7 @@
     <string name="force_old_index_summary">Om det finns fel eller kompatibilitetsproblem, använd XML-appindexet</string>
     <string name="app_installed_media">Fil installerad till %s</string>
     <string name="app_permission_storage">F-Droid behöver lagringstillstånd för att installera detta till lagring. Vänligen tillåt det på nästa skärm för att fortsätta med installationen.</string>
-    <string name="app_list_download_ready">Hämtad, redo att installera</string>
+    <string name="app_list_download_ready">Hämtad, redo att installeras</string>
     <string name="status_inserting_x_apps">Sparar appdetaljer (%1$d/%2$d) från %3$s</string>
     <string name="app_details__incompatible_mismatched_signature">Olika signaturer till installerad version</string>
     <string name="app_details__no_versions__show_incompat_versions">För att visa inkompatibla versioner här ändå, aktivera inställningen \"%1$s\".</string>
@@ -465,7 +464,7 @@
     <string name="scan_removable_storage_summary">Leta efter paketförråd på flyttbar lagring som SD-kort och USB-minnen</string>
     <string name="app_repository">Förråd: %1$s</string>
     <string name="main_menu__updates">Uppdateringar</string>
-    <string name="nearby_splash__read_external_storage">Sök i SD-kort efter förråd och speglar.</string>
+    <string name="nearby_splash__read_external_storage">Sök på SD-kort efter förråd och speglar.</string>
     <string name="nearby_splash__request_permission">Prova</string>
     <string name="not_visible_nearby">I närheten inte aktiverat</string>
     <string name="not_visible_nearby_description">Gör din enhet synlig innan du byter med närliggande enheter.</string>
@@ -493,4 +492,24 @@
     <string name="swap_toast_closing_nearby_after_timeout">Stängd i närheten eftersom den var inaktiv.</string>
     <string name="nearby_splash__document_tree">Sök USB OTG för förråd och speglar.</string>
     <string name="menu_opencollective">OpenCollective</string>
+    <string name="notification_channel_installs_title">Installationer</string>
+    <string name="notification_channel_installs_description">Visar notifikationer för app-installationer.</string>
+    <string name="notification_channel_updates_description">Visar notifikationer för uppdateringar av app och förråd.</string>
+    <string name="notification_channel_updates_title">Uppdateringar</string>
+    <string name="notification_channel_swaps_description">Visar notifikationer för app-byten mellan användare.</string>
+    <string name="notification_channel_swaps_title">Byten</string>
+    <string name="menu_show_install_history">Visa installationshistorik</string>
+    <string name="menu_show_fdroid_metrics_report">Visa mätvärdesrapport</string>
+    <string name="toast_metrics_in_install_history">%s-mätvärdesrapporten är synlig i Install History-visaren</string>
+    <string name="send_to_fdroid_metrics_summary">Skickar anonyma data varje vecka till F-Droid Metrics (kräver Behåll installationshistorik)</string>
+    <string name="send_to_fdroid_metrics">Skicka användningsdata</string>
+    <string name="fdroid_metrics_report">%s-mätvärdesrapport</string>
+    <string name="install_history_and_metrics">Installera historik och mätvärden</string>
+    <string name="send_fdroid_metrics_json">%s-mätvärdesrapport som JSON-fil</string>
+    <string name="send_fdroid_metrics_report">Skicka %s-mätvärdesrapport</string>
+    <string name="theme_follow_system">Följ systemet</string>
+    <string name="use_pure_black_dark_theme_summary">Rekommenderas endast för OLED-skärmar.</string>
+    <string name="use_pure_black_dark_theme">Använd ren svart bakgrund i mörkt tema</string>
+    <string name="banner_no_data_or_wifi">Ingen data eller WiFi aktiverat</string>
+    <string name="banner_no_internet">Inget internet</string>
 </resources>

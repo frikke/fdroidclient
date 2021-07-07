@@ -1,7 +1,6 @@
 package org.fdroid.fdroid;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -12,6 +11,8 @@ import android.nfc.NfcAdapter;
 import android.os.Build;
 import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class NfcHelper {
 
     private static final String TAG = "NfcHelper";
@@ -20,7 +21,7 @@ public class NfcHelper {
         return NfcAdapter.getDefaultAdapter(context.getApplicationContext());
     }
 
-    public static boolean setPushMessage(Activity activity, Uri toShare) {
+    public static boolean setPushMessage(AppCompatActivity activity, Uri toShare) {
         NfcAdapter adapter = getAdapter(activity);
         if (adapter != null) {
             adapter.setNdefPushMessage(new NdefMessage(new NdefRecord[]{
@@ -32,7 +33,7 @@ public class NfcHelper {
     }
 
     @TargetApi(16)
-    public static void setAndroidBeam(Activity activity, String packageName) {
+    public static void setAndroidBeam(AppCompatActivity activity, String packageName) {
         if (Build.VERSION.SDK_INT < 16) {
             return;
         }
@@ -53,7 +54,7 @@ public class NfcHelper {
     }
 
     @TargetApi(16)
-    public static void disableAndroidBeam(Activity activity) {
+    public static void disableAndroidBeam(AppCompatActivity activity) {
         if (Build.VERSION.SDK_INT < 16) {
             return;
         }

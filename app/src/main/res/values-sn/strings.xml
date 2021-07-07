@@ -153,7 +153,7 @@
         %2$s kubva
         %1$s
     </string>
-    <string name="update_notification_title">Kunatsa pfimbi</string>
+    <string name="banner_updating_repositories">Kunatsa pfimbi</string>
     <string name="status_processing_xml_percent">Kushisha %2$s / %3$s (%4$d%%) kubva %1$s</string>
     <string name="status_connecting_to_repo">Kuhakira ku
         %1$s
@@ -356,7 +356,6 @@
 
     <string name="theme_light">Chiedza</string>
     <string name="theme_dark">Rima</string>
-    <string name="theme_night">Usiku</string>
 
     <string name="crash_dialog_title">F-Droid yabondera</string>
     <string name="crash_dialog_text">Pane kanganiso isina kutarisirwa yaitika

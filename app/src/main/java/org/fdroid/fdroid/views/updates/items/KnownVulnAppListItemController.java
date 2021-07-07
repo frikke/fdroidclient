@@ -1,15 +1,12 @@
 package org.fdroid.fdroid.views.updates.items;
 
-import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.view.View;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.fdroid.fdroid.AppUpdateStatusManager;
 import org.fdroid.fdroid.R;
@@ -26,13 +23,18 @@ import org.fdroid.fdroid.views.apps.AppListItemController;
 import org.fdroid.fdroid.views.apps.AppListItemState;
 import org.fdroid.fdroid.views.updates.UpdatesAdapter;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 /**
  * Tell the user that an app they have installed has a known vulnerability.
  * The role of this controller is to prompt the user what it is that should be done in response to this
  * (e.g. uninstall, update, disable).
  */
 public class KnownVulnAppListItemController extends AppListItemController {
-    public KnownVulnAppListItemController(Activity activity, View itemView) {
+    public KnownVulnAppListItemController(AppCompatActivity activity, View itemView) {
         super(activity, itemView);
     }
 

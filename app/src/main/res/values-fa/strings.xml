@@ -8,7 +8,7 @@
     <string name="update_interval">فاصلهٔ به‌روزرسانی‌های خودکار</string>
     <string name="notify_on">نمایش یک اعلان هنگام موجود بودن به‌روز رسانی‌ها</string>
     <string name="no_such_app">چنین برنامه‌ای پیدا نشد.</string>
-    <string name="about_title">دربارهٔ اف‌دروید</string>
+    <string name="about_title">دَرباره‌ی اِف‌دروید</string>
     <string name="app_installed">نصب شده</string>
     <string name="app_not_installed">نصب نشده</string>
     <string name="added_on">در %s افزوده شد</string>
@@ -25,11 +25,11 @@
     <string name="choose_bt_send">گزینش روش ارسال بلوتوث</string>
     <string name="repo_add_url">نشانی مخزن</string>
     <string name="repo_add_fingerprint">اثر انگشت (اختیاری)</string>
-    <string name="menu_manage">مخزن‌ها</string>
+    <string name="menu_manage">مخازن</string>
     <string name="menu_search">جست‌وجو</string>
-    <string name="menu_share">اشتراک گذاری</string>
+    <string name="menu_share">هم‌رسانی</string>
     <string name="menu_install">نصب</string>
-    <string name="menu_uninstall">حذف نصب</string>
+    <string name="menu_uninstall">لغو نصب</string>
     <string name="menu_issues">اشکال‌ها</string>
     <string name="menu_source">کد منبع</string>
     <string name="details_notinstalled">نصب نشده</string>
@@ -54,7 +54,7 @@
     <string name="unsigned_description">این یعنی فهرست برنامه‌ها نتوانست تأیید شود. باید مراقب برنامه‌های بارگیری شده از فهرست‌های امضا نشده باشید.</string>
     <string name="unknown">ناشناس</string>
     <string name="requires_features">نیاز دارد: %1$s</string>
-    <string name="app_name">اف‌دروید</string>
+    <string name="app_name">اِف‌دروید</string>
     <string name="SignatureMismatch">نگارش جدید با کلیدی متفاوت با قبلی امضا شده است. برای نصب نگارش جدید، باید نخست نگارش قدیمی را حذف کرد. لطفاً این کار را انجام داده و دوباره تلاش کنید. (به خاطر داشته باشید که حذف نصب، تمام داده‌های ذخیره شدهٔ کاره در حافظهٔ داخلی را پاک می‌کند)</string>
     <string name="version">نگارش</string>
     <string name="enable_nfc_send">به کار انداختن فرستادن با NFC…</string>
@@ -79,7 +79,7 @@
     <string name="app_incompatible">ناسازگار</string>
     <string name="app_inst_known_source">نصب شده (از %s)</string>
     <string name="app_inst_unknown_source">نصب شده (از منبع ناشناس)</string>
-    <string name="links">لینک‌ها</string>
+    <string name="links">پیوندها</string>
     <string name="more">بیشتر</string>
     <string name="less">کمتر</string>
     <string name="back">بازگشت</string>
@@ -90,7 +90,7 @@
     <string name="menu_launch">گشودن</string>
     <string name="menu_ignore_all">نادیده گرفتن تمام به‌روز رسانی‌ها</string>
     <string name="menu_ignore_this">نادیده گرفتن این به‌روز رسانی</string>
-    <string name="menu_website">وبسایت</string>
+    <string name="menu_website">پایگاه وب</string>
     <string name="menu_changelog">گزارش دگرگونی</string>
     <string name="menu_upgrade">به‌روز رسانی</string>
     <string name="menu_bitcoin">بیت‌کوین</string>
@@ -118,7 +118,7 @@
     <string name="proxy_port">درگاه پروکسی</string>
     <string name="proxy_port_summary">شمارهٔ درگاه پروکسی (مثلاً 8118)</string>
     <string name="status_download_unknown_size">در حال بارگیری\n%2$s از\n%1$s</string>
-    <string name="update_notification_title">در حال به‌روز رسانی مخزن‌ها</string>
+    <string name="banner_updating_repositories">در حال به‌روزرسانی مخازن</string>
     <string name="status_processing_xml_percent">در حال پردازش %2$s / %3$s (%4$d%%) از %1$s</string>
     <string name="status_inserting_apps">در حال ذخیرهٔ جزئیات برنامه</string>
     <string name="repos_unchanged">تمام مخزن‌ها به‌روز هستند</string>
@@ -131,9 +131,7 @@
     <string name="repo_num_apps">تعداد برنامه ها</string>
     <string name="repo_fingerprint">اثر انگشت کلید امضا (SHA-256)</string>
     <string name="repo_confirm_delete_title">مخزن حذف شود؟</string>
-    <string name="not_on_same_wifi">دستگاه شما روی همان شبکه وای‌فای مخزن محلّی‌ای که افزودید نیست! 
-\n
-\nلطفاً به این شبکه وصل شوید: %s</string>
+    <string name="not_on_same_wifi">افزاره‌تان روی شبکهٔ وای‌فای مخزن محلّی‌ای که افزوده‌اید نیست! تلاش کنید به این شبکه وصل شوید: %s</string>
     <string name="pref_language">زبان</string>
     <string name="pref_language_default">پیش فرض سیستم</string>
     <string name="wifi">وای‌فای</string>
@@ -205,7 +203,6 @@
     <string name="interval_2w">بررسی هر ۲ هفته برای به‌روز رسانی‌ها</string>
     <string name="theme_light">روشن</string>
     <string name="theme_dark">تاریک</string>
-    <string name="theme_night">شب</string>
     <string name="malformed_repo_uri">نادیده گرفتن نشانی اینترنتی مخزن ناهنجار: %s</string>
     <string name="all_other_repos_fine">تمام مخزن‌های دیگر خطایی ایجاد نکردند.</string>
     <string name="repo_not_yet_updated">این مخزن هنوز استفاده نشده است. برای دیدن برنامه هایی که فراهم می‌کند باید فعّالش کنید.</string>
@@ -236,7 +233,7 @@
     <string name="install_confirm_update_system_no_perms">آیا می‌خواهید یک به‌روزرسانی برای این برنامه کاربردی داخلی نصب کنید؟ داده‌های موجود شما از دست نخواهد رفت. به دسترسی ویژه‌ای نیاز ندارد.</string>
     <string name="uninstall_update_confirm">این برنامه با نسخه کارخانه جایگزین شود؟ همه داده‌ها پاک می‌شوند.</string>
     <string name="uninstall_confirm">می‌خواهید این برنامه را حذف نصب کنید؟</string>
-    <string name="menu_email">ایمیل به نویسنده</string>
+    <string name="menu_email">رایانامه به نویسنده</string>
     <string name="antinonfreeassetslist">این برنامه شامل دارایی های غیر آزاد است</string>
     <string name="empty_search_available_app_list">چنین برنامه هایی موجود نیستند.</string>
     <string name="crash_dialog_title">اف‌دروید از کار افتاد</string>
@@ -263,7 +260,7 @@
     <string name="keep_install_history_summary">نگه داشتن گزارشی از تمام نصب و حذف‌ها در یک فضای خصوصی</string>
     <string name="update_auto_install">نصب خودکار به‌روز رسانی‌ها</string>
     <string name="update_auto_install_summary">بارگیری و به‌روز رسانی برنامه‌ها در پس‌زمینه، با نمایش یک اعلان</string>
-    <string name="app_details_donate_prompt_unknown_author">خرید قهوه برای توسعه‌دهند های %1$s!</string>
+    <string name="app_details_donate_prompt_unknown_author">خرید قهوه برای توسعه‌دهنده‌های %1$s!</string>
     <string name="app_details_donate_prompt">‫%1$s به دست %2$s ایجاد شده است. برایشان قهوه بخرید!</string>
     <string name="app_version_x_available">نگارش %1$s موجود است</string>
     <string name="app_version_x_installed">نگارش %1$s</string>
@@ -288,10 +285,10 @@
     <string name="clear_search">پاک‌سازی جست‌وجو</string>
     <string name="repositories_summary">افزودن منابع اضافی برای برنامه ها</string>
     <string name="menu_video">ویدیو</string>
-    <string name="main_menu__latest_apps">جدیدترین</string>
+    <string name="main_menu__latest_apps">آخرین</string>
     <string name="main_menu__categories">دسته‌ها</string>
     <string name="main_menu__swap_nearby">اطراف</string>
-    <string name="latest__empty_state__no_recent_apps">برنامه جدیدی پیدا نشد</string>
+    <string name="latest__empty_state__no_recent_apps">هیچ برنامهٔ اخیری پیدا نشد</string>
     <string name="latest__empty_state__never_updated">پس از به‌روز رسانی فهرست برنامه های‌تان، جدیدترین برنامه‌ها در این‌‌جا نمایش داده می شوند</string>
     <string name="latest__empty_state__no_enabled_repos">به محض فعّال و به‌روز کردن یک مخزن، جدیدترین برنامه‌ها باید در این‌جا نمایش یابند</string>
     <string name="categories__empty_state__no_categories">هیچ دسته‌ای برای نمایش نیست</string>
@@ -305,7 +302,7 @@
         <item quantity="one">نمایش %d</item>
         <item quantity="other">نمایش‌ همه %d</item>
     </plurals>
-    <string name="nearby_splash__download_apps_from_people_nearby">اینترنت ندارید؟ برنامه ها را از افراد در نزدیکی خود بگیرید!</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">اینترنت ندارید؟ برنامه‌ها را از افراد در نزدیکی خود بگیرید!</string>
     <string name="nearby_splash__find_people_button">یافتن اطرافیانم</string>
     <string name="nearby_splash__both_parties_need_fdroid">برای استفاده از این ویژگی، دو طرف به %1$s نیاز دارند.</string>
     <string name="app__tts__downloading_progress">در حال بارگیری، %1$d%% کامل</string>
@@ -363,7 +360,7 @@
         <item quantity="one">%1$d سال پیش به‌روز شده</item>
         <item quantity="other">%1$d سال پیش به‌روز شده</item>
     </plurals>
-    <string name="by_author_format">توسط %s</string>
+    <string name="by_author_format">از %s</string>
     <string name="download_404">فایل درخواستی یافت نشد.</string>
     <string name="force_old_index">اجبار به قالب فهرست قدیمی</string>
     <string name="force_old_index_summary">استفاده از فهرست کارهٔ XML در صورت وجود اشکال یا ناسازگاری</string>
@@ -427,8 +424,8 @@
     <string name="show_anti_feature_apps_on">نمایش برنامه‌هایی که نیاز به پادویژگی دارند</string>
     <string name="force_touch_apps">شامل برنامه‌های لمسی</string>
     <string name="force_touch_apps_on">نمایش برنامه‌هایی که نیاز به صفحهٔ لمسی دارند، فارغ از پشتیبانی سخت‌افزاری</string>
-    <string name="repo_official_mirrors">mirror‌های رسمی</string>
-    <string name="repo_user_mirrors">استفاده از mirrorها</string>
+    <string name="repo_official_mirrors">آینه‌های رسمی</string>
+    <string name="repo_user_mirrors">استفاده از آینه‌ها</string>
     <string name="use_bluetooth">استفاده از بلوتوث</string>
     <string name="swap_toast_invalid_url">نشانی نامعتبر برای تاخت زدن: %1$s</string>
     <string name="swap_toast_hotspot_enabled">نقطهٔ اتصال وای‌فای فعّال است</string>
@@ -436,7 +433,7 @@
     <string name="prompt_to_send_crash_reports">اعلان برای فرستادن گزارش‌های فروپاشی</string>
     <string name="prompt_to_send_crash_reports_summary">جمع‌آوری داده دربارهٔ فروپاشی‌ها و پرسش برای فرستادنشان به توسعه‌دهنده</string>
     <string name="hide_all_notifications">نهفتن تمام آگاهی‌ها</string>
-    <string name="hide_all_notifications_summary">جلوگیری تمام عمل‌ها از نمایش در نوار وضعیت و کشوی آگاهی.</string>
+    <string name="hide_all_notifications_summary">جلوگیری از نمایش تمامی کنش‌ها در نوار وضعیت و کشوی آگاهی.</string>
     <string name="send_install_history">فرستادن تاریخچهٔ نصب</string>
     <string name="send_history_csv">تاریخچهٔ نصب %s در قالب پروندهٔ csv</string>
     <string name="install_history">تاریخچهٔ نصب</string>
@@ -460,7 +457,7 @@
     <string name="scan_removable_storage_summary">گشتن دنبال مخازن روی حافظه جداشدنی مثل کارت‌های SD و حافظه‌های USB</string>
     <string name="app_repository">مخزن: %1$s</string>
     <string name="main_menu__updates">به‌روز رسانی‌ها</string>
-    <string name="nearby_splash__read_external_storage">کارت SD را برای mirrorو مخزن ها جستجو کنید.</string>
+    <string name="nearby_splash__read_external_storage">کارت SD را برای آینه‌ها و مخزن‌ها جستجو کنید.</string>
     <string name="nearby_splash__request_permission">بیازماییدش</string>
     <string name="not_visible_nearby">اطراف فعّال نیست</string>
     <string name="not_visible_nearby_description">پیش از تاخت زدن با دستگاه‌های اطراف، دستگاهتان را قابل مشاهده کنید.</string>
@@ -486,6 +483,27 @@
     <string name="swap_stopping">در حال توقف…</string>
     <string name="disabled">غیر فعال شد</string>
     <string name="swap_error_cannot_start_bluetooth">ناتوانی در آغاز بلوتوث!</string>
-    <string name="nearby_splash__document_tree">حافظه USB OTG را برای mirrorها و مخازن جستجو کنید.</string>
+    <string name="nearby_splash__document_tree">حافظه USB OTG را برای آینه‌ها و مخازن جستجو کنید.</string>
     <string name="swap_toast_closing_nearby_after_timeout">ویژگی اطراف به دلیل بی‌کار بودن، بسته شد.</string>
+    <string name="notification_channel_updates_description">اعلان‌های به‌روزرسانی مخزن و برنامه نمایش داده می‌شوند.</string>
+    <string name="notification_channel_updates_title">به‌روزرسانی‌ها</string>
+    <string name="notification_channel_installs_description">اعلان‌های نصب برنامه نمایش داده می‌شوند.</string>
+    <string name="notification_channel_installs_title">نصب‌ها</string>
+    <string name="menu_opencollective">اوپن‌کالکتیو</string>
+    <string name="notification_channel_swaps_description">نمایش آگاهی‌های مبادلهٔ کارهٔ نظیر به نظیر.</string>
+    <string name="notification_channel_swaps_title">مبادله‌ها</string>
+    <string name="menu_show_install_history">نمایش تاریخچهٔ نصب</string>
+    <string name="menu_show_fdroid_metrics_report">نمایش گزارش سنجش</string>
+    <string name="toast_metrics_in_install_history">گزارش سنجش %s در نمایشگر تاریخچهٔ نصب، قابل مشاهده است</string>
+    <string name="send_to_fdroid_metrics_summary">هر هفته، داده‌های ناشناس را به سنجش اف‌دروید می‌فرستد (نیاز به نگه‌داشتن تاریخچهٔ نصب)</string>
+    <string name="send_to_fdroid_metrics">فرستادن داده‌های استفاده</string>
+    <string name="fdroid_metrics_report">گزارش سنجش‌%s</string>
+    <string name="install_history_and_metrics">سنجش و تاریخچهٔ نصب</string>
+    <string name="send_fdroid_metrics_json">گزارش سنجش %s در قالب پروندهٔ جی‌سان</string>
+    <string name="send_fdroid_metrics_report">فرستادن گزارش سنجش %s</string>
+    <string name="theme_follow_system">از سیستم تبعیت کن</string>
+    <string name="use_pure_black_dark_theme_summary">فقط برای صفحه های OLED توصیه می شود.</string>
+    <string name="use_pure_black_dark_theme">از زمینه سیاه خالص در تم تاریک استفاده کن</string>
+    <string name="banner_no_data_or_wifi">اتصال وای‌فای یا داده‌ها فعال نیست</string>
+    <string name="banner_no_internet">بدون اینترنت</string>
 </resources>

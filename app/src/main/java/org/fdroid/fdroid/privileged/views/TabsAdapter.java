@@ -17,12 +17,8 @@
 
 package org.fdroid.fdroid.privileged.views;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
-import androidx.annotation.NonNull;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TabHost;
@@ -30,6 +26,11 @@ import android.widget.TabWidget;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * This is a helper class that implements the management of tabs and all
@@ -67,7 +68,7 @@ class TabsAdapter extends PagerAdapter
         }
     }
 
-    TabsAdapter(Activity activity, TabHost tabHost, ViewPager pager) {
+    TabsAdapter(AppCompatActivity activity, TabHost tabHost, ViewPager pager) {
         context = activity;
         this.tabHost = tabHost;
         viewPager = pager;

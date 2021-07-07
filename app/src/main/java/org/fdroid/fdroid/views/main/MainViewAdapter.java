@@ -21,15 +21,17 @@
 
 package org.fdroid.fdroid.views.main;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseIntArray;
 import android.view.Menu;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.PopupMenu;
+
 import org.fdroid.fdroid.R;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Represents the main views that are accessible from the main screen via each
@@ -76,6 +78,8 @@ class MainViewAdapter extends RecyclerView.Adapter<MainViewController> {
         long viewType = getItemId(holder.getAdapterPosition());
         if (viewType == R.id.updates) {
             holder.bindUpdates();
+        } else if (viewType == R.id.nearby) {
+            NearbyViewBinder.updateUsbOtg(activity);
         }
     }
 
@@ -84,8 +88,8 @@ class MainViewAdapter extends RecyclerView.Adapter<MainViewController> {
     public MainViewController onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         MainViewController holder = createEmptyView(activity);
         switch (viewType) {
-            case R.id.whats_new:
-                holder.bindWhatsNewView();
+            case R.id.latest:
+                holder.bindLatestView();
                 break;
             case R.id.categories:
                 holder.bindCategoriesView();

@@ -99,7 +99,7 @@
     <string name="status_download_unknown_size">Sæki
 \n%2$s frá
 \n%1$s</string>
-    <string name="update_notification_title">Uppfæri hugbúnaðarsöfn</string>
+    <string name="banner_updating_repositories">Uppfæri hugbúnaðarsöfn</string>
     <string name="status_processing_xml_percent">Meðhöndla %2$s / %3$s (%4$d%%) frá %1$s</string>
     <string name="status_connecting_to_repo">Tengist við
 \n%1$s</string>
@@ -208,7 +208,6 @@
     <string name="keep_forever">Að eilífu</string>
     <string name="theme_light">Ljóst</string>
     <string name="theme_dark">Dökkt</string>
-    <string name="theme_night">Næturhamur</string>
     <string name="crash_dialog_title">F-Droid hrundi</string>
     <string name="crash_dialog_comment_prompt">Þú getur bætt hér við aukaupplýsingum og athugasemdum:</string>
     <string name="unstable_updates_summary">Stinga upp á uppfærslum í óstöðugar útgáfur</string>

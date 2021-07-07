@@ -30,6 +30,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.TextUtils;
 import android.util.Log;
+
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.Utils;
@@ -321,16 +322,16 @@ public class DBHelper extends SQLiteOpenHelper {
 
     /**
      * Look for additional, initial repositories from the device's filesystem.
-     * These can be added as part of the ROM ({@code /system} or included later
-     * by vendors/OEMs ({@code /vendor}, {@code /odm}, {@code /oem}). These are
-     * always added at a lower priority than the repos embedded in the APK via
+     * These can be added as part of the ROM ({@code /system} or {@code /product}
+     * or included later by vendors/OEMs ({@code /vendor}, {@code /odm}, {@code /oem}).
+     * These are always added at a lower priority than the repos embedded in the APK via
      * {@code default_repos.xml}.
      * <p>
-     * ROM has the lowest priority, then Vendor, ODM, and OEM.
+     * ROM (System) has the lowest priority, then Product, Vendor, ODM, and OEM.
      */
     private static List<String> loadAdditionalRepos(String packageName) {
         List<String> repoItems = new LinkedList<>();
-        for (String root : Arrays.asList("/system", "/vendor", "/odm", "/oem")) {
+        for (String root : Arrays.asList("/system", "/product", "/vendor", "/odm", "/oem")) {
             File additionalReposFile = new File(root + "/etc/" + packageName + "/additional_repos.xml");
             try {
                 if (additionalReposFile.isFile()) {
@@ -1318,6 +1319,7 @@ public class DBHelper extends SQLiteOpenHelper {
         Utils.debugLog(TAG, "Removing all index tables, they will be recreated next time F-Droid updates.");
 
         Preferences.get().resetLastUpdateCheck();
+        CategoryProvider.Helper.clearCategoryIdCache();
 
         db.beginTransaction();
         try {

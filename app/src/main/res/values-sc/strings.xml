@@ -32,7 +32,7 @@
     <string name="no">Nono</string>
     <string name="repo_add_title">Annanghe unu depòsitu nou</string>
     <string name="repo_add_add">Annanghe</string>
-    <string name="cancel">Annudda</string>
+    <string name="cancel">Annulla</string>
     <string name="enable">Abìlita</string>
     <string name="add_key">Annanghe crae</string>
     <string name="overwrite">Subraiscrie</string>
@@ -153,7 +153,7 @@
     <string name="back">In dae segus</string>
     <string name="invalid_url">Custu no est unu ligàmene vàlidu.</string>
     <string name="menu_changelog">Lista modìficas</string>
-    <string name="update_notification_title">Agiornende sos depòsitos</string>
+    <string name="banner_updating_repositories">Agiornende sos depòsitos</string>
     <string name="status_processing_xml_percent">Protzessende %2$s / %3$s (%4$d%%) dae %1$s</string>
     <string name="pref_language">Limba</string>
     <string name="pref_language_default">Predefinida de sistema</string>
@@ -243,7 +243,6 @@
     <string name="repo_url">Indiritzu</string>
     <string name="status_download_unknown_size">Iscarrighende\n%2$s dae\n%1$s</string>
     <string name="permissions">Permissos</string>
-    <string name="theme_night">Note</string>
     <string name="more">De prus</string>
     <string name="less">De mancu</string>
     <string name="menu_settings">Preferèntzias</string>
@@ -526,4 +525,18 @@
     <string name="notification_channel_swaps_title">Cuncàmbios</string>
     <string name="notification_channel_installs_title">Installatziones</string>
     <string name="menu_opencollective">OpenCollective</string>
+    <string name="menu_show_install_history">Ammustra sa cronologia de sas installatziones</string>
+    <string name="menu_show_fdroid_metrics_report">Ammustra su raportu de sas mètricas</string>
+    <string name="toast_metrics_in_install_history">Su raportu de anàlisi de sas mètricas %s si podet pompiare in su visualizadore de sa cronologia de sas installatziones</string>
+    <string name="send_to_fdroid_metrics_summary">Imbia in manera anònima datos cada chida a sas mètricas de F-Droid (bisòngiat de su sarvamentu de sa cronologia de sas installatziones)</string>
+    <string name="send_to_fdroid_metrics">Imbia sos datos de impreu</string>
+    <string name="fdroid_metrics_report">Raportu de sas mètricas %s</string>
+    <string name="install_history_and_metrics">Cronologia de sas installatzione e mètricas</string>
+    <string name="send_fdroid_metrics_json">Raportu de anàlisi mètrica %s comente documentu JSON</string>
+    <string name="send_fdroid_metrics_report">Imbia su raportu de anàlisi mètrica de %s</string>
+    <string name="theme_follow_system">Sighi su sistema</string>
+    <string name="use_pure_black_dark_theme_summary">Racumandadu pro sos ischermos OLED.</string>
+    <string name="use_pure_black_dark_theme">Imprea un\'isfundu nieddu de su totu in su tema iscuru</string>
+    <string name="banner_no_data_or_wifi">Peruna connessione mòbile o Wifi ativa</string>
+    <string name="banner_no_internet">Chene ìnternet</string>
 </resources>

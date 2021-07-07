@@ -26,9 +26,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.Base64;
-import info.guardianproject.netcipher.NetCipher;
+
 import org.apache.commons.io.FileUtils;
-import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Utils;
 
@@ -41,6 +40,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+
+import info.guardianproject.netcipher.NetCipher;
 
 /**
  * Download files over HTTP, with support for proxies, {@code .onion} addresses,
@@ -195,7 +196,7 @@ public class HttpDownloader extends Downloader {
                 && FDroidApp.subnetInfo.isInRange(host); // on the same subnet as we are
     }
 
-    private HttpURLConnection getConnection() throws SocketTimeoutException, IOException {
+    HttpURLConnection getConnection() throws SocketTimeoutException, IOException {
         HttpURLConnection connection;
         if (isSwapUrl(sourceUrl)) {
             // swap never works with a proxy, its unrouted IP on the same subnet
@@ -209,7 +210,7 @@ public class HttpDownloader extends Downloader {
             }
         }
 
-        connection.setRequestProperty("User-Agent", "F-Droid " + BuildConfig.VERSION_NAME);
+        connection.setRequestProperty("User-Agent", Utils.getUserAgent());
         connection.setConnectTimeout(getTimeout());
         connection.setReadTimeout(getTimeout());
 

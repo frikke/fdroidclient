@@ -777,4 +777,25 @@
     <string name="status_downloading_remaining">Edhe %1$s</string>
     <string name="search_history">Kërkime së fundi</string>
     <string name="install_history_switch">Përdor historik instalimi</string>
+    <string name="search_auto_keyboard">Hape tastierën automatikisht</string>
+    <string name="hide">Fshihe</string>
+    <string name="category_group_summary_productivity">Kalendarë, punë, sahate &amp; shënime</string>
+    <string name="category_group_summary_tools">Lëvizje, mot, makina llogaritëse &amp; shndërrues</string>
+    <string name="category_group_summary_wallets">Financë, para &amp; përgjegjës fjalëkalimesh</string>
+    <string name="category_group_summary_media">Muzikë, podcast-e, lojëra &amp; lexues elibrash</string>
+    <string name="category_group_summary_communication">Email, shkëmbim mesazhesh &amp; rrjete shoqërorë</string>
+    <string name="category_group_summary_device">Nisës, tastierë, siguri &amp; tema grafike</string>
+    <string name="category_group_summary_network">Shfletues, VPN, ndërmjetës &amp; firewall</string>
+    <string name="category_group_summary_storage">Kartela, galeri, njëkohësim në re &amp; fshehtëzim</string>
+    <string name="category_group_summary_interests">Shkencë, sporte, vizatim &amp; receta</string>
+    <string name="category_group_summary_misc">Të pakategorizuar</string>
+    <string name="app_details_anti_features_title">Çfarë janë Anti-Veçoritë?</string>
+    <string name="app_details_anti_features_text">Disa aplikacione vijnë me sjellje të cilat s’i kërkuat — dhe mund të mos i doni. Gjëra të tilla si reklama, gjurmim, ose varësi nga shërbime pronësore. Këto i quajmë Anti-Veçori. \n\nAplikacionet në F-Droid janë të etiketuar qartë, kur përmbajnë Anti-Veçori, që të mund të bëni një zgjedhje duke qenë të informuar.</string>
+    <string name="dialog_metered_dont_show">Mos e shfaq më këtë</string>
+    <string name="apps_updates_hint_title">Urime 🥳</string>
+    <string name="apps_updates_hint_text">Krejt aplikacionet tuaj janë të përditësuar</string>
+    <string name="search_my_apps_hint">Kërko te aplikacione të instaluar</string>
+    <string name="repo_disable_dialog_title">Çaktivizoje depon</string>
+    <string name="repo_disable_dialog_warning">Nëse e keni vënë këtë depo si të parapëlqyer për çfarëdo aplikacioni, ai parapëlqim do të humbë</string>
+    <string name="repo_disable_dialog_text">Krejt aplikacionet nga kjo depo do të zhduken. Prej kësaj s’do të preken aplikacione të instaluar tashmë.</string>
 </resources>

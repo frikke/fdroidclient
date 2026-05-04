@@ -138,7 +138,7 @@
     <string name="install_confirm_update_system_no_perms">คุณต้องการติดตั้งการอัปเดตแอปในตัวนี้หรือไม่ ข้อมูลที่มีอยู่ของคุณจะไม่สูญหาย ไม่จำเป็นต้องเข้าถึงเป็นพิเศษ</string>
     <string name="newPerms">ใหม่</string>
     <string name="allPerms">ทั้งหมด</string>
-    <string name="perm_costs_money">อาจจะัทำให้คุณเสียค่าใช้จ่าย</string>
+    <string name="perm_costs_money">อาจจะทำให้คุณเสียค่าใช้จ่าย</string>
     <string name="uninstall_update_confirm">แทนที่แอปนี้ด้วยเวอร์ชันเริ่มต้นไหม ระบบจะนำข้อมูลทั้งหมดออก</string>
     <string name="uninstall_confirm">คุณต้องการถอนการติดตั้งแอปนี้หรือไม่\?</string>
     <string name="download_error">การดาวน์โหลดล้มเหลว!</string>
@@ -566,4 +566,13 @@
     <string name="pref_export_log_title">บันทึกการแก้ไขข้อผิดพลาด</string>
     <string name="app_details_more_apps_interesting">สิ่งนี้อาจเป็นที่น่าสนใจสำหรับคุณเช่นกัน:</string>
     <string name="app_details_more_apps_by_author">แอปเพิ่มเติมโดย %1$s</string>
+    <string name="menu_about">เกี่ยวกับ</string>
+    <string name="menu_apps_my">แอพพลิเคชั่นของฉัน</string>
+    <string name="app_list_recently_updated">อัพเดทเมื่อเร็ว ๆ นี้</string>
+    <string name="app_list_most_downloaded">ดาวน์โหลดมากที่สุด</string>
+    <string name="app_list_all">แอพพลิเคชั่นทั้งหมด</string>
+    <string name="search_placeholder">ค้นหา…</string>
+    <string name="app_list_author">แอพพลิเคชั่นโดย %s</string>
+    <string name="app_list_new">แอพพลิเคชั่นใหม่</string>
+    <string name="crash_dialog_title_old">F-Droid เกิดข้อผิดพลาด</string>
 </resources>

@@ -804,4 +804,25 @@
     <string name="status_downloading_remaining">%1$s rămas</string>
     <string name="search_history">Căutări recente</string>
     <string name="install_history_switch">Utilizează istoricul de instalare</string>
+    <string name="search_auto_keyboard">Deschide automat tastatura</string>
+    <string name="hide">Ascunde</string>
+    <string name="category_group_summary_productivity">Calendare, activități, ceasuri și note</string>
+    <string name="category_group_summary_tools">Navigaţie, vreme, calculatoare şi convertoare</string>
+    <string name="category_group_summary_wallets">Finanţe, bani şi gestionare parole</string>
+    <string name="category_group_summary_media">Muzică, podcasturi, jocuri și cărți electronice</string>
+    <string name="category_group_summary_communication">E-mail, mesaje și rețele sociale</string>
+    <string name="category_group_summary_device">Lansator, tastatură, securitate și tematică</string>
+    <string name="category_group_summary_network">Browser, VPN-uri, proxy-uri și firewall</string>
+    <string name="category_group_summary_storage">Fișiere, galerie, sincronizare în cloud și criptare</string>
+    <string name="category_group_summary_interests">Știință, sport, desen și rețete</string>
+    <string name="category_group_summary_misc">Fără categorie</string>
+    <string name="app_details_anti_features_title">Ce sunt caracteristicile periculoase?</string>
+    <string name="apps_updates_hint_title">Felicitări 🥳</string>
+    <string name="repo_disable_dialog_title">Dezactivare depozit</string>
+    <string name="search_my_apps_hint">Căutare aplicații instalate</string>
+    <string name="dialog_metered_dont_show">Nu arăta asta din nou</string>
+    <string name="apps_updates_hint_text">Toate aplicațiile sunt actualizate</string>
+    <string name="repo_disable_dialog_text">Toate aplicațiile din acest depozit vor dispărea. Aplicațiile deja instalate nu vor fi afectate.</string>
+    <string name="repo_disable_dialog_warning">Dacă ați setat acest depozit ca preferat pentru orice aplicație, această preferință va fi pierdută</string>
+    <string name="app_details_anti_features_text">Unele aplicații au comportamente pe care nu le-ați cerut și s-ar putea să nu le doriți. Lucruri cum ar fi reclame, supraveghere sau dependența de servicii proprietare. Noi le numim: caracteristici periculoase. \n\nAplicațiile din F-Droid sunt clar etichetate atunci când conțin caracteristici periculoase, astfel încât să puteți face o alegere în cunoștință de cauză.</string>
 </resources>

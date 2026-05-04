@@ -654,7 +654,7 @@
     <string name="call_to_action_keepandroidopen_url">https://keepandroidopen.org</string>
     <string name="first_start_intro">Samtempigu deponejojn por komenci</string>
     <string name="first_start_offline">Vi estas nekonektita. Konektu kun la Interreto por komenci.</string>
-    <string name="first_start_metered">Vi nun uzas ĉeltelefonan konekton kaj necesas elŝuti pli ol 10 MB. Frapetu “Elŝuti deponejojn” por komenci malgraŭ tio.</string>
+    <string name="first_start_metered">Vi nun uzas ĉeltelefonan konekton kaj necesas elŝuti pli ol 10 MB. Frapetu “Elŝuti deponejojn” por komenci malgraŭ tio.</string>
     <string name="first_start_button">Elŝuti deponejojn</string>
     <string name="no_repos_enabled">Neniu disponebla deponejo. Aldonu deponejon por komenci.</string>
     <string name="search_filter_no_results">Neniu kongrua aplikaĵo\n\nProvu uzi malpli da serĉvortojn aŭ forigi filtrilojn</string>
@@ -778,4 +778,25 @@
     <string name="install_history_delete_text">Ĉu forviŝi historion de instaladoj?</string>
     <string name="search_history">Lastaj serĉoj</string>
     <string name="install_history_switch">Uzi historion de instaloj</string>
+    <string name="search_auto_keyboard">Aŭtomate malfermi klavaron</string>
+    <string name="hide">Kaŝi</string>
+    <string name="category_group_summary_productivity">Kalendaroj, planiloj, horloĝoj kaj notlibroj</string>
+    <string name="category_group_summary_tools">Navigado, vetero, kalkuliloj kaj konvertiloj</string>
+    <string name="category_group_summary_wallets">Financoj, monujoj kaj biletujoj</string>
+    <string name="category_group_summary_media">Muziko, podkastoj, ludoj kaj bitlibroj</string>
+    <string name="category_group_summary_communication">Retpoŝto, komunikiloj kaj sociaj komunikiloj</string>
+    <string name="category_group_summary_device">Aplikaĵ-lanĉiloj, klavaroj, sekureco kaj haŭtoj</string>
+    <string name="category_group_summary_network">Retfoliumiloj, VPN, retperiloj kaj fajroŝirmiloj</string>
+    <string name="category_group_summary_storage">Dosieroj, bildoj, nuba samtempigo kaj ĉifrado</string>
+    <string name="category_group_summary_interests">Scienco, sporto, desegnado kaj kuir-receptoj</string>
+    <string name="category_group_summary_misc">Senkategoriaj</string>
+    <string name="app_details_anti_features_title">Kio estas fiebloj?</string>
+    <string name="app_details_anti_features_text">Iuj aplikaĵoj enhavas eblojn, pri kiuj vi ne petis – kaj kiujn vi probable ne volas. Temas ekzemple pri reklamoj, spuriloj, dependo de neliberaj servoj. Ni nomas ilin “fiebloj” aŭ “kontraŭebloj”.\n\nAplikaĵoj en F-Droid estas klare etikeditaj, kiam ili enhavas fieblojn, do vi povas konscie elekti, ĉu uzi ilin.</string>
+    <string name="dialog_metered_dont_show">Ne montri denove</string>
+    <string name="apps_updates_hint_title">Gratulon 🥳</string>
+    <string name="apps_updates_hint_text">Ĉiuj viaj aplikaĵoj estas ĝisdataj.</string>
+    <string name="search_my_apps_hint">Serĉi instalitajn aplikaĵojn</string>
+    <string name="repo_disable_dialog_title">Malaktivigi deponejon</string>
+    <string name="repo_disable_dialog_warning">Se vi agordis tiun ĉi deponejon kiel preferatan por iu aplikaĵo, tiu prefero perdiĝos.</string>
+    <string name="repo_disable_dialog_text">Ĉiuj aplikaĵoj de tiu ĉi deponejo malaperos. Tamen tio ĉi ne efikos sur jam instalitajn aplikaĵojn.</string>
 </resources>

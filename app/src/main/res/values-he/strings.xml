@@ -671,7 +671,7 @@
     <string name="app_list_most_downloaded">הכי מורדים</string>
     <string name="app_list_all">כל היישמונים</string>
     <string name="app_list_author">יישמונים על ידי %s</string>
-    <string name="search_placeholder">חפש…</string>
+    <string name="search_placeholder">חיפוש…</string>
     <string name="search_no_results">לא נמצאו יישומונים\n\nנסו להשתמש בפחות מילות חיפוש או להוסיף עוד מאגרים</string>
     <string name="category_group_productivity">הפקה</string>
     <string name="category_group_tools">כלים</string>
@@ -695,4 +695,38 @@
     <string name="package_name">שם החבילה:</string>
     <string name="installed_version">גרסה מותקנת:</string>
     <string name="ipfsgw_summary_new">הורידו יישומונים בעזרת IPFS web endpoints</string>
+    <string name="first_start_intro">כדי להתחיל, יש לסנכרן את מאגרי היישומונים</string>
+    <string name="first_start_offline">אין לך חיבור לרשת. נא להתחבר לאינטרנט בשביל להתחיל.</string>
+    <string name="first_start_button">קבלת מאגרים</string>
+    <string name="search_history">חיפושים אחרונים</string>
+    <string name="search_auto_keyboard">פתיחה אוטומטית של המקלדת</string>
+    <string name="sort_by_name">מיון לפי שם</string>
+    <string name="sort_by_latest">מיון לפי מועד עדכון אחרון</string>
+    <string name="filter_intro">סינון יישומונים לפי</string>
+    <string name="filter_button_clear_all">ניקוי כל הסינונים</string>
+    <string name="got_it">הבנתי</string>
+    <string name="clear">ניקוי</string>
+    <string name="hide">הסתרה</string>
+    <string name="category_group_summary_productivity">לוחות שנה, משימות, שעונים והערות</string>
+    <string name="category_group_summary_network">דפדפן, VPN, מתווכים וחומת אש</string>
+    <string name="category_group_summary_storage">קבצים, גלריה, סנכרון בענן והצפנה</string>
+    <string name="pref_dyn_colors_title">שימוש בצבעי המערכת</string>
+    <string name="pref_dyn_colors_summary">החלת צבעים דינמיים מהגדרות המערכת של מכשירך</string>
+    <string name="pref_language_summary">פתיחת הגדרות השפה של המערכת</string>
+    <string name="pref_auto_updates_only_wifi">ברשת אלחוטית בלבד</string>
+    <string name="pref_auto_updates_only_always">תמיד (גם בנתונים ניידים)</string>
+    <string name="pref_auto_updates_only_never">אף פעם</string>
+    <string name="pref_repo_updates_title">בדיקת עדכונים</string>
+    <string name="pref_category_network">רשת</string>
+    <string name="pref_mirror_chooser_summary_random">אקראי</string>
+    <string name="pref_proxy_title">חיבור דרך מתווך SOCKS</string>
+    <string name="pref_proxy_disabled">חיבור לאינטרנט ללא מתווך</string>
+    <string name="pref_proxy_enabled">המתווך %s משמש לחיבור</string>
+    <plurals name="notification_update_success_title">
+        <item quantity="one">יישומון התעדכן</item>
+        <item quantity="two">שני יישומונים התעדכנו</item>
+        <item quantity="other">%1$d יישומונים התעדכנו</item>
+    </plurals>
+    <string name="notification_installing_section_installing">מותקנים:</string>
+    <string name="notification_installing_section_confirmation">דורשים אישור משתמש:</string>
 </resources>

@@ -847,4 +847,25 @@
     <string name="status_downloading_remaining">%1$s fágtha</string>
     <string name="search_history">Cuardaigh le déanaí</string>
     <string name="install_history_switch">Úsáid stair suiteála</string>
+    <string name="search_auto_keyboard">Méarchlár oscailte go huathoibríoch</string>
+    <string name="hide">Folaigh</string>
+    <string name="category_group_summary_productivity">Féilirí, tascanna, cloig &amp; nótaí</string>
+    <string name="category_group_summary_tools">Loingseoireacht, aimsir, áireamháin &amp; tiontairí</string>
+    <string name="category_group_summary_wallets">Airgeadas, airgead agus bainisteoirí roimhe seo</string>
+    <string name="category_group_summary_media">Ceol, podchraoltaí, cluichí &amp; léitheoirí ríomhleabhar</string>
+    <string name="category_group_summary_communication">Ríomhphost, teachtaireachtaí agus líonraí sóisialta</string>
+    <string name="category_group_summary_device">Lainseálaí, méarchlár, slándáil &amp; téamaíocht</string>
+    <string name="category_group_summary_network">Brabhsálaí, VPNanna, seachfhreastalaithe &amp; balla dóiteáin</string>
+    <string name="category_group_summary_storage">Comhaid, gailearaí, sioncrónú scamall &amp; criptiú</string>
+    <string name="category_group_summary_interests">Eolaíocht, spóirt, líníocht &amp; oidis</string>
+    <string name="category_group_summary_misc">Gan catagóir</string>
+    <string name="app_details_anti_features_title">Cad iad Frithghnéithe?</string>
+    <string name="app_details_anti_features_text">Tagann iompraíochtaí le roinnt aipeanna nár iarr tú orthu — agus b\'fhéidir nach dteastaíonn uait. Rudaí cosúil le fógraí, rianú, nó spleáchas ar sheirbhísí dílseánaigh. Tugtar Frithghnéithe orthu seo.\n\nTá lipéad soiléir ar aipeanna in F-Droid nuair a bhíonn Frithghnéithe iontu, ionas gur féidir leat rogha eolasach a dhéanamh.</string>
+    <string name="dialog_metered_dont_show">Ná taispeáin seo arís</string>
+    <string name="apps_updates_hint_title">Comhghairdeas 🥳</string>
+    <string name="apps_updates_hint_text">Tá do chuid aipeanna go léir cothrom le dáta</string>
+    <string name="search_my_apps_hint">Cuardaigh aipeanna suiteáilte</string>
+    <string name="repo_disable_dialog_title">Díchumasaigh an stórlann</string>
+    <string name="repo_disable_dialog_warning">Má shocraigh tú an stórlann seo mar rogha d\'aon aip, caillfear an rogha sin</string>
+    <string name="repo_disable_dialog_text">Imeoidh gach aip ón stór seo as radharc. Ní bheidh tionchar ar aipeanna atá suiteáilte cheana féin.</string>
 </resources>

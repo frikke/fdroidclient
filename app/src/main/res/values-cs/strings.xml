@@ -799,5 +799,26 @@
     <string name="status_downloading">Stahování rychlostí %s/s</string>
     <string name="status_downloading_remaining">Zbývá %1$s</string>
     <string name="search_history">Nedávná hledání</string>
-    <string name="install_history_switch">Používatt historii instalace</string>
+    <string name="install_history_switch">Používat historii instalace</string>
+    <string name="search_auto_keyboard">Automaticky otevřít klávesnici</string>
+    <string name="hide">Skrýt</string>
+    <string name="category_group_summary_productivity">Kalendáře, úkoly, hodiny a poznámky</string>
+    <string name="category_group_summary_tools">Navigace, počasí, kalkulačky a převodníky</string>
+    <string name="category_group_summary_wallets">Finance, peníze a správce lístků</string>
+    <string name="category_group_summary_media">Hudba, podcasty, hry a čtečky e-knih</string>
+    <string name="category_group_summary_communication">E-mail, zprávy a sociální sítě</string>
+    <string name="category_group_summary_device">Launcher, klávesnice, zabezpečení a motivy</string>
+    <string name="category_group_summary_network">Prohlížeč, VPN, proxy a firewall</string>
+    <string name="category_group_summary_storage">Soubory, galerie, cloudová synchronizace a šifrování</string>
+    <string name="category_group_summary_interests">Věda, sporty, kreslení a recepty</string>
+    <string name="category_group_summary_misc">Bez kategorie</string>
+    <string name="app_details_anti_features_title">Co jsou anti-vlastnosti?</string>
+    <string name="app_details_anti_features_text">Některé aplikace se chovají způsobem, o který jste nepožádali – a který možná ani nechcete. Jde například o reklamy, sledování nebo závislost na proprietárních službách. Tomuto jevu říkáme „anti-vlastnosti“.\n\nAplikace v F-Droidu jsou jasně označeny, pokud obsahují anti-vlastnosti, abyste se mohli rozhodnout na základě všech dostupných informací.</string>
+    <string name="dialog_metered_dont_show">Znovu nezobrazovat</string>
+    <string name="apps_updates_hint_title">Gratulujeme 🥳</string>
+    <string name="apps_updates_hint_text">Všechny vaše aplikace jsou aktuální</string>
+    <string name="search_my_apps_hint">Hledat nainstalované aplikace</string>
+    <string name="repo_disable_dialog_title">Zakázat repozitář</string>
+    <string name="repo_disable_dialog_warning">Pokud jste tento repozitář nastavili jako preferovaný u nějakých aplikací, bude tato preference ztracena</string>
+    <string name="repo_disable_dialog_text">Všechny aplikace z tohoto repozitáře zmizí. Na již nainstalované aplikace to nebude mít vliv.</string>
 </resources>

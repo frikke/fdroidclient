@@ -807,4 +807,25 @@
     <string name="status_downloading_remaining">%1$s restants</string>
     <string name="search_history">Recherches récentes</string>
     <string name="install_history_switch">Utiliser l\'historique d\'installation</string>
+    <string name="search_auto_keyboard">Ouvrir automatiquement le clavier</string>
+    <string name="hide">Masquer</string>
+    <string name="category_group_summary_productivity">Agendas, tâches, horloges &amp; notes</string>
+    <string name="category_group_summary_tools">Navigation, météo, calculatrices &amp; convertisseurs</string>
+    <string name="category_group_summary_wallets">Gestionnaires de finances, d\'argent &amp; de cartes</string>
+    <string name="category_group_summary_media">Musique, podcasts, jeux &amp; liseuses</string>
+    <string name="category_group_summary_communication">Courriel, messagerie &amp; réseaux sociaux</string>
+    <string name="category_group_summary_device">Lanceur, clavier, sécurité &amp; personnalisation</string>
+    <string name="category_group_summary_network">Navigateurs, VPN, proxys &amp; pare-feu</string>
+    <string name="category_group_summary_storage">Fichiers, galerie, synchronisation dans le cloud &amp; chiffrement</string>
+    <string name="category_group_summary_interests">Science, sport, dessin &amp; recettes</string>
+    <string name="category_group_summary_misc">Non classé</string>
+    <string name="app_details_anti_features_title">Que sont les « anti-fonctionnalités » ?</string>
+    <string name="app_details_anti_features_text">Certaines applications présentent des comportements que vous n\'avez pas demandés — et dont vous ne voulez peut-être pas. Il s\'agit notamment de publicités, de suivi ou de dépendance à l\'égard de services propriétaires. Nous appelons cela des « anti-fonctionnalités ».\n\nLes applications disponibles sur F-Droid sont clairement signalées lorsqu\'elles contiennent des anti-fonctionnalités, afin que vous puissiez faire un choix éclairé.</string>
+    <string name="dialog_metered_dont_show">Ne plus afficher ce message</string>
+    <string name="apps_updates_hint_title">Félicitations 🥳</string>
+    <string name="apps_updates_hint_text">Toutes vos applications sont à jour</string>
+    <string name="search_my_apps_hint">Rechercher les applications installées</string>
+    <string name="repo_disable_dialog_title">Désactiver le référentiel</string>
+    <string name="repo_disable_dialog_warning">Si vous avez défini ce référentiel comme référentiel par défaut pour une application, ce paramètre sera perdu</string>
+    <string name="repo_disable_dialog_text">Toutes les applications de ce référentiel vont disparaître. Les applications déjà installées ne seront pas concernées.</string>
 </resources>

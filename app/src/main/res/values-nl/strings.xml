@@ -93,7 +93,7 @@
     <string name="theme">Thema</string>
     <string name="unsigned">Niet ondertekend</string>
     <string name="unverified">Onbevestigd</string>
-    <string name="repo_fingerprint">Vingerafdruk van de ondertekeningssleutel (SHA-256)</string>
+    <string name="repo_fingerprint">Ondertekeningssleutel vingerafdruk (SHA-256)</string>
     <string name="repo_description">Beschrijving</string>
     <string name="unknown">Onbekend</string>
     <string name="repo_confirm_delete_title">Verwijder gegevensbank?</string>
@@ -745,4 +745,24 @@
     <string name="app_details_install_error_text">Sorry! Er was een onverwachte fout tijdens het installeren van deze app</string>
     <string name="crash_report_text">Een onverwachte fout vond plaats. Dit is niet uw schuld. Zou u een e-mail willen sturen met de details om te helpen dit probleem op te lossen?</string>
     <string name="install_history_empty_state">Deze lijst is nog leeg\n\nWanneer u apps installeert, update of deïnstalleert zal hier een register verschijnen</string>
+    <string name="search_auto_keyboard">Open toetsenbord automatisch</string>
+    <string name="hide">Verberg</string>
+    <string name="category_group_summary_productivity">Kalenders, taken, klokken &amp; notities</string>
+    <string name="category_group_summary_tools">Navigatie, weer, rekenmachines &amp; omrekenaars</string>
+    <string name="category_group_summary_wallets">Financiën, geld &amp; pasbeheer</string>
+    <string name="category_group_summary_media">Muziek, podcasts, spellen &amp; e-book lezers</string>
+    <string name="category_group_summary_communication">E-mail, berichten &amp; sociale netwerken</string>
+    <string name="category_group_summary_device">Launchers, toetsenborden, beveiliging &amp; thema\'s</string>
+    <string name="category_group_summary_network">Browsers, VPNs, proxies &amp; firewalls</string>
+    <string name="category_group_summary_storage">Bestanden, gallerij, cloudsynchronizatie &amp; verleuteling</string>
+    <string name="category_group_summary_interests">Wetenschap, sport, tekenen &amp; recepten</string>
+    <string name="category_group_summary_misc">Ungecategorizeerd</string>
+    <string name="app_details_anti_features_title">Wat zijn Anti-Functies?</string>
+    <string name="app_details_anti_features_text">Sommige apps hebben gedrag waar u niet om gevraagd hebt — en wat u misschien niet wilt. Dingen zoals advertenties, tracking, of afhankelijkheid van betaalde diensten. We noemen dat Anti-Functies. \n\nApps in F-Droid zijn duidelijk gelabeled als ze Anti-Functies bevatten, keuze kan maken.</string>
+    <string name="dialog_metered_dont_show">Toon dit niet vaker</string>
+    <string name="apps_updates_hint_title">Gefeliciteerd 🥳</string>
+    <string name="apps_updates_hint_text">Al uw apps zijn bijgewerkt</string>
+    <string name="search_my_apps_hint">Doorzoek geïnstalleerde apps</string>
+    <string name="status_downloading">Wordt gedownload met %s/s</string>
+    <string name="status_downloading_remaining">%1$s over</string>
 </resources>

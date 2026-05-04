@@ -829,4 +829,25 @@
     <string name="status_downloading_remaining">Pozostało %1$s</string>
     <string name="search_history">Ostatnie wyszukiwania</string>
     <string name="install_history_switch">Używaj historii instalacji</string>
+    <string name="search_auto_keyboard">Otwieraj klawiaturę automatycznie</string>
+    <string name="hide">Ukryj</string>
+    <string name="category_group_summary_productivity">Kalendarze, zadania, zegary i notatki</string>
+    <string name="category_group_summary_tools">Nawigacja, pogoda, kalkulatory i przeliczniki</string>
+    <string name="category_group_summary_wallets">Finanse, menedżery pieniędzy i kart</string>
+    <string name="category_group_summary_media">Muzyka, podcasty, gry i czytniki e-booków</string>
+    <string name="category_group_summary_communication">E-mail, komunikatory i sieci społecznościowe</string>
+    <string name="category_group_summary_device">Launchery, klawiatury, bezpieczeństwo i motywy</string>
+    <string name="category_group_summary_network">Przeglądarki, VPN-y, proxy i zapory</string>
+    <string name="category_group_summary_storage">Pliki, galerie, synchronizacja w chmurze i szyfrowanie</string>
+    <string name="category_group_summary_interests">Nauka, sport, rysowanie i przepisy kulinarne</string>
+    <string name="category_group_summary_misc">Nieskategoryzowane</string>
+    <string name="app_details_anti_features_title">Czym są niepożądane funkcje?</string>
+    <string name="app_details_anti_features_text">Niektóre aplikacje zawierają funkcje, o które nie prosiłeś(-aś) — i których być może nie chcesz. Chodzi na przykład o reklamy, śledzenie użytkowników lub zależność od zastrzeżonych usług. Nazywamy je „niepożądanymi funkcjami”.\n\nAplikacje w F-Droid są wyraźnie oznaczone, gdy zawierają „niepożądane funkcje”, dzięki czemu możesz podjąć świadomą decyzję.</string>
+    <string name="dialog_metered_dont_show">Nie pokazuj tego ponownie</string>
+    <string name="apps_updates_hint_title">Gratulacje 🥳</string>
+    <string name="apps_updates_hint_text">Wszystkie Twoje aplikacje są aktualne</string>
+    <string name="search_my_apps_hint">Szukaj zainstalowanych aplikacji</string>
+    <string name="repo_disable_dialog_title">Wyłącz repozytorium</string>
+    <string name="repo_disable_dialog_warning">Jeśli ustawiłeś(-aś) to repozytorium jako preferowane dla jakiejkolwiek aplikacji, wtedy to ustawienie zostanie utracone.</string>
+    <string name="repo_disable_dialog_text">Wszystkie aplikacje z tego repozytorium znikną. Nie wpłynie to na już zainstalowane aplikacje.</string>
 </resources>

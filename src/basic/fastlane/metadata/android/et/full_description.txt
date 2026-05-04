@@ -12,4 +12,4 @@ Android on ise avatud selles mõttes, et sul on võimalus paigaldada APK pakette
 * nutiseadmega ühildamatute rakenduste filtreerimine,
 * rakenduste otsimine kategooriate ja kirjelduste järgi,
 * seotud kohaviitade kasutamine toetamiseks, lähtekoodiga tutvumiseks jne,
-* kindlustunne rakenduste hoidla allkirjastatud indeksite ja APK räside kaudu.
+* kindlustunne rakenduste hoidla allkirjastatud indeksite ja APK räside kaudu

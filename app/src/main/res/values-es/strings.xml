@@ -817,4 +817,25 @@
     <string name="status_downloading_remaining">%1$s restantes</string>
     <string name="search_history">Busquedas recientes</string>
     <string name="install_history_switch">Historial de instalaciones</string>
+    <string name="search_auto_keyboard">Abrir teclado automáticamente</string>
+    <string name="hide">Ocultar</string>
+    <string name="category_group_summary_productivity">Calendarios, tareas, relojes y notas</string>
+    <string name="category_group_summary_tools">Navegación, tiempo, calculadoras y conversores</string>
+    <string name="category_group_summary_wallets">Finanzas, dinero y gestores de pases</string>
+    <string name="category_group_summary_media">Música, pódcast, juegos y lectores de libros electrónicos</string>
+    <string name="category_group_summary_communication">Correo electrónico, mensajería y redes sociales</string>
+    <string name="category_group_summary_device">Lanzadores, teclados, seguridad y temas</string>
+    <string name="category_group_summary_network">Navegadores, VPNs, proxies y cortafuegos</string>
+    <string name="category_group_summary_storage">Archivos, galerías, sincronización y cifrado</string>
+    <string name="category_group_summary_interests">Ciencia, deportes, dibujo y recetas</string>
+    <string name="category_group_summary_misc">Sin categoría</string>
+    <string name="app_details_anti_features_title">¿Qué son las Características Indeseadas?</string>
+    <string name="app_details_anti_features_text">Algunas aplicaciones vienen con comportamientos que no pediste —y que posiblemente no quieras. Cosas como anuncios, rastreo o dependencia de servicios privativos. A esto lo llamamos Características Indeseadas.\n\nLas aplicaciones en F-Droid están etiquetadas claramente cuando contienen Características Indeseadas, de manera que puedas tomar una decisión informada.</string>
+    <string name="dialog_metered_dont_show">No mostrar nuevamente</string>
+    <string name="apps_updates_hint_title">Felicitaciones 🥳</string>
+    <string name="apps_updates_hint_text">Todas tus aplicaciones están actualizadas</string>
+    <string name="search_my_apps_hint">Buscar aplicaciones instaladas</string>
+    <string name="repo_disable_dialog_title">Desactivar repositorio</string>
+    <string name="repo_disable_dialog_warning">Si has configurado este repositorio como el preferido para alguna aplicación, dicha configuración se perderá</string>
+    <string name="repo_disable_dialog_text">Todas las aplicaciones de este repositorio desaparecerán. Las que ya tengas instaladas no se verán afectadas.</string>
 </resources>

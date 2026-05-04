@@ -771,4 +771,25 @@
     <string name="status_downloading_remaining">剩余 %1$s</string>
     <string name="search_history">最近搜索</string>
     <string name="install_history_switch">使用安装历史记录</string>
+    <string name="search_auto_keyboard">自动打开键盘</string>
+    <string name="hide">隐藏</string>
+    <string name="category_group_summary_productivity">日历、任务、时钟和笔记</string>
+    <string name="category_group_summary_tools">导航、天气、计算器和转换器</string>
+    <string name="category_group_summary_wallets">财务、金钱和密码管理器</string>
+    <string name="category_group_summary_media">音乐、播客、游戏和电子书阅读器</string>
+    <string name="category_group_summary_communication">电子邮件、消息收发和社交网络</string>
+    <string name="category_group_summary_device">启动器、键盘、安全和主题</string>
+    <string name="category_group_summary_network">浏览器、VPN、代理和防火墙</string>
+    <string name="category_group_summary_storage">文件、图库、云同步和加密</string>
+    <string name="category_group_summary_interests">科学、体育、绘图和菜谱</string>
+    <string name="category_group_summary_misc">未分类</string>
+    <string name="app_details_anti_features_title">什么是“负面特征”？</string>
+    <string name="app_details_anti_features_text">一些应用有用户未请求和可能不想要的行为，比如广告、跟踪或者依赖专有服务。我们把这些叫做“负面特征”。\n\nF-Droid 应用包含的“负面特征”会有清晰的标记以便用户进行知情选择。</string>
+    <string name="dialog_metered_dont_show">不再显示</string>
+    <string name="apps_updates_hint_title">祝贺 🥳</string>
+    <string name="apps_updates_hint_text">所有应用都是最新版</string>
+    <string name="search_my_apps_hint">搜索安装的应用</string>
+    <string name="repo_disable_dialog_title">禁用存储库</string>
+    <string name="repo_disable_dialog_warning">如果曾将该存储库设为任何应用的首选存储库，那么这样的设置将失效</string>
+    <string name="repo_disable_dialog_text">所有来自该存储库的应用将消失。已安装的应用不受影响。</string>
 </resources>

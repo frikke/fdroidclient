@@ -766,4 +766,25 @@
     <string name="status_downloading_remaining">%1$s còn lại</string>
     <string name="search_history">Lượt tìm kiếm gần đây</string>
     <string name="install_history_switch">Dùng lịch sử cài đặt</string>
+    <string name="search_auto_keyboard">Mở bàn phím tự động</string>
+    <string name="hide">Ẩn</string>
+    <string name="category_group_summary_productivity">Lịch, tác vụ, đồng hồ &amp; ghi chú</string>
+    <string name="category_group_summary_tools">Điều hướng, thời tiết, máy tính và công cụ chuyển đổi</string>
+    <string name="category_group_summary_wallets">Tài chính, tiền và vé</string>
+    <string name="category_group_summary_media">Âm nhạc, podcast, trò chơi và trình đọc sách điện tử</string>
+    <string name="category_group_summary_communication">Email, tin nhắn và mạng xã hội</string>
+    <string name="category_group_summary_device">Trình launcher, bàn phím, bảo mật &amp; giao diện</string>
+    <string name="category_group_summary_network">Trình duyệt, VPN, proxy và tường lửa</string>
+    <string name="category_group_summary_storage">Tệp, thư viện ảnh, đồng bộ hóa đám mây và mã hóa</string>
+    <string name="category_group_summary_interests">Khoa học, thể thao, vẽ và công thức nấu ăn</string>
+    <string name="category_group_summary_misc">Chưa phân loại</string>
+    <string name="app_details_anti_features_title">Phản-tính năng là gì?</string>
+    <string name="app_details_anti_features_text">Một số ứng dụng đi kèm với những tính năng mà bạn không yêu cầu — và có thể không muốn. Ví dụ như quảng cáo, theo dõi người dùng hoặc phụ thuộc vào các dịch vụ độc quyền. Chúng tôi gọi những tính năng này là \"Phản-tính năng\". \n\nCác ứng dụng trong F-Droid được dán nhãn rõ ràng khi chúng chứa các Phản-tính năng, giúp bạn đưa ra lựa chọn sáng suốt.</string>
+    <string name="dialog_metered_dont_show">Không hiện lại nữa</string>
+    <string name="apps_updates_hint_title">Chúc mừng 🥳</string>
+    <string name="apps_updates_hint_text">Tất cả ứng dụng của bạn đã được cập nhật</string>
+    <string name="search_my_apps_hint">Tìm ứng dụng đã cài đặt</string>
+    <string name="repo_disable_dialog_title">Tắt kho ứng dụng</string>
+    <string name="repo_disable_dialog_warning">Nếu bạn đã thiết lập kho ứng dụng này làm kho ưu tiên cho bất kỳ ứng dụng nào, thiết lập đó sẽ bị mất</string>
+    <string name="repo_disable_dialog_text">Tất cả ứng dụng từ kho ứng dụng này sẽ biến mất. Các ứng dụng đã cài đặt trước đó sẽ không bị ảnh hưởng.</string>
 </resources>

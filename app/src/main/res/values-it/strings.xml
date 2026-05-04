@@ -769,4 +769,60 @@
     <string name="crash_report_comment_hint">Dicci cosa è successo proprio prima del crash</string>
     <string name="crash_report_button_send">Invia report</string>
     <string name="crash_report_error">Impossibile inviare report. Nessuna app di posta elettronica trovata :(</string>
+    <string name="search_auto_keyboard">Apri tastiera automaticamente</string>
+    <string name="hide">Nascondi</string>
+    <string name="category_group_summary_productivity">Calendari, attività, orologi &amp; note</string>
+    <string name="category_group_summary_tools">Navigazione, meteo, calcolatrici &amp; convertitori</string>
+    <string name="category_group_summary_wallets">Finanza, gestori di soldi &amp; carte</string>
+    <string name="category_group_summary_media">Musica, podcast, giochi &amp; lettori ebook</string>
+    <string name="category_group_summary_communication">Mail, messaggi &amp; social network</string>
+    <string name="category_group_summary_device">Launcher, tastiera, sicurezza &amp; temi</string>
+    <string name="category_group_summary_network">Browser, VPN, proxy &amp; firewall</string>
+    <string name="category_group_summary_storage">File, galleria, sincronizzazione cloud &amp; crittografia</string>
+    <string name="category_group_summary_interests">Scienza, sport, disegno &amp; ricette</string>
+    <string name="category_group_summary_misc">Senza categoria</string>
+    <string name="app_details_anti_features_text">Alcune app vengono fornite con comportamenti che non hai chiesto e che potresti non volere. Cose come annunci, monitoraggio o dipendenza dai servizi proprietari. Noi chiamiamo queste Anti-Caratteristiche-. \n\nLe app in F-Droid sono chiaramente etichettate quando contengono Anti-Caratteristiche, in modo da poter fare una scelta informata.</string>
+    <string name="app_details_anti_features_title">Cosa sono le Anti-Caratteristiche?</string>
+    <string name="dialog_metered_dont_show">Non mostrare più</string>
+    <string name="apps_updates_hint_title">Congratulazioni 🥳</string>
+    <string name="apps_updates_hint_text">Tutte le tue app sono aggiornate</string>
+    <string name="search_my_apps_hint">Cerca app installate</string>
+    <string name="repo_disable_dialog_title">Disabilità repository</string>
+    <string name="repo_disable_dialog_warning">Se hai impostato questa repository come preferita per qualsiasi app, quella preferenza andrà persa</string>
+    <string name="repo_disable_dialog_text">Tutte le app da questa repository scompariranno. Le app già installate non saranno interessate.</string>
+    <string name="notification_channel_updates_available_title">Aggiornamenti app disponibili</string>
+    <string name="notification_channel_updates_available_description">Visualizza una notifica dopo l\'aggiornamento delle repository se sono stati rilevati aggiornamenti delle app</string>
+    <string name="notification_repo_update_default">Connessione a %1$s…</string>
+    <string name="notification_repo_update_downloading">Scaricato %1$s da %2$s</string>
+    <plurals name="notification_repo_update_saving">
+        <item quantity="one">Salvata %1$d app da %2$s</item>
+        <item quantity="many">Salvate %1$d app da %2$s</item>
+        <item quantity="other">Salvate %1$d app da %2$s</item>
+    </plurals>
+    <plurals name="notification_installing_title">
+        <item quantity="one">Installazione di %1$d app…</item>
+        <item quantity="many">Installazione di %1$d app…</item>
+        <item quantity="other">Installazione di %1$d app…</item>
+    </plurals>
+    <plurals name="notification_updating_title">
+        <item quantity="one">Aggiornamento di %1$d app…</item>
+        <item quantity="many">Aggiornamento di %1$d app…</item>
+        <item quantity="other">Aggiornamento di %1$d app…</item>
+    </plurals>
+    <plurals name="notification_update_success_title">
+        <item quantity="one">%1$d app aggiornata</item>
+        <item quantity="many">%1$d app aggiornate</item>
+        <item quantity="other">%1$d app aggiornate</item>
+    </plurals>
+    <string name="notification_installing_section_installing">Installazione:</string>
+    <string name="notification_installing_section_confirmation">Conferma utente richiesta:</string>
+    <string name="notification_installing_section_installed">Installata:</string>
+    <string name="notification_installing_confirmation">Tocca per confermare</string>
+    <string name="permission_camera_denied">Concedi l\'autorizzazione alla fotocamera per la scansione del codice QR. Tocca per concedere l\'autorizzazione della fotocamera nelle impostazioni.</string>
+    <string name="error">Errore</string>
+    <string name="install_history_switch">Usa cronologia installazioni</string>
+    <string name="install_history_empty_state">Questa lista è ancora vuota\n\nQuando installi, aggiorni o disinstalli le app, un registro verrà visualizzato qui</string>
+    <string name="install_history_disabled_state">La cronologia installazioni è disattivata\n\nInstallazioni, aggiornamenti e disinstallazioni non verranno registrati</string>
+    <string name="install_history_delete_ally">Cancella cronologia installazioni</string>
+    <string name="install_history_delete_text">Cancellare la cronologia installazioni?</string>
 </resources>

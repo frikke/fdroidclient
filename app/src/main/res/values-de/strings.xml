@@ -720,7 +720,7 @@
     <string name="app_issue_not_available_title">App nicht mehr verfügbar</string>
     <string name="app_issue_not_available_text">Die App wurde möglicherweise entfernt oder befand sich in einem Repository, das du entfernt oder deaktiviert hast.</string>
     <string name="app_issue_not_available_button">App-Info anzeigen</string>
-    <string name="app_issue_hint">Die folgenden Apps erfordern deine Aufmerksamkeit. Sie kannst ein App-Problem ignorieren, indem du lange darauf drückst.</string>
+    <string name="app_issue_hint">Die folgenden Apps erfordern deine Aufmerksamkeit. Du kannst ein App-Problem ignorieren, indem du lange darauf drückst.</string>
     <string name="added_x_ago">%1$s hinzugefügt</string>
     <string name="size_colon">Größe: %1$s</string>
     <string name="version_code_colon">Versionscode: %1$s</string>
@@ -786,4 +786,25 @@
     <string name="status_downloading_remaining">noch %1$s</string>
     <string name="search_history">Zuletzt gesucht</string>
     <string name="install_history_switch">Installationsverlauf verwenden</string>
+    <string name="search_my_apps_hint">Installierte Apps suchen</string>
+    <string name="search_auto_keyboard">Tastatur automatisch öffnen</string>
+    <string name="hide">Ausblenden</string>
+    <string name="category_group_summary_productivity">Kalender, Aufgaben, Uhren und Notizen</string>
+    <string name="category_group_summary_tools">Navigation, Wetter, Rechner und Umrechner</string>
+    <string name="category_group_summary_wallets">Finanzen, Geld- und Passverwaltung</string>
+    <string name="category_group_summary_media">Musik, Podcasts, Spiele und E-Book-Reader</string>
+    <string name="category_group_summary_communication">E-Mail, Messaging und soziale Netzwerke</string>
+    <string name="category_group_summary_device">Launcher, Tastatur, Sicherheit und Design</string>
+    <string name="category_group_summary_network">Browser, VPNs, Proxys und Firewalls</string>
+    <string name="category_group_summary_storage">Dateien, Galerie, Cloud-Synchronisierung und Verschlüsselung</string>
+    <string name="category_group_summary_interests">Wissenschaft, Sport, Zeichnen und Rezepte</string>
+    <string name="category_group_summary_misc">Unkategorisiert</string>
+    <string name="app_details_anti_features_title">Was sind unerwünschte Merkmale?</string>
+    <string name="app_details_anti_features_text">Manche Apps weisen Funktionen auf, um die du nicht gebeten hast – und die du vielleicht gar nicht willst. Dazu gehören beispielsweise Werbung, Tracking oder die Abhängigkeit von proprietären Diensten. Wir bezeichnen diese als „unerwünschte Merkmale“.\n\nApps in F-Droid sind deutlich gekennzeichnet, wenn sie unerwünschte Merkmale enthalten, damit du eine fundierte Entscheidung treffen kannst.</string>
+    <string name="dialog_metered_dont_show">Nicht mehr anzeigen</string>
+    <string name="apps_updates_hint_title">Herzlichen Glückwunsch 🥳</string>
+    <string name="apps_updates_hint_text">Alle deine Apps sind auf dem neuesten Stand</string>
+    <string name="repo_disable_dialog_title">Paketquelle deaktivieren</string>
+    <string name="repo_disable_dialog_warning">Wenn du diese Paketquelle für eine App als bevorzugt festgelegt hast, geht diese Einstellung verloren</string>
+    <string name="repo_disable_dialog_text">Alle Apps aus dieser Paketquelle werden gelöscht. Bereits installierte Apps sind davon nicht betroffen.</string>
 </resources>

@@ -686,4 +686,17 @@
     <string name="search_history">Останні пошуки</string>
     <string name="search_filter_no_results">Нічого не знайдено\n\nСпробуйте змінити параметри пошуку або вимкнути фільтри</string>
     <string name="search_my_apps_no_results">Додатків не знайдено\n\nСпробуйте скоротити пошуковий запит</string>
+    <string name="search_auto_keyboard">Автоматично відкривати клавіатуру</string>
+    <string name="sort_title">Сортування та сумісність</string>
+    <string name="sort_by_name">Сортувати за назвою</string>
+    <string name="sort_by_latest">Сортувати за останнім оновленням</string>
+    <string name="filter_only_compatible">Програми, сумісні з цим пристроєм</string>
+    <string name="filter_button_save">Зберегти як за замовчуванням</string>
+    <string name="filter_intro">Фільтрувати програми за</string>
+    <string name="filter_button_clear_all">Очистити всі фільтри</string>
+    <string name="filter">Фільтер</string>
+    <string name="filter_selected">вибраний</string>
+    <string name="category">Категорія</string>
+    <string name="filter_antifeatures">Приховати антифункції</string>
+    <string name="onboarding_app_list_filter_title">Фільтер</string>
 </resources>

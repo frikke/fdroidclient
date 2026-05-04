@@ -797,4 +797,25 @@
     <string name="status_downloading_remaining">%1$s restantes</string>
     <string name="search_history">Buscas recentes</string>
     <string name="install_history_switch">Usar histórico de instalação</string>
+    <string name="search_auto_keyboard">Abrir teclado automaticamente</string>
+    <string name="hide">Ocultar</string>
+    <string name="category_group_summary_productivity">Calendários, tarefas, relógios &amp; anotações</string>
+    <string name="category_group_summary_tools">Navegação, clima, calculadoras &amp; conversores</string>
+    <string name="category_group_summary_wallets">Finanças, dinheiro &amp; carteiras</string>
+    <string name="category_group_summary_media">Música, podcasts, jogos &amp; leitores de e-book</string>
+    <string name="category_group_summary_communication">E-mail, mensagens &amp; redes sociais</string>
+    <string name="category_group_summary_device">Launchers, teclados, segurança &amp; temas</string>
+    <string name="category_group_summary_network">Navegadores, VPNs, proxies &amp; firewall</string>
+    <string name="category_group_summary_storage">Arquivos, galeria, sincronização com nuvem &amp; criptografia</string>
+    <string name="category_group_summary_interests">Ciência, esportes, desenho &amp; receitas</string>
+    <string name="category_group_summary_misc">Sem categoria</string>
+    <string name="app_details_anti_features_title">O que são características indesejáveis?</string>
+    <string name="app_details_anti_features_text">Alguns apps vem com comportamentos que você não pediu — e talvez não quer. Coisas como anúncios, rastreamento, ou dependência em serviços proprietários. Nós chamamos isso de características indesejáveis.\n\nApps no F-Droid são rotulados de forma clara quando contêm características indesejáveis, para que você faça uma escolha informada.</string>
+    <string name="dialog_metered_dont_show">Não mostrar isso novamente</string>
+    <string name="apps_updates_hint_title">Parabéns 🥳</string>
+    <string name="apps_updates_hint_text">Todos seus apps estão atualizados</string>
+    <string name="search_my_apps_hint">Buscar apps instalados</string>
+    <string name="repo_disable_dialog_title">Desativar repositório</string>
+    <string name="repo_disable_dialog_warning">Se você configurou esse repositório como preferido para algum app, essa preferência vai ser perdida</string>
+    <string name="repo_disable_dialog_text">Todos os apps deste repositório desaparecerão. Os apps que já estão instalados não serão desinstalados.</string>
 </resources>

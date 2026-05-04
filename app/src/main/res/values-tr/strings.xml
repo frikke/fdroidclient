@@ -251,7 +251,7 @@
     <string name="keep_install_history">Yükleme geçmişi tut</string>
     <string name="keep_install_history_summary">Tüm yükleme ve kaldırmaların günlüğünü özel olarak sakla</string>
     <string name="update_auto_install">Güncellemeleri otomatik olarak yükle</string>
-    <string name="warning_no_internet">Güncelleme başarısız. İnternet bağlantınızı kontrol edin.</string>
+    <string name="warning_no_internet">Güncelleme yapılamıyor, internete bağlı mısınız?</string>
     <string name="update_auto_install_summary">Bir bildirim göstererek arka planda uygulamaları indir ve güncelle</string>
     <string name="versions">Sürümler</string>
     <string name="app_details_donate_prompt_unknown_author">%1$s geliştiricilerine bir kahve alın!</string>
@@ -795,4 +795,25 @@
     <string name="status_downloading_remaining">%1$s kaldı</string>
     <string name="search_history">Son aramalar</string>
     <string name="install_history_switch">İndirme geçmişini kullan</string>
+    <string name="search_auto_keyboard">Klavyeyi otomatik olarak aç</string>
+    <string name="hide">Gizle</string>
+    <string name="category_group_summary_productivity">Takvimler, görevler, saatler ve notlar</string>
+    <string name="category_group_summary_tools">Navigasyon, hava durumu, hesap makineleri ve dönüştürücüler</string>
+    <string name="category_group_summary_wallets">Finans, para ve geçiş yöneticileri</string>
+    <string name="category_group_summary_media">Müzik, podcast\'ler, oyunlar ve e-kitap okuyucular</string>
+    <string name="category_group_summary_communication">E-posta, mesajlaşma ve sosyal ağlar</string>
+    <string name="category_group_summary_device">Başlatıcı, klavye, güvenlik ve tema</string>
+    <string name="category_group_summary_network">Tarayıcı, VPN\'ler, proxy\'ler ve güvenlik duvarı</string>
+    <string name="category_group_summary_storage">Dosyalar, galeri, bulut senkronizasyonu ve şifreleme</string>
+    <string name="category_group_summary_interests">Bilim, spor, çizim ve tarifler</string>
+    <string name="category_group_summary_misc">Kategorize edilmemiş</string>
+    <string name="app_details_anti_features_text">Bazı uygulamalar, istemediğiniz ve istemeyebileceğiniz özelliklerle birlikte gelir — Reklamlar, izleme veya özel hizmetlere bağımlılık gibi şeyler. Bunlara \"Anti-Özellikler\" diyoruz. \n\nF-Droid\'deki uygulamalar, içerdikleri Anti-Özellikler konusunda açıkça etiketlenmiştir, böylece bilinçli bir seçim yapabilirsiniz.</string>
+    <string name="app_details_anti_features_title">Anti-Özellikler Nelerdir?</string>
+    <string name="dialog_metered_dont_show">Bunu bir daha gösterme</string>
+    <string name="repo_disable_dialog_text">Bu depodaki tüm uygulamalar kaybolacak. Hali hazırda yüklenmiş uygulamalar etkilenmeyecek.</string>
+    <string name="repo_disable_dialog_warning">Eğer bu depoyu (repository) herhangi bir uygulama için tercih edilen olarak ayarladıysanız, bu tercih kaybolacaktır</string>
+    <string name="repo_disable_dialog_title">Depoyu devre dışı bırak</string>
+    <string name="apps_updates_hint_title">Tebrikler 🥳</string>
+    <string name="search_my_apps_hint">Yüklü uygulamaları arayın</string>
+    <string name="apps_updates_hint_text">Tüm uygulamalarınız güncel</string>
 </resources>

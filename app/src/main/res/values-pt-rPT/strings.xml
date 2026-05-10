@@ -714,4 +714,7 @@
     <string name="pref_proxy_enabled">Usa %s para conectar</string>
     <string name="pref_proxy_hint">O formato esperado é servidor:porta</string>
     <string name="pref_proxy_error">Formato de proxy inválido</string>
+    <string name="category_group_summary_communication">E-mail, mensagens e redes sociais</string>
+    <string name="category_group_summary_device">Lançadores, teclado, segurança &amp; temas</string>
+    <string name="pref_repo_updates_title">Verificar se há atualizações</string>
 </resources>

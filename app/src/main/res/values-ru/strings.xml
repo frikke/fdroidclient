@@ -811,4 +811,25 @@
     <string name="status_downloading_remaining">Осталось: %1$s</string>
     <string name="install_history_switch">Использовать историю установок</string>
     <string name="search_history">Недавние поиски</string>
+    <string name="search_auto_keyboard">Автоматически открывать клавиатуру</string>
+    <string name="hide">Скрыть</string>
+    <string name="category_group_summary_productivity">Календари, задачи, часы и заметки</string>
+    <string name="category_group_summary_tools">Навигация, погода, калькуляторы и конвертеры</string>
+    <string name="category_group_summary_wallets">Финансы, деньги и менеджеры паролей</string>
+    <string name="category_group_summary_media">Музыка, подкасты, игры и программы для чтения электронных книг</string>
+    <string name="category_group_summary_communication">Электронная почта, мессенджеры и социальные сети</string>
+    <string name="category_group_summary_device">Лаунчеры, клавиатуры, безопасность и оформление</string>
+    <string name="category_group_summary_network">Браузеры, VPN, прокси и брандмауэры</string>
+    <string name="category_group_summary_storage">Файлы, галереи, облачная синхронизация и шифрование</string>
+    <string name="category_group_summary_interests">Наука, спорт, рисование и рецепты</string>
+    <string name="category_group_summary_misc">Без категории</string>
+    <string name="app_details_anti_features_title">Что такое анти-функции?</string>
+    <string name="app_details_anti_features_text">Некоторые приложения имеют функции, которые вам не нужны — и которые вы, вероятно, хотели бы исключить. Например, реклама, отслеживание действий или зависимость от проприетарных сервисов. Мы называем их анти-функциями.\n\nПриложения в F-Droid, содержащие анти-функции, маркируются соответствующим образом, чтобы вы могли сделать осознанный выбор.</string>
+    <string name="dialog_metered_dont_show">Не показывать снова</string>
+    <string name="apps_updates_hint_title">Поздравляем 🥳</string>
+    <string name="apps_updates_hint_text">Все ваши приложения обновлены</string>
+    <string name="search_my_apps_hint">Поиск установленных приложений</string>
+    <string name="repo_disable_dialog_title">Отключить репозиторий</string>
+    <string name="repo_disable_dialog_warning">Если вы указали этот репозиторий в качестве предпочтительного для каких-либо приложений, эта настройка будет сброшена</string>
+    <string name="repo_disable_dialog_text">Все приложения из этого репозитория исчезнут. Уже установленные приложения останутся нетронутыми.</string>
 </resources>

@@ -516,7 +516,7 @@
     <string name="app_details_repository_button_prefer">Ưu tiên kho ứng dụng</string>
     <string name="repo_error_adding_archive">Không thể thêm trực tiếp các kho đã lưu trữ. Nhấn vào Kho ứng dụng trong danh sách và bật lưu trữ tại đó.</string>
     <string name="useDnsCache">Dùng bộ nhớ đệm DNS</string>
-    <string name="useDnsCacheSummary">Để giảm số lượt truy vấn DNS.</string>
+    <string name="useDnsCacheSummary">Để giảm số lượt truy vấn DNS</string>
     <string name="repo_archive_toggle">Kho lưu trữ</string>
     <string name="repo_archive_toggle_description">Hiển thị các ứng dụng đã lưu trữ và các phiên bản lỗi thời</string>
     <string name="repo_archive_failed">Kho lưu trữ hiện không tồn tại</string>
@@ -689,8 +689,8 @@
     <string name="filter_only_compatible">Chỉ ứng dụng tương thích thiết bị</string>
     <string name="first_start_offline">Không có mạng. Kiểm tra kết nối và thử lại.</string>
     <string name="first_start_metered">Bạn đang dùng dữ liệu di động. Nhấn Nạp kho ứng dụng để bắt đầu.</string>
-    <string name="pref_auto_updates_summary_only_wifi">Mỗi ngày, cập nhật các ứng dụng khi kết nối Wi-Fi</string>
-    <string name="pref_auto_updates_summary_always">Mỗi ngày, cập nhật các ứng dụng bằng Wi-Fi lẫn dữ liệu di động</string>
+    <string name="pref_auto_updates_summary_only_wifi">Mỗi ngày, bằng Wi-Fi</string>
+    <string name="pref_auto_updates_summary_always">Mỗi ngày, bằng Wi-Fi lẫn dữ liệu di động</string>
     <string name="pref_auto_updates_summary_never">Đã tắt • Ứng dụng cần được cập nhật thủ công</string>
     <string name="about_text">Các ứng dụng trên F-Droid là phần mềm tự do mã nguồn mở (FOSS), chúng tôn trọng quyền riêng tư của bạn và bất kỳ ai cũng có thể xem mã nguồn, phát triển và cải tiến chúng.\n\nViệc phân phối ứng dụng minh bạch, tôn trọng quyền riêng tư và có trách nhiệm sẽ thiết lập một tiêu chuẩn thử thách hệ sinh thái di động phải trở nên tốt hơn.\n\nTác động của F-Droid không chỉ được đo lường bằng số lượng ứng dụng được xuất bản, mà còn bằng sự tự do, lòng tin và các quyền kỹ thuật số mà nó bảo vệ.\n\nHãy giúp F-Droid bảo vệ sự đổi mới bởi cộng đồng tạo ra và tiếp tục sứ mệnh về tính mở, quyền riêng tư và trao quyền cho người dùng.</string>
     <string name="about_license_text">Chương trình này là Phần mềm Tự do. Bạn có thể tái phân phối và/hoặc sửa đổi nó theo các điều khoản của Giấy phép Công cộng GNU do Tổ chức Phần mềm Tự do công bố, phiên bản 3 của Giấy phép hoặc bất kỳ phiên bản nào sau đó.</string>

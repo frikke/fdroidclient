@@ -67,7 +67,7 @@
     <string name="repositories_summary">Laai addisionele program bronne</string>
     <string name="menu_settings">Instellings</string>
     <string name="menu_search">Soek</string>
-    <string name="menu_add_repo">Nuwe argief</string>
+    <string name="menu_add_repo">Nuevo Repositorio</string>
     <string name="menu_launch">Oopmaak</string>
     <string name="menu_share">Deel</string>
     <string name="menu_install">Installeer</string>
@@ -151,7 +151,7 @@
     <string name="not_on_same_wifi">Jou toestel is nie op die dieselfde Wi-Fi as die plaaslike argief jy nou net gelaai het nie! Probeer hierdie netwerk aansluiting by: %s</string>
     <string name="requires_features">Vereis: %1$s</string>
     <string name="pref_language">Taal</string>
-    <string name="pref_language_default">Stelsel nalaat waarde</string>
+    <string name="pref_language_default">Predeterminado del sistema</string>
     <string name="wifi">Wi-Fi</string>
     <string name="wifi_ap">Hotspot</string>
     <string name="category_Connectivity">Konnektiwiteit</string>
@@ -262,7 +262,7 @@
         Wil jy \'n e-pos met die besonderhede stuur om die probleem te help oplos?
     </string>
     <string name="crash_dialog_comment_prompt">Jy kan ekstra inligting en kommentaar hier laat:</string>
-    <string name="notification_title_single_update_available">Opdatering beskikbaar</string>
+    <string name="notification_title_single_update_available">Update available</string>
     <string name="install_confirm_update_system">Wil u \'n opdatering vir hierdie ingeboude app installeer\? U bestaande data sal nie verlore gaan nie. Die opgedateerde program kry toegang tot:</string>
     <string name="notification_title_single_ready_to_install">Gereed om te installeer</string>
     <string name="notification_title_single_ready_to_install_update">Opdatering gereed vir installasie</string>

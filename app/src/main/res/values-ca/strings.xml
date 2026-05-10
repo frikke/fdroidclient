@@ -794,4 +794,25 @@
     <string name="install_history_switch">Usa l\'historial d\'instal·lacions</string>
     <string name="sdk_target_version">%1$s (objectiu)</string>
     <string name="sdk_max_version">%1$s (màxim)</string>
+    <string name="search_auto_keyboard">Obre el teclat automàticament</string>
+    <string name="hide">Amaga</string>
+    <string name="category_group_summary_productivity">Calendaris, tasques, rellotges i notes</string>
+    <string name="category_group_summary_tools">Navegació, oratge, calculadores i conversors</string>
+    <string name="category_group_summary_wallets">Finances, diners i gestors de contrasenyes</string>
+    <string name="category_group_summary_media">Música, podcasts, jocs i lectors de llibres electrònics</string>
+    <string name="category_group_summary_communication">Correu electrònic, missatgeria i xarxes socials</string>
+    <string name="category_group_summary_device">Llançadores, teclats, seguretat i temes</string>
+    <string name="category_group_summary_network">Navegadors, VPN, intermediaris i tallafocs</string>
+    <string name="category_group_summary_storage">Fitxers, galeries, sincronització horària i xifratge</string>
+    <string name="category_group_summary_interests">Ciències, esports, dibuix i receptes</string>
+    <string name="category_group_summary_misc">No classificat</string>
+    <string name="app_details_anti_features_title">Què son les característiques no adients?</string>
+    <string name="app_details_anti_features_text">Algunes aplicacions porten funcionalitats que no heu demanat, i que possiblement no vulgueu. Coses com ara anuncis, rastreigs, o dependència de serveis propietaris. D\'això en diem característiques no adients\n\nLes aplicacions a F-Droid estan etiquetades clarament quan contenen característiques no adients; d\'aquesta manera podeu prendre una decisió informada.</string>
+    <string name="dialog_metered_dont_show">No tornis a mostrar-ho</string>
+    <string name="apps_updates_hint_title">Enhorabona 🥳</string>
+    <string name="apps_updates_hint_text">Totes les aplicacions estan actualitzades</string>
+    <string name="search_my_apps_hint">Cerca aplicacions instal·lades</string>
+    <string name="repo_disable_dialog_title">Desactiva el dipòsit</string>
+    <string name="repo_disable_dialog_warning">Si no heu configurat aquest dipòsit com el preferit per a cap aplicació, aquesta preferència es perdrà</string>
+    <string name="repo_disable_dialog_text">Totes les aplicacions d\'aquest dipòsit desapareixeran. Les aplicacions ja instal·lades no es veuran afectades.</string>
 </resources>

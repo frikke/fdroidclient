@@ -657,4 +657,19 @@
     <string name="developer_contact">개발자 연락처</string>
     <string name="menu_discover">탐색</string>
     <string name="ipfsgw_summary_new">IPFS 웹 엔드포인트를 사용하여 앱 다운로드</string>
+    <string name="filter">필터</string>
+    <string name="onboarding_app_list_filter_title">필터</string>
+    <string name="clear">지우기</string>
+    <string name="pref_category_network">네트워크</string>
+    <string name="pref_mirror_chooser_summary_random">무작위</string>
+    <string name="dialog_metered_button">다운로드</string>
+    <string name="repo_basicauth_username">사용자 이름</string>
+    <string name="repo_basicauth_password">비밀번호</string>
+    <string name="notification_title">알림</string>
+    <string name="notification_installing_section_installing">설치 중:</string>
+    <string name="notification_installing_section_installed">설치 완료:</string>
+    <string name="error">오류</string>
+    <string name="hide">숨기기</string>
+    <string name="category">카테고리</string>
+    <string name="category_group_summary_misc">카테고리 없음</string>
 </resources>

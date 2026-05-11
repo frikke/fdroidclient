@@ -697,7 +697,7 @@
     <string name="author_by">بواسطة %1$s</string>
     <string name="last_updated">آخر تحديث: %1$s</string>
     <string name="last_updated_with_size">آخر تحديث: %1$s (%2$s)</string>
-    <string name="status_install_preparing">يحضر للتثبيت…</string>
+    <string name="status_install_preparing">يجهز التثبيت…</string>
     <string name="whats_new_title">ما الجديد</string>
     <string name="donate_title">تبرَّع</string>
     <string name="anti_features_title">لدى هذا التطبيق خصائص مكروهة</string>

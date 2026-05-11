@@ -639,7 +639,7 @@
     <string name="category_group_misc">杂项</string>
     <string name="author_by">由 %1$s 开发</string>
     <string name="last_updated">上次更新：%1$s</string>
-    <string name="last_updated_with_size">上次更新： %1$s (%2$s)</string>
+    <string name="last_updated_with_size">上次更新：%1$s (%2$s)</string>
     <string name="status_install_preparing">正在准备安装…</string>
     <string name="whats_new_title">新版变化</string>
     <string name="donate_title">捐赠</string>
@@ -710,7 +710,7 @@
     <string name="app_issue_not_available_text">此应用可能已被删除或者在您删除或禁用的存储库中</string>
     <string name="app_issue_not_available_button">显示应用信息</string>
     <string name="app_issue_hint">下方应用需要您的关注。可以长按应用来忽略它。</string>
-    <string name="added_x_ago">添加了 %1$s</string>
+    <string name="added_x_ago">添加于 %1$s</string>
     <string name="size_colon">大小: %1$s</string>
     <string name="version_code_colon">版本码: %1$s</string>
     <string name="sdk_versions_colon">SDK 版本: %1$s</string>

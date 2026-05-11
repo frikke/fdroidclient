@@ -650,7 +650,7 @@
     <string name="technical_info">اطّلاعات فنی</string>
     <string name="package_name">نام بسته:</string>
     <string name="installed_version">نگارش نصب شده:</string>
-    <string name="category_group_interests">سهام</string>
+    <string name="category_group_interests">علایق</string>
     <string name="filter">پالایش</string>
     <string name="filter_selected">گزیده</string>
     <string name="category">دسته</string>
@@ -778,4 +778,25 @@
     <string name="status_downloading">بار گرفتن با %s/ث</string>
     <string name="status_downloading_remaining">‫‏%1$s مانده</string>
     <string name="install_history_switch">استفاده از تاریخچهٔ نصب</string>
+    <string name="hide">نهفتن</string>
+    <string name="category_group_summary_misc">دسته‌بندی نشده</string>
+    <string name="apps_updates_hint_title">تبریک 🥳</string>
+    <string name="repo_disable_dialog_title">از کار انداختن مخزن</string>
+    <string name="search_auto_keyboard">گشودن خودکار صفحه‌کلید</string>
+    <string name="app_details_anti_features_title">پادویژگی‌ها چیستند؟</string>
+    <string name="search_my_apps_hint">جست‌وجوی کاره‌های نصب شده</string>
+    <string name="dialog_metered_dont_show">دیگر نشان داده نشود</string>
+    <string name="category_group_summary_productivity">تقویم، وظایف، ساعت و یادداشت</string>
+    <string name="category_group_summary_tools">ناوبری، آب‌وهوا، ماشین‌حساب و تبدیلگر</string>
+    <string name="category_group_summary_wallets">مدیریت پول و اموال</string>
+    <string name="category_group_summary_communication">رایانامه، پیام‌رسانی و شبکه‌های اجتماعی</string>
+    <string name="category_group_summary_device">اجراگر، صفحه‌کلید، امنیت و زمینش</string>
+    <string name="category_group_summary_network">مرورگر، وی‌پی‌ان، پیشکار و دیوار آتش</string>
+    <string name="category_group_summary_interests">علمی، ورزشی، نقاشی و دستور پخت</string>
+    <string name="category_group_summary_media">آهنگ، پادپخش، بازی و کتاب‌خوان</string>
+    <string name="category_group_summary_storage">پرونده‌ها، نگارخانه، ابری و رمزنگاری</string>
+    <string name="apps_updates_hint_text">همهٔ کاره‌هایتان به‌روزند</string>
+    <string name="repo_disable_dialog_text">کاره‌های این مخزن دیگر ظاهر نخواهند شد. کاره‌هایی که نصب شده‌اند تأثیر نخواهند پذیرفت.</string>
+    <string name="repo_disable_dialog_warning">اگر این مخزن را برای هر کاره‌ای به عنوان ترجیحی تنظیم کرده باشید آن ترجیح از دست خواهد رفت</string>
+    <string name="app_details_anti_features_text">برخی کاره‌ها رفتارهایی دارند که شما نخواسته و شاید نپسندید. چیزهایی چون تبلیغات، ردیابی یا وابستگی به خدمت‌های انحصاری. به این‌ها پادویژگی می‌گوییم.\n\nکاره‌های اف‌دروید در صورت داشتن پادویژگی به وضوح برچسب خورده‌اند تا بتوانید انتخابی آگاهانه داشته باشید.</string>
 </resources>

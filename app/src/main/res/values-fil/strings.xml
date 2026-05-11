@@ -103,7 +103,7 @@
     <string name="menu_search">Maghanap</string>
     <string name="menu_share">Ibahagi</string>
     <string name="menu_install">I-install</string>
-    <string name="menu_add_repo">Bagong Repositoryo</string>
+    <string name="menu_add_repo">Bagong repositoryo</string>
     <string name="menu_uninstall">Burahin</string>
     <string name="enable">Buksan</string>
     <string name="add_key">Magdagdag ng Susi</string>
@@ -147,7 +147,7 @@
     <string name="category_Security">Seguridad</string>
     <string name="category_Time">Oras</string>
     <string name="category_Writing">Pagsusulat</string>
-    <string name="not_on_same_wifi">Wala ka sa Wi-Fi ng lokal na repo na kakadagdag mo lang! Subukan mong sumali sa network na ito: %s</string>
+    <string name="not_on_same_wifi">Wala ka sa Wi-Fi ng lokal na repo na kadaragdag mo lang! Subukan mong sumali sa network na ito: %s</string>
     <string name="wifi">Wi-Fi</string>
     <string name="category_Sports_Health">Palakasan &amp; Kalusugan</string>
     <string name="category_System">Sistema</string>
@@ -158,8 +158,8 @@
     <string name="notification_action_cancel">Ikansela</string>
     <string name="notification_action_install">I-install</string>
     <string name="crash_dialog_title">Nag-crash ang F-Droid</string>
-    <string name="notification_title_single_update_available">May Update</string>
-    <string name="notification_title_summary_install_error">Pumalya ang Pag-install</string>
+    <string name="notification_title_single_update_available">May update</string>
+    <string name="notification_title_summary_install_error">Pumalya ang pag-install</string>
     <string name="no">Hindi</string>
     <string name="cancel">Ikansela</string>
     <string name="menu_manage">Mga Repositoryo</string>
@@ -172,8 +172,8 @@
     <string name="swap_welcome">Welcome sa F-Droid!</string>
     <string name="newPerms">Bago</string>
     <string name="updates__tts__download_app">I-download</string>
-    <string name="warning_no_internet">Di ma-update, nakakonekta ka ba sa Internet?</string>
-    <string name="app_details">Detalye ng App</string>
+    <string name="warning_no_internet">Di ma-update, nakakonekta ka ba sa internet?</string>
+    <string name="app_details">Detalye ng app</string>
     <string name="more">Dagdag</string>
     <string name="SignatureMismatch">Pirmado ng ibang susi (key) ang bagong bersyon kumpara sa luma. Para ma-install ang bagong bersyon, kailangan mo munang burahin ang luma. Pakiusap, gawin niyo po ito at subukan muli. (Tandaan, kasamang mabubura ang kahit anong internal na tinago ng app)</string>
     <string name="send_history_csv">Naka-CSV na tala ng in-install ng %s</string>
@@ -514,4 +514,9 @@
     <string name="latest__empty_state__upgrading">Inaupgrade ang database…</string>
     <string name="menu_release_channel_beta">Payagan ang mga Beta Updates</string>
     <string name="app_name_basic">F-Droid Basic</string>
+    <string name="menu_about">Tungkol dito</string>
+    <string name="menu_discover">Tuklasin</string>
+    <string name="menu_apps_my">Apps ko</string>
+    <string name="first_start_loading">Kumukuha ng mga repositoryo ng app…</string>
+    <string name="first_start_intro">Para makapagsimula, i-sync ang mga repositoryo ng app</string>
 </resources>

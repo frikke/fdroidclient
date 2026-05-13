@@ -579,7 +579,7 @@
     <string name="repositories_last_update_never">nunca</string>
     <string name="repo_share_not_found">Não foi possível encontrar o endereço do repositório no texto partilhado.</string>
     <string name="repo_and_mirror_add_both_info">A URL que tenta adicionar (%s) é um espelho de um novo repositório. Tanto o repositório original como o espelho serão adicionados.</string>
-    <string name="warning_no_compat_versions">O repositório selecionado não tem versões compatíveis com a app. Para receber atualizações, prefira um repositório com versões compatíveis.</string>
+    <string name="warning_no_compat_versions">O repositório selecionado não tem uma versão compatível da app. Para receber atualizações, selecione um repositório preferido com versões compatíveis.</string>
     <string name="repo_add_repo_and_mirror">Adicionar repositório e espelho</string>
     <string name="repo_view_repo">Visualizar repositório</string>
     <string name="repo_scan_qr_code">Ler QR code</string>
@@ -825,4 +825,5 @@
     <string name="install_history_delete_text">Apagar o histórico de instalações?</string>
     <string name="pref_repo_updates_summary_only_wifi">Verificar se há atualizações de apps dos repositórios periodicamente apenas no Wi-Fi</string>
     <string name="signer_colon">Signatário: %1$s</string>
+    <string name="app_details_anti_features_text">Algumas apps vêm com comportamentos que você não pediu — e talvez não quer. Coisas como anúncios, rastejamento ou dependência de serviços proprietários. Chamamo-las características indesejadas.\n\nApps em F-Droid são claramente rotulados quando contêm características indesejadas, para poder fazer uma escolha informada.</string>
 </resources>

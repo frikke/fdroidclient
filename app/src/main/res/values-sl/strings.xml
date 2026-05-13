@@ -763,4 +763,20 @@
     <string name="added_x_ago">Dodano %1$s</string>
     <string name="size_colon">Velikost: %1$s</string>
     <string name="version_code_colon">Različica kode: %1$s</string>
+    <string name="sdk_versions_colon">SDK različice: %1$s</string>
+    <string name="sdk_min_version">%1$s (najmanj)</string>
+    <string name="sdk_target_version">%1$s (priporočen)</string>
+    <string name="sdk_max_version">%1$s (največ)</string>
+    <string name="signer_colon">Podpisnik: %1$s</string>
+    <string name="architectures_colon">Arhitekture: %1$s</string>
+    <string name="app_details_incompatible_version">Nezdružljivo • Namestitev verjetno ne bo uspešna</string>
+    <string name="app_details_incompatible_signer">Neujemanje podpisov, namestitev ni mogoča</string>
+    <string name="app_details_install_error_text">Žal nam je! Pri nameščanju te aplikacije je prišlo do nepričakovane napake</string>
+    <string name="apps_updates_hint_title">Čestitke 🥳</string>
+    <string name="apps_updates_hint_text">Vse vaše aplikacije so posodobljene</string>
+    <string name="search_my_apps_hint">Iskanje nameščenih aplikacij</string>
+    <string name="status_downloading">ٛPrenos s hitrostjo %s MB/s</string>
+    <string name="status_downloading_remaining">Preostane še %1$s MB</string>
+    <string name="repo_disable_dialog_title">Onemogoči skladišče</string>
+    <string name="repo_disable_dialog_warning">Če ste to skladišče nastavili kot prednostno za katero koli aplikacijo, bo ta nastavitev izgubljena</string>
 </resources>

@@ -1,19 +1,19 @@
 * Botons i actualitzacions d'estat més fiables
 
-* Revisió de la configuració incloent-hi nous controls d'ús de dades
+* Revisió de la configuració incloent-hi controls d'ús de dades nous
 
 * Operació de fons conscient de la bateria a l'Android 5.0 i posteriors
 
-* Compartir l'element del menú pels repositoris
+* Opció «Comparteix» al menú dels repositoris
 
-* Desactivar els informes de fallada a la configuració
+* Desactiveu els informes de fallada a la configuració
 
-* Instal·lar el visualitzador de l'historial quan el registre estigui habilitat
+* Instal·leu el visualitzador de l'historial quan el registre estigui habilitat
 
-* Llista de característiques no adients clicables, afegida NoSourceSince (SenseFontDesDe)
+* Llista de característiques no adients clicables, afegida NoSourceSince
 
-* L'Android 4.0 és ara el mínim soportat 
+* L'Android 4.0 és ara el mínim compatible
 
-* Grans millores per a les versions personalitzades de l'F-Droid de etiqueta blanca
+* Grans millores per a les versions personalitzades permeses de l'F-Droid
 
 * Configuració experta per enviar la versió de depuració+UUID en baixar

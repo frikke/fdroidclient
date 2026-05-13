@@ -734,7 +734,7 @@
     <string name="app_details_incompatible_version">Inkompatibel • Installasjonen vil antagelig mislykkes</string>
     <string name="app_details_incompatible_signer">Signaturene samsvarer ikke, kan ikke installere</string>
     <string name="app_details_install_error_text">Beklager! Det oppsto en uforventet feil under installasjonen av denne appen</string>
-    <string name="status_downloading">Laster ned med: %1$s</string>
+    <string name="status_downloading">Laster ned med: %s/s</string>
     <string name="status_downloading_remaining">%1$s igjen</string>
     <string name="repo_has_update_error">Oppdateringsfeil</string>
     <string name="repo_has_update_error_intro">En feil oppsto under oppdateringen av denne pakkebrønnen:</string>
@@ -753,4 +753,12 @@
     <string name="crash_report_error_saving">En feil oppstod under lagring av krasjrapporten som fil</string>
     <string name="notification_title">Varslinger</string>
     <string name="notification_channel_install_success_title">Automatisk installerte apper</string>
+    <string name="search_history">Nylige søk</string>
+    <string name="search_auto_keyboard">Åpne tastatur automatisk</string>
+    <string name="hide">Sjul</string>
+    <string name="category_group_summary_productivity">Kalender, oppgaver, klokker &amp; notater</string>
+    <string name="category_group_summary_tools">Navigasjon, vær, kalkulatorer &amp; omformere</string>
+    <string name="category_group_summary_wallets">Finans, penger &amp; passord banker</string>
+    <string name="category_group_summary_media">Musikk, podcaster, spill &amp; ebok lesere</string>
+    <string name="category_group_summary_communication">E-post, meldinger &amp; sosiale nettverk</string>
 </resources>

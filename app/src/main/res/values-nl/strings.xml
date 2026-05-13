@@ -575,7 +575,7 @@
     </plurals>
     <string name="ipfsgw_summary_disabled">Download apps van IPFS web eindpunten: uitgeschakeld</string>
     <string name="antitetherednet">Gebonden Netwerk Diensten</string>
-    <string name="warning_no_compat_versions">Het gekozen archief bevat geen ondersteunde programma versies, om bij te werken, kies een archief met ondersteunde versies.</string>
+    <string name="warning_no_compat_versions">De gekozen databank bevat geen ondersteunde appversies. Om updates te ontvangen, kies een databank met ondersteunde versies.</string>
     <string name="menu_share_apk">Deel APK bestand</string>
     <string name="auto_update_time_past">Bijwerken wanneer condities zijn toegepast</string>
     <string name="repo_view_repo">Bekijk databank</string>
@@ -766,4 +766,54 @@
     <string name="status_downloading">Wordt gedownload met %s/s</string>
     <string name="status_downloading_remaining">%1$s over</string>
     <string name="repo_disable_dialog_title">Gegevensbank uitschakelen</string>
+    <string name="repo_disable_dialog_warning">Als u deze databank heeft ingesteld als de voorkeursoptie voor een app zal die voorkeur verloren raken</string>
+    <string name="repo_disable_dialog_text">Alle apps uit deze databank zullenverdwijnen. Al geïnstalleerde apps worden niet beïnvloed.</string>
+    <string name="repo_has_update_error">Update foutmeldingen</string>
+    <string name="repo_has_update_error_intro">Een fout trad op terwijl deze databank werd geüpdated:</string>
+    <string name="repo_last_update_upstream">%s gepubliceerd</string>
+    <string name="repo_last_downloaded">%s gedownload</string>
+    <string name="repo_basicauth_username">Gebruikersnaam</string>
+    <string name="repo_basicauth_password">Wachtwoord</string>
+    <string name="repo_basicauth_edit">Veranderingen Opslaan</string>
+    <string name="repo_force_update">Controleer op updates</string>
+    <string name="crash_report_comment_hint">Vertel ons wat er gebeurde vlak voor de crash</string>
+    <string name="crash_report_button_send">Verstuur rapport</string>
+    <string name="crash_report_error">Rapport kon niet verstuurd worden. Geen e-mailapp gevonden :(</string>
+    <string name="crash_report_save">Sla crash rapport op als bestand</string>
+    <string name="crash_report_saved">Rapport opgeslagen als bestand</string>
+    <string name="crash_report_error_saving">Fout tijdens het opslaan van het crash rapport als bestand</string>
+    <string name="notification_title">Notificaties</string>
+    <string name="notification_summary">Opent systeemnotificatie-instellingen</string>
+    <string name="notification_channel_install_success_title">Automatisch geïnstalleerde apps</string>
+    <string name="notification_channel_install_success_description">Geeft een notificatie weer nadat apps automatisch geïnstalleerd zijn</string>
+    <string name="notification_channel_updates_available_title">Beschikbare app updates</string>
+    <string name="notification_channel_updates_available_description">Geef een notificatie weer nadat databanken werden geüpdated en updates zijn gevonden</string>
+    <string name="notification_repo_update_default">Verbinden met %1$s…</string>
+    <string name="notification_repo_update_downloading">%1$s wordt gedownload vanuit %2$s</string>
+    <plurals name="notification_repo_update_saving">
+        <item quantity="one">%1$d app opgeslagen vanuit %2$s</item>
+        <item quantity="other">%1$d apps opgeslagen vanuit %2$s</item>
+    </plurals>
+    <plurals name="notification_installing_title">
+        <item quantity="one">%1$d app wordt geïnstalleerd…</item>
+        <item quantity="other">%1$d apps worden geïnstalleerd…</item>
+    </plurals>
+    <plurals name="notification_updating_title">
+        <item quantity="one">%1$d app wordt geüpdate…</item>
+        <item quantity="other">%1$d apps worden geüpdate…</item>
+    </plurals>
+    <plurals name="notification_update_success_title">
+        <item quantity="one">%1$d app geüpdated</item>
+        <item quantity="other">%1$d apps geüpdated</item>
+    </plurals>
+    <string name="notification_installing_section_installing">Installeren:</string>
+    <string name="notification_installing_section_confirmation">Heeft gebruikersbevestiging nodig:</string>
+    <string name="notification_installing_section_installed">Geïnstalleerd:</string>
+    <string name="notification_installing_confirmation">Raak aan om te bevestigen</string>
+    <string name="permission_camera_denied">Geef cameratoestemming om de QR code te scannen. Raak aan om cameratoestemming te geven in instellingen.</string>
+    <string name="error">Fout</string>
+    <string name="install_history_switch">Gebruik installatiegeschiedenis</string>
+    <string name="install_history_disabled_state">Installatiegeschiedenis is uitgeschakeld\n\nInstallaties, updates en deïnstallaties zullen niet worden geregistreerd</string>
+    <string name="install_history_delete_ally">Verwijder installatiegeschiedenis</string>
+    <string name="install_history_delete_text">Verwijder de installatiegeschiedenis?</string>
 </resources>

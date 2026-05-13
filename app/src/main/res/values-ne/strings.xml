@@ -67,7 +67,7 @@
     <string name="swap_connecting">जडान हुँदै</string>
     <string name="permissions">अनुमतिहरू</string>
     <string name="delete">मेट्नुहोस्</string>
-    <string name="wifi">Wi-Fi</string>
+    <string name="wifi">वाइफाइ</string>
     <string name="apps">अनुप्रयोग</string>
     <string name="updates">अद्यावधिकहरू</string>
     <string name="unverified">अप्रमाणित</string>
@@ -75,4 +75,14 @@
     <string name="repo_details">भण्डार</string>
     <string name="by_author_format">द्वारा %s</string>
     <string name="prompt_to_send_crash_reports">बिग्रेको  खंडमा  रिपोर्टहरु पठाउन सोधनु</string>
+    <string name="category_Connectivity" tools:ignore="UnusedResources">जडान</string>
+    <string name="more">धेरै</string>
+    <string name="less">थोरै</string>
+    <string name="antitracklist">यो अनुप्रयोगले तपाईंको गतिविधि पछ्याउँछ र खबर गर्दछ</string>
+    <string name="warning_no_internet">अद्यावधिक गर्न मिलेन, के तपाईं इन्टरनेटमा जडान हुनुभएको छ?</string>
+    <string name="unsigned">हस्ताक्षर नगरिएको</string>
+    <string name="not_on_same_wifi">तपाईको उपकरण तपाईले भर्खर थपेको स्थानीय भण्डार भएको उही वाइफाइमा छैन! यस नेटवर्कमा सामेल हुने प्रयास गर्नुहोस्: %s</string>
+    <string name="category_System" tools:ignore="UnusedResources">प्रणाली</string>
+    <string name="crash_dialog_text">अनपेक्षित त्रुटिले गर्दा अनुप्रयोग रोकिन बाध्य भयो। के तपाइँ यो मुद्दालाई ठीक गर्न मद्दतको लागि विवरणहरू ईमेल गर्न चाहनुहुन्छ?</string>
+    <string name="repo_add_add">थप्नुहोस्</string>
 </resources>
